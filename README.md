@@ -25,7 +25,7 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
   - An external usb antenna that support packet injection and monitor mode. We recommend RTL8812BU or RTL8822BU Chipsets
   - An USB to Micro USB adapter
 # HOW TO SETUP AND INSTALL MOJITO? 
-1. Flash and setup kali linux for raspberry pi 0 wh {<br>
+1. Flash and setup kali linux for raspberry pi 0 wh  <br>{<br>
     You can get kali linux official image from: [Download Kali Linux](https://kali.download/arm-images/kali-2024.4/kali-linux-2024.4-raspberry-pi-zero-w-armel.img.xz)  <br>
     You can flash the image on the sd using Balena Etcher. You can get it from: [Download Balena Etcher](https://etcher.balena.io) <br>
 }<br>
