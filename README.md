@@ -25,8 +25,11 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
   - An external usb antenna that support packet injection and monitor mode. We recommend RTL8812BU or RTL8822BU Chipsets
   - An USB to Micro USB adapter
 # HOW TO SETUP AND INSTALL MOJITO? 
-1. Flash and setup kali linux for raspberry pi 0 wh
-2. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside.
+1. Flash and setup kali linux for raspberry pi 0 wh {
+      You can get kali linux official image from: [Download Kali Linux](https://kali.download/arm-images/kali-2024.4/kali-linux-2024.4-raspberry-pi-zero-w-armel.img.xz)  
+      You can flash the image on the sd using Balena Etcher. You can get it from: [Download Balena Etcher](https://etcher.balena.io)
+}
+3. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside.
 ### ⚠️ REMEMBER: THE PASSWORD WILL BE ALWAYS "kali" ⚠️
 4. Connect to it using ssh, for example:
 ```
