@@ -22,7 +22,8 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
   - Wavseshare 1.44 inch lcd HAT display 
   - Raspberry pi 0 w/wh 
   - 16 GB sd card (You need much less, but you might need 16 GB for additional packages)
-  - An external usb antenna that support packet injection and monitor mode. We recommend RTL8812BU or RTL8822BU        Chipsets
+  - An external usb antenna that support packet injection and monitor mode. We recommend RTL8812BU or RTL8822BU Chipsets
+  - An USB to Micro USB adapter
 # HOW TO SETUP AND INSTALL MOJITO? 
 1. Flash and setup kali linux for raspberry pi 0 wh
 2. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside.
