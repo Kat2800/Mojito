@@ -33,7 +33,7 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
     Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
 }<br>
 ### ⚠️ REMEMBER: THE PASSWORD WILL BE ALWAYS "kali" ⚠️
-4. Connect to it using ssh, for example:
+4. Connect to USB port, and if you have it connect the antenna on the second port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
 ssh kali@192.168.1.xxx
 ```
