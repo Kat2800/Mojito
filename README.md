@@ -29,7 +29,9 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
     You can get kali linux official image from: [Download Kali Linux](https://kali.download/arm-images/kali-2024.4/kali-linux-2024.4-raspberry-pi-zero-w-armel.img.xz)  <br>
     You can flash the image on the sd using Balena Etcher. You can get it from: [Download Balena Etcher](https://etcher.balena.io) <br>
 }<br>
-3. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside. <br>
+3. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside. <br>{<br>
+    Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
+}<br>
 ### ⚠️ REMEMBER: THE PASSWORD WILL BE ALWAYS "kali" ⚠️
 4. Connect to it using ssh, for example:
 ```
