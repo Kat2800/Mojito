@@ -33,7 +33,7 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
 ssh kali@192.168.1.xxx
 ```
 You can see Mojito ip form your WiFi.
-If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try to connect automatically.<br>
+If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try to connect.<br>
 You can use this to connect manually from an hdmi and keyboard setup
 ```
 sudo iwconfig wlan0 up
