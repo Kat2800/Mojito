@@ -2,8 +2,8 @@
     "repositories": [
         {
             "name": "mojito",
-            "url": "https://github.com/rickyfili10/mojito.git",
-            "local_dir": "/home/kali/mojito"
+            "url": "https://github.com/rickyfili10/Mojito.git",
+            "local_dir": "/home/kali/Mojito"
         }
     ]
 }
