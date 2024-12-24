@@ -8,7 +8,7 @@ def mon0():
         os.system("sudo airmon-ng start mon0")
 
 if randomCheck():
-    show_message("Checking for\n   Updates...", 1)
+    ui_print("Checking for\n   Updates...", 1)
     updateMain()
 else: 
     pass
