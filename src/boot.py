@@ -18,5 +18,5 @@ mon0()
 BootCheck() # Return True, so in case of plugin to start at boot it boot it
 # execPlugins()
 
-# returner() # uncomment for ask passowrd at boot
+
 os.system("sudo python menu.py")
