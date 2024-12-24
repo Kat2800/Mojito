@@ -4,10 +4,6 @@ import LCD_1in44
 import time
 import os
 import subprocess
-import hashlib
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.backends import default_backend
 import psutil
 import json
 # Network settings
@@ -147,85 +143,6 @@ def show_file_menu():
             break
         if GPIO.input(KEY3_PIN) == 0:
             break
-
-def generate_key_from_password(password: str) -> bytes:
-    """Genera una chiave AES a partire dalla password."""
-    return hashlib.sha256(password.encode()).digest()
-
-def encrypt_message(message: str, key: bytes) -> bytes:
-    """Cripta un messaggio usando una chiave e restituisce il testo cifrato."""
-    iv = os.urandom(16)
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
-    encryptor = cipher.encryptor()
-    padder = padding.PKCS7(algorithms.AES.block_size).padder()
-    padded_message = padder.update(message.encode()) + padder.finalize()
-    encrypted_message = encryptor.update(padded_message) + encryptor.finalize()
-    return iv + encrypted_message
-
-def write_encrypted_message_to_file(file_path: str, message: str, key: bytes):
-    """Cripta un messaggio e lo scrive in un file."""
-
-    encrypted_message = encrypt_message(message, key)
-    with open(file_path, 'wb') as file:
-        file.write(encrypted_message)
-def decrypt_message(encrypted_message: bytes, key: bytes) -> str:
-    """Decifra un messaggio usando una chiave e restituisce il testo in chiaro."""
-    iv = encrypted_message[:16]
-    encrypted_message = encrypted_message[16:]
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
-    decryptor = cipher.decryptor()
-    padded_message = decryptor.update(encrypted_message) + decryptor.finalize()
-    unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
-    try:
-        message = unpadder.update(padded_message) + unpadder.finalize()
-        return message.decode()
-    except ValueError:
-        pass
-def setPsk():
-    # Definisci il messaggio da criptare e la chiave per la cifratura
-    original_message = "mojito"
-    ui_print("Create a password:", 3)
-    password = get_keyboard_input()  # Password per generare la chiave AES
-    key = generate_key_from_password(password)
-
-    # Scrivi il messaggio criptato nel file psk.txt
-    write_encrypted_message_to_file("psk.txt", original_message, key)
-    ui_print("Password Saved.", 3)
-def read_encrypted_message_from_file(file_path: str) -> bytes:
-    """Legge un messaggio criptato da un file."""
-    with open(file_path, 'rb') as file:
-        return file.read()
-def returner():
-    psk_try = 0
-    max_tries = 4
-    if os.path.exists("psk.txt"):
-        encrypted_message = read_encrypted_message_from_file("psk.txt")
-
-        while psk_try < max_tries:
-            ui_print("Password Required.", 1)
-            user_password = get_keyboard_input()
-            user_key = generate_key_from_password(user_password)
-
-            try:
-                decrypted_message = decrypt_message(encrypted_message, user_key)
-
-                if decrypted_message == "mojito":
-                    ui_print("Login in...", 1)
-                    break
-
-                else:
-                    ui_print("Wrong password", 1)
-                    psk_try += 1
-            except ValueError as e:
-                ui_print(str(e))
-                psk_try += 1
-
-
-    else:
-        setPsk()
-
-# Display logo at startup
-
 
 # Create blank image for drawing
 width = 128
