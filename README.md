@@ -4,9 +4,9 @@
 
 # The Mojito Project by Blackat
 
-## Why is called "mojito" like the cocktail? 🍸
-This project is called "Mojito" beacuse while the developers were coding this project, they were drinking non-alcoholic mojitos (maked by @rickyfili10)
-![mojito](https://github.com/user-attachments/assets/b10b95f5-7286-47bb-a8e1-64bc07b0ffd4)
+## Why is called "Mojito" like the cocktail? 🍸
+This project is called "Mojito" beacuse while the developers were coding this project, they were drinking non-alcoholic Mojitos (maked by @rickyfili10)
+![Mojito](https://github.com/user-attachments/assets/b10b95f5-7286-47bb-a8e1-64bc07b0ffd4)
 
 # What's that? 🤔
 Mojito is swiss army knife for ethical hacking (educational purposes only) and runs on a raspberry pi 0 w/wh that use a wavseshare 1.44 inch lcd HAT display. It have a collection of hacking tools and it is based on Kali Linux. 
@@ -67,7 +67,7 @@ sudo reboot
 ```
 ## Clone the Mojito repostory and enter in it 
  ```
-  git clone https://github.com/rickyfili10/mojito.git && cd mojito/src
+  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
  ```
 ## Install the requisites 📃
  ```
