@@ -4,41 +4,53 @@ import requests
 import json
 import random
 from libs.mojstd import *
-# list of to-update check
+
+# Nome del file di configurazione
 CONFIG_FILE = "updatlist.json"
 
 def load_repositories():
     """
-    Load repo list
+    Carica la lista dei repository dal file di configurazione.
     """
     try:
         with open(CONFIG_FILE, "r") as f:
             config = json.load(f)
         return config.get("repositories", [])
     except FileNotFoundError:
-        print(f"{CONFIG_FILE} not found. ")
+        print(f"{CONFIG_FILE} non trovato.")
+        ui_print("Config File Missing.", 1)
     except json.JSONDecodeError as e:
-        print(f"Error during reading {CONFIG_FILE}: {e}")
+        print(f"Errore durante la lettura di {CONFIG_FILE}: {e}")
+        ui_print("Config File Error.", 1)
     return []
 
 def get_remote_hash(repo_url):
     """
-    See the most recent hash
+    Ottieni l'hash più recente dal repository remoto.
     """
-    api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/") + "/commits/main"
     try:
-        response = requests.get(api_url)
+        # URL base del repository su GitHub
+        repo_api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/")
+        # Ottieni informazioni sul repository per determinare il branch di default
+        repo_info = requests.get(repo_api_url)
+        repo_info.raise_for_status()
+        default_branch = repo_info.json().get("default_branch", "main")
+
+        # Ottieni l'hash dell'ultimo commit del branch di default
+        commits_api_url = f"{repo_api_url}/commits/{default_branch}"
+        response = requests.get(commits_api_url)
         response.raise_for_status()
+
         commit_data = response.json()
-        return commit_data["sha"]
-    except Exception as e:
-        print(f"Error during chatching remote hash {repo_url}: {e}")
+        return commit_data.get("sha")
+    except requests.exceptions.RequestException as e:
+        print(f"Errore durante il recupero dell'hash remoto {repo_url}: {e}")
         ui_print("Hash Error.", 1)
         return None
 
 def get_local_hash(local_dir):
     """
-    See the most recent local hash
+    Ottieni l'hash più recente dal repository locale.
     """
     try:
         result = subprocess.run(
@@ -49,76 +61,78 @@ def get_local_hash(local_dir):
         )
         return result.stdout.strip()
     except subprocess.CalledProcessError:
-        print(f"Error during chatching local hash: {local_dir}. Maybe not a Git repostory?")
+        print(f"Errore: {local_dir} non è un repository Git valido o è mancante.")
         ui_print("Local Hash Error.", 1)
         return None
 
 def update_repo(repo_url, repo_name, local_dir):
     """
-    Update the local repo
+    Aggiorna il repository locale per allinearlo al repository remoto.
     """
     try:
+        # Ottieni il branch di default dal repository remoto
+        repo_api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/")
+        repo_info = requests.get(repo_api_url)
+        repo_info.raise_for_status()
+        default_branch = repo_info.json().get("default_branch", "main")
+
         if os.path.exists(local_dir):
-            # Se la directory esiste, esegui un pull
+            # Se la directory esiste, esegui un fetch e un reset
             subprocess.run(["git", "-C", local_dir, "fetch", "--all"], check=True)
-            subprocess.run(["git", "-C", local_dir, "reset", "--hard", "origin/main"], check=True)
+            subprocess.run(["git", "-C", local_dir, "reset", "--hard", f"origin/{default_branch}"], check=True)
         else:
-            # Altrimenti, clona il repository
+            # Altrimenti clona il repository
             subprocess.run(["git", "clone", repo_url, local_dir], check=True)
-        print(f"Repository {repo_name} updated!")
+
+        print(f"Repository {repo_name} aggiornato con successo!")
         ui_print(f"{repo_name} Updated!", 1)
     except subprocess.CalledProcessError as e:
-        print(f"Error while updating {repo_url}: {e}")
+        print(f"Errore durante l'aggiornamento di {repo_url}: {e}")
         ui_print("Update Error.", 1)
-import random
 
 def randomCheck():
+    """
+    Controllo casuale per simulazioni o test.
+    """
     number = random.randint(1, 10)  
-    if number in [3, 4, 5, 6]:
-        return True
-    else:
-        return False
-
-
+    return number in [3, 4, 5, 6]
 
 def updateMain():
     """
-    Check and install updates
+    Controlla e installa gli aggiornamenti.
     """
-    print("Loading configuration...")
+    print("Caricamento configurazione...")
     repositories = load_repositories()
 
     if not repositories:
-        print("No repo to update!")
+        print("Nessun repository da aggiornare!")
         ui_print("Everything is\n    Updated!", 1)
         return
 
     for repo in repositories:
-        repo_name = repo.get("name", "repository sconosciuto")
+        repo_name = repo.get("name", "Repository sconosciuto")
         repo_url = repo.get("url")
         local_dir = repo.get("local_dir")
 
         if not repo_url or not local_dir:
-            print(f"Missing data: {repo_name}. Skipping...")
+            print(f"Dati mancanti per {repo_name}. Salto...")
             ui_print(f"Missing data: {repo_name}.", 1)
             continue
 
-        print(f"Checking update for {repo_name}...")
+        print(f"Controllo aggiornamenti per {repo_name}...")
         ui_print(f"Checking update for\n    {repo_name}...")
 
         remote_hash = get_remote_hash(repo_url)
         if not remote_hash:
-            print(f"Can't see remote hash: {repo_name}. Skipping...")
+            print(f"Impossibile ottenere l'hash remoto per {repo_name}. Salto...")
             ui_print(f"Remote hash error. {repo_name}", 1)
             continue
 
         local_hash = get_local_hash(local_dir)
         if local_hash != remote_hash:
-            print(f"Update avabile! {repo_name}. ")
-            ui_print(f"Update avabile!\n {repo_name}.", 1)
+            print(f"Aggiornamento disponibile per {repo_name}.")
+            ui_print(f"Update available!\n {repo_name}.", 1)
             update_repo(repo_url, repo_name, local_dir)
         else:
-            print(f"{repo_name} alredy updated!")
-            ui_print(f"{repo_name}\nAlredy updated!", 1)
-
-
+            print(f"{repo_name} è già aggiornato!")
+            ui_print(f"{repo_name}\nAlready updated!", 1)
