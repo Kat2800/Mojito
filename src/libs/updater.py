@@ -5,12 +5,12 @@ import json
 import random
 from libs.mojstd import *
 
-# Nome del file di configurazione
+# Configuration file name
 CONFIG_FILE = "updatlist.json"
 
 def load_repositories():
     """
-    Carica la lista dei repository dal file di configurazione.
+    Load the list of repositories from the configuration file.
     """
     try:
         with open(CONFIG_FILE, "r") as f:
@@ -24,17 +24,17 @@ def load_repositories():
 
 def get_remote_hash(repo_url):
     """
-    Ottieni l'hash più recente dal repository remoto.
+    Get the most recent hash from the remote repository.
     """
     try:
-        # URL base del repository su GitHub
+        # Base URL of the repository on GitHub
         repo_api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/")
-        # Ottieni informazioni sul repository per determinare il branch di default
+        # Get repository information to determine the default branch
         repo_info = requests.get(repo_api_url)
         repo_info.raise_for_status()
         default_branch = repo_info.json().get("default_branch", "main")
 
-        # Ottieni l'hash dell'ultimo commit del branch di default
+        # Get the hash of the latest commit from the default branch
         commits_api_url = f"{repo_api_url}/commits/{default_branch}"
         response = requests.get(commits_api_url)
         response.raise_for_status()
@@ -47,7 +47,7 @@ def get_remote_hash(repo_url):
 
 def get_local_hash(local_dir):
     """
-    Ottieni l'hash più recente dal repository locale.
+    Get the most recent hash from the local repository.
     """
     try:
         result = subprocess.run(
@@ -63,21 +63,21 @@ def get_local_hash(local_dir):
 
 def update_repo(repo_url, repo_name, local_dir):
     """
-    Aggiorna il repository locale per allinearlo al repository remoto.
+    Update the local repository to align with the remote repository.
     """
     try:
-        # Ottieni il branch di default dal repository remoto
+        # Get the default branch from the remote repository
         repo_api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/")
         repo_info = requests.get(repo_api_url)
         repo_info.raise_for_status()
         default_branch = repo_info.json().get("default_branch", "main")
 
         if os.path.exists(local_dir):
-            # Se la directory esiste, esegui un fetch e un reset
+            # If the directory exists, perform a fetch and reset
             subprocess.run(["git", "-C", local_dir, "fetch", "--all"], check=True)
             subprocess.run(["git", "-C", local_dir, "reset", "--hard", f"origin/{default_branch}"], check=True)
         else:
-            # Altrimenti clona il repository
+            # Otherwise, clone the repository
             subprocess.run(["git", "clone", repo_url, local_dir], check=True)
 
         ui_print(f"{repo_name} Updated!", 1)
@@ -86,14 +86,14 @@ def update_repo(repo_url, repo_name, local_dir):
 
 def randomCheck():
     """
-    Controllo casuale per simulazioni o test.
+    Random check for simulations or testing.
     """
     number = random.randint(1, 10)  
     return number in [3, 4, 5, 6]
 
 def updateMain():
     """
-    Controlla e installa gli aggiornamenti.
+    Check and install updates.
     """
     repositories = load_repositories()
 
@@ -102,7 +102,7 @@ def updateMain():
         return
 
     for repo in repositories:
-        repo_name = repo.get("name", "Repository sconosciuto")
+        repo_name = repo.get("name", "Unknown Repository")
         repo_url = repo.get("url")
         local_dir = repo.get("local_dir")
 
