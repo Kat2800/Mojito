@@ -17,10 +17,8 @@ def load_repositories():
             config = json.load(f)
         return config.get("repositories", [])
     except FileNotFoundError:
-        print(f"{CONFIG_FILE} non trovato.")
         ui_print("Config File Missing.", 1)
     except json.JSONDecodeError as e:
-        print(f"Errore durante la lettura di {CONFIG_FILE}: {e}")
         ui_print("Config File Error.", 1)
     return []
 
@@ -44,7 +42,6 @@ def get_remote_hash(repo_url):
         commit_data = response.json()
         return commit_data.get("sha")
     except requests.exceptions.RequestException as e:
-        print(f"Errore durante il recupero dell'hash remoto {repo_url}: {e}")
         ui_print("Hash Error.", 1)
         return None
 
@@ -61,7 +58,6 @@ def get_local_hash(local_dir):
         )
         return result.stdout.strip()
     except subprocess.CalledProcessError:
-        print(f"Errore: {local_dir} non è un repository Git valido o è mancante.")
         ui_print("Local Hash Error.", 1)
         return None
 
@@ -84,10 +80,8 @@ def update_repo(repo_url, repo_name, local_dir):
             # Altrimenti clona il repository
             subprocess.run(["git", "clone", repo_url, local_dir], check=True)
 
-        print(f"Repository {repo_name} aggiornato con successo!")
         ui_print(f"{repo_name} Updated!", 1)
     except subprocess.CalledProcessError as e:
-        print(f"Errore durante l'aggiornamento di {repo_url}: {e}")
         ui_print("Update Error.", 1)
 
 def randomCheck():
@@ -101,11 +95,9 @@ def updateMain():
     """
     Controlla e installa gli aggiornamenti.
     """
-    print("Caricamento configurazione...")
     repositories = load_repositories()
 
     if not repositories:
-        print("Nessun repository da aggiornare!")
         ui_print("Everything is\n    Updated!", 1)
         return
 
@@ -115,24 +107,19 @@ def updateMain():
         local_dir = repo.get("local_dir")
 
         if not repo_url or not local_dir:
-            print(f"Dati mancanti per {repo_name}. Salto...")
             ui_print(f"Missing data: {repo_name}.", 1)
             continue
 
-        print(f"Controllo aggiornamenti per {repo_name}...")
         ui_print(f"Checking update for\n    {repo_name}...")
 
         remote_hash = get_remote_hash(repo_url)
         if not remote_hash:
-            print(f"Impossibile ottenere l'hash remoto per {repo_name}. Salto...")
             ui_print(f"Remote hash error. {repo_name}", 1)
             continue
 
         local_hash = get_local_hash(local_dir)
         if local_hash != remote_hash:
-            print(f"Aggiornamento disponibile per {repo_name}.")
             ui_print(f"Update available!\n {repo_name}.", 1)
             update_repo(repo_url, repo_name, local_dir)
         else:
-            print(f"{repo_name} è già aggiornato!")
             ui_print(f"{repo_name}\nAlready updated!", 1)
