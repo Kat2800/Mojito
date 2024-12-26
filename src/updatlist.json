@@ -2,7 +2,7 @@
     "repositories": [
         {
             "name": "Mojito",
-            "url": "https://github.com/rickyfili10/Mojito.git",
+            "url": "https://api.github.com/repos/rickyfili10/Mojito/commits/main",
             "local_dir": "/home/kali/Mojito"
         }
     ]
