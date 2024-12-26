@@ -33,7 +33,7 @@ def get_remote_hash(repo_url):
         return commit_data["sha"]
     except Exception as e:
         print(f"Error during chatching remote hash {repo_url}: {e}")
-        show_message("Hash Error.", 1)
+        ui_print("Hash Error.", 1)
         return None
 
 def get_local_hash(local_dir):
@@ -50,7 +50,7 @@ def get_local_hash(local_dir):
         return result.stdout.strip()
     except subprocess.CalledProcessError:
         print(f"Error during chatching local hash: {local_dir}. Maybe not a Git repostory?")
-        show_message("Local Hash Error.", 1)
+        ui_print("Local Hash Error.", 1)
         return None
 
 def update_repo(repo_url, repo_name, local_dir):
@@ -66,10 +66,10 @@ def update_repo(repo_url, repo_name, local_dir):
             # Altrimenti, clona il repository
             subprocess.run(["git", "clone", repo_url, local_dir], check=True)
         print(f"Repository {repo_name} updated!")
-        show_message(f"{repo_name} Updated!", 1)
+        ui_print(f"{repo_name} Updated!", 1)
     except subprocess.CalledProcessError as e:
         print(f"Error while updating {repo_url}: {e}")
-        show_message("Update Error.", 1)
+        ui_print("Update Error.", 1)
 import random
 
 def randomCheck():
@@ -90,7 +90,7 @@ def updateMain():
 
     if not repositories:
         print("No repo to update!")
-        show_message("Everything is\n    Updated!", 1)
+        ui_print("Everything is\n    Updated!", 1)
         return
 
     for repo in repositories:
@@ -100,25 +100,25 @@ def updateMain():
 
         if not repo_url or not local_dir:
             print(f"Missing data: {repo_name}. Skipping...")
-            show_message(f"Missing data: {repo_name}.", 1)
+            ui_print(f"Missing data: {repo_name}.", 1)
             continue
 
         print(f"Checking update for {repo_name}...")
-        show_message(f"Checking update for\n    {repo_name}...")
+        ui_print(f"Checking update for\n    {repo_name}...")
 
         remote_hash = get_remote_hash(repo_url)
         if not remote_hash:
             print(f"Can't see remote hash: {repo_name}. Skipping...")
-            show_message(f"Remote hash error. {repo_name}", 1)
+            ui_print(f"Remote hash error. {repo_name}", 1)
             continue
 
         local_hash = get_local_hash(local_dir)
         if local_hash != remote_hash:
             print(f"Update avabile! {repo_name}. ")
-            show_message(f"Update avabile!\n {repo_name}.", 1)
+            ui_print(f"Update avabile!\n {repo_name}.", 1)
             update_repo(repo_url, repo_name, local_dir)
         else:
             print(f"{repo_name} alredy updated!")
-            show_message(f"{repo_name}\nAlredy updated!", 1)
+            ui_print(f"{repo_name}\nAlredy updated!", 1)
 
 
