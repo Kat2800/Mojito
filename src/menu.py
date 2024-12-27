@@ -104,18 +104,7 @@ while True:
                                             break
 
 
-        elif selected_option == "Party":
-            # Draw and handle the Network sub-menu
-            sub_menu_options = ["Login", "Join a Party", "Create a Party", "Leave Party", "Exit"]
-            sub_selected_index = 0
-
-
-
-            while True:
-                if bk():
-                    break
-                draw_sub_menu(sub_selected_index, sub_menu_options)
-
+    
                 if GPIO.input(KEY_UP_PIN) == 0:
                     sub_selected_index = (sub_selected_index - 1) % len(sub_menu_options)
                     draw_sub_menu(sub_selected_index, sub_menu_options)
