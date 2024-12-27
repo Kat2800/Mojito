@@ -2,7 +2,7 @@
 ### Ehy! We are working hard on this project! So please if you can help us! 🫰
 ## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to How to setup and install section.
 
-# The Mojito Project by Blackat
+# The Mojito Project by BlacKat
 
 ## Why is called "Mojito" like the cocktail? 🍸
 This project is called "Mojito" beacuse while the developers were coding this project, they were drinking non-alcoholic Mojitos (maked by @rickyfili10)
