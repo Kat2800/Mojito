@@ -402,7 +402,6 @@ def draw_menu(selected_index):
 
 
 def ui_print(message, duration=2):
-    print(message)
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))  # Clear previous image
     draw.text((10, 50), message, font=font, fill=(255, 255, 255))
     disp.LCD_ShowImage(image, 0, 0)
