@@ -6,6 +6,7 @@ import time
 import subprocess
 import psutil
 import json
+import emoji
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/home/kali/Mojito/src/libs')))
 import LCD_1in44
 # Network settings
@@ -351,10 +352,16 @@ def draw_menu(selected_index):
 
 
 def ui_print(message, duration=2):
-    print(message)
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))  # Clear previous image
+    
+    message = emoji.emojize(message, language='alias')
+    
+    print(message) 
+    
+    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+
     draw.text((10, 50), message, font=font, fill=(255, 255, 255))
     disp.LCD_ShowImage(image, 0, 0)
+
     if duration != "unclear":
         time.sleep(duration)
         disp.LCD_Clear()
