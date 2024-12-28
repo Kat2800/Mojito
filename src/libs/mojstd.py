@@ -404,7 +404,7 @@ def draw_menu(selected_index):
 
 
 
-def ui_print(message, duration=2, font1="/home/kali/Mojito/src/libs/fonts/mojito.ttf"):
+def ui_print(message, duration=2, font1="/home/kali/Mojito/src/libs/fonts/BebasNeue-Regular.ttf"):
     # Create a blank image and a drawing object
     image = Image.new('RGB', (width, height), (0, 0, 0))  # Assuming width and height are defined
     draw = ImageDraw.Draw(image)
