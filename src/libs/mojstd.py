@@ -325,7 +325,7 @@ def getYesNo():
             time.sleep(0.3)
 
 # Menu options
-menu_options = ["Networks","Bluetooth", "Payload", "Party", "App & Plugin", "Shutdown", "Reboot", "Restart MojUI"]
+menu_options = ["Networks","Bluetooth", "Payload", "Party", "App & Plugin", "Shutdown", "Reboot", "Restart MojUI", "Settings"]
 selected_index = 0
 
 def show_image(image_path, exit_event=None):
