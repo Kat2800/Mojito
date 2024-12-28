@@ -409,7 +409,7 @@ def ui_print(message, duration=2):
     draw = ImageDraw.Draw(image)
     
     # Assuming you have a valid font object
-    font = ImageFont.truetype("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 24)  # Adjust the font size if necessary
+    font = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf", 24) # Adjust the font size if necessary
     
     print(message)  # Optional, for debugging
     
