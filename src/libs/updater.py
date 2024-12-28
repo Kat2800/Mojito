@@ -82,11 +82,11 @@ def update_repo(repo_url, repo_name, local_dir):
         src_dir = os.path.join(local_dir, "src")
         if os.path.exists(local_dir):
             # Aggiorna il repository
-            subprocess.run(["git", "-C", local_dir, "fetch", "--all"], check=True)
-            subprocess.run(["git", "-C", local_dir, "reset", "--hard", f"origin/{default_branch}"], check=True)
+            subprocess.run(["sudo", "git", "-C", local_dir, "fetch", "--all"], check=True)
+            subprocess.run(["sudo", "git", "-C", local_dir, "reset", "--hard", f"origin/{default_branch}"], check=True)
         else:
             # Clona il repository se non esiste
-            subprocess.run(["git", "clone", repo_url, local_dir], check=True)
+            subprocess.run(["sudo", "git", "clone", repo_url, local_dir], check=True)
 
         # Controlla che la directory src/ sia aggiornata
         if not os.path.exists(src_dir):
