@@ -403,13 +403,13 @@ def draw_menu(selected_index):
 
 
 
-def ui_print(message, duration=2, font1="/home/kali/Mojito/src/libs/fonts/BebasNeue-Regular.ttf"):
+def ui_print(message, duration=2):
     # Create a blank image and a drawing object
     image = Image.new('RGB', (width, height), (0, 0, 0))  # Assuming width and height are defined
     draw = ImageDraw.Draw(image)
     
     # Assuming you have a valid font object
-    font = ImageFont.truetype(font1, 24)  # Adjust the font size if necessary
+    font = ImageFont.truetype("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 24)  # Adjust the font size if necessary
     
     print(message)  # Optional, for debugging
     
