@@ -7,8 +7,6 @@ import sys
 from libs.mojstd import * # Mojito Standard Library 
 
 
-
-# returner()
 while True:
     draw_menu(selected_index)
 
