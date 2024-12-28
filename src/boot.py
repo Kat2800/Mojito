@@ -9,7 +9,6 @@
 
 
 from libs.mojstd import *
-from libs.bootCheck import *
 from libs.updater import *
 import os
 import glob
