@@ -127,6 +127,7 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
    - ✔️ 4 Way Handshake capture
    - ✔️ Add wifi Rick Roll AP
    - ✔️ Fix I/O errors
+   - ❌ UTF-8 support
    - ❌ Add Apple sideload
    - ❌ Add Apple Jailbreaker (like checkra1n and dopamine)
    - ❌ Add android rooter -> Bootloader unlocker, vbmeta flasher and sudo binary flasher (like Magisk)
