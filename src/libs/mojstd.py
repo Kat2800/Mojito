@@ -404,25 +404,10 @@ def draw_menu(selected_index):
 
 
 def ui_print(message, duration=2):
-    # Create a blank image and a drawing object
-    image = Image.new('RGB', (width, height), (0, 0, 0))  # Assuming width and height are defined
-    draw = ImageDraw.Draw(image)
-    
-    # Assuming you have a valid font object
-    font = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf", 24) # Adjust the font size if necessary
-    
-    print(message)  # Optional, for debugging
-    
-    # Clear previous content by drawing a black rectangle
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
-    
-    # Draw the UTF-8 text on the image
+    print(message)
+    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))  # Clear previous image
     draw.text((10, 50), message, font=font, fill=(255, 255, 255))
-    
-    # Send the image to the display (this depends on your specific library)
     disp.LCD_ShowImage(image, 0, 0)
-    
-    # Wait for the specified duration before clearing the display
     if duration != "unclear":
         time.sleep(duration)
         disp.LCD_Clear()
