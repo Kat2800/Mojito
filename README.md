@@ -120,32 +120,22 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
   [<br>
   ❌ Not implemented yet <br>
   ✔️ Implemented <br>
-  ✏️ Almost implemented or in development<br>
-  🔧 Dosen't work and should be fixed<br>
-  ⌚ In pause for now<br>
-  ⚒️ To fix soon<br>
-  🙅 Continuation not guaranteed<br>
-  💡Idea<br>
-  🛑 End of support<br>
   ]
-   - ❌ Add wifi deauth
+   - ✔️ Add wifi deauth
    - ❌ Add wifi sniff
-   - ❌ Add wifi beacon
-   - ✏️ Add wifi fakeAP
+   - ❌ Add wifi fakeAP
+   - ✔️ 4 Way Handshake capture
    - ✔️ Add wifi Rick Roll AP
    - ✔️ Fix I/O errors
-   - 💡 Add Apple sideload 
-   - ⌚ Add Apple Jailbreaker (like checkra1n and dopamine)
-   - 💡 Add adb apk installer (for bypass family link (if you are a kid) or to bypass blocks on company phones)
-   - 💡 Add android rooter -> Bootloader unlocker, vbmeta flasher and sudo binary flasher (like Magisk)
-   - ✏️ Mojito official wiki
-   - 🔧 Fix Settings app
-   - ⚒️ Fix that you can't use iOs bluetooth spam more than one time
-   - ⚒️ Fix all the exit buttons
-   - ✏️ Make the code cleaner
-   - 🙅 Add party function
+   - ❌ Add Apple sideload
+   - ❌ Add Apple Jailbreaker (like checkra1n and dopamine)
+   - ❌ Add android rooter -> Bootloader unlocker, vbmeta flasher and sudo binary flasher (like Magisk)
+   - ❌ Mojito official wiki
+   - ❌ Fix Settings app
+   - ❌ Fix bluetooth spam
+   - ❌ Fix all the exit buttons
    - ❌ Add a function to save Wifi and Wifi password to connect to networks without password
-   - 🔧 Plugin and app support (Plugin support can be bugged)
+   - ✔️ Plugin and app support
 
 ### Under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) Licence 📄
   What you can do: ✔️<br>
