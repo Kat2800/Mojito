@@ -20,7 +20,7 @@ def mon0():
 
 if randomCheck():
     ui_print("Checking for\n   Updates...", 1)
-    updateMain()
+        
 else: 
     pass
 mon0()        
