@@ -273,59 +273,6 @@ def getinput():
             draw_keyboard(selected_key_index, input_text, mode, caps_lock)
             time.sleep(0.3)
 
-def YesNo(selected_key_index, mode="alpha"):
-    # Impostazioni per il disegno della schermata
-    width, height = 320, 240  # Risoluzione dello schermo (adatta questa dimensione al tuo schermo)
-    
-    # Clear previous image
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
-
-    # Crea i tasti "Yes" e "No"
-    button_width = 100
-    button_height = 50
-    center_x = width // 2
-    center_y = height // 2
-
-    # Posizioni dei tasti "Yes" e "No" (disposti orizzontalmente)
-    yes_x = center_x - button_width - 20  # "Yes" si sposterà a sinistra
-    no_x = center_x + 20  # "No" sarà a destra del centro
-    button_y = center_y - button_height // 2  # Verticalmente centrato
-
-    # Disegna i tasti con il cursore selezionato
-    if selected_key_index == 0:
-        draw.rectangle((yes_x, button_y, yes_x + button_width, button_y + button_height), fill=(0, 255, 0))  # Tasto Yes selezionato
-        draw.text((yes_x + 20, button_y + 15), "Yes", font=font, fill=(0, 0, 0))
-        draw.rectangle((no_x, button_y, no_x + button_width, button_y + button_height), outline=(255, 255, 255))  # Tasto No non selezionato
-        draw.text((no_x + 20, button_y + 15), "No", font=font, fill=(255, 255, 255))
-    else:
-        draw.rectangle((yes_x, button_y, yes_x + button_width, button_y + button_height), outline=(255, 255, 255))  # Tasto Yes non selezionato
-        draw.text((yes_x + 20, button_y + 15), "Yes", font=font, fill=(255, 255, 255))
-        draw.rectangle((no_x, button_y, no_x + button_width, button_y + button_height), fill=(0, 255, 0))  # Tasto No selezionato
-        draw.text((no_x + 20, button_y + 15), "No", font=font, fill=(0, 0, 0))
-
-    # Display the updated image
-    disp.LCD_ShowImage(image, 0, 0)
-def getYesNo():
-    selected_key_index = 0  # Inizialmente selezionato "Yes"
-    while True:
-        draw_keyboard(selected_key_index)
-
-        # Navigazione tra i tasti (cambia selezione tra "Yes" e "No")
-        if GPIO.input(KEY_LEFT_PIN) == 0:  # Se l'utente preme il tasto sinistro, seleziona "Yes"
-            selected_key_index = 0
-            time.sleep(0.3)
-        if GPIO.input(KEY_RIGHT_PIN) == 0:  # Se l'utente preme il tasto destro, seleziona "No"
-            selected_key_index = 1
-            time.sleep(0.3)
-
-        # Conferma la selezione
-        if GPIO.input(KEY_PRESS_PIN) == 0:  # Quando l'utente preme il tasto di conferma
-            if selected_key_index == 0:
-                return "Yes"
-            elif selected_key_index == 1:
-                return "No"
-            time.sleep(0.3)
-
 # Menu options
 menu_options = ["Networks","Bluetooth", "Payload", "Party", "App & Plugin", "Shutdown", "Reboot", "Restart MojUI", "Settings"]
 selected_index = 0
