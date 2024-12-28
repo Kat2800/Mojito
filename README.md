@@ -66,6 +66,7 @@ sudo apt upgrade
 sudo reboot
 ```
 ## Clone the Mojito repostory and enter in it 
+### Remember: Kali does not support pip. To install packages you can use "sudo apt install python3-name"
  ```
   git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
  ```
