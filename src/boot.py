@@ -13,7 +13,7 @@ if randomCheck():
 else: 
     pass
         
-plugins = glob.glob('plugins/*.py')
+plugins = glob.glob('plugins/boot/*.py')
 
 for file in plugins:
     os.system(f"sudo python {file}")
