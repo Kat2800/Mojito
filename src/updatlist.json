@@ -1,9 +1,0 @@
-{
-    "repositories": [
-        {
-            "name": "Mojito",
-            "url": "https://github.com/rickyfili10/Mojito",
-            "local_dir": "/home/kali/Mojito"
-        }
-    ]
-}
