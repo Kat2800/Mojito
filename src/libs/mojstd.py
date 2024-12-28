@@ -1,11 +1,13 @@
 import RPi.GPIO as GPIO
 from PIL import Image, ImageDraw, ImageFont
-import LCD_1in44
+import os 
+import sys
 import time
-import os
 import subprocess
 import psutil
 import json
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'libs')))
+import LCD_1in44
 # Network settings
 BROADCAST_IP = '<broadcast>'
 PORT = 12345  # Port
