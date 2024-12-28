@@ -57,7 +57,7 @@ def get_local_hash(local_dir):
     """
     try:
         result = subprocess.run(
-            ["git", "-C", local_dir, "rev-parse", "HEAD"],
+            ["sudo", "git", "-C", local_dir, "rev-parse", "HEAD"],
             capture_output=True,
             text=True,
             check=True
