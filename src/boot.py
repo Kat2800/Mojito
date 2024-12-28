@@ -17,11 +17,7 @@ def mon0():
         os.system("sudo iw wlan0 interface add mon0 type monitor")
         os.system("sudo airmon-ng start mon0")
 
-if randomCheck():
-    ui_print("Checking for\n   Updates...", 1)
-    update()
-else: 
-    pass
+
 mon0()        
 plugins = glob.glob('plugins/boot/*.py')
 
