@@ -86,7 +86,7 @@ def execute_file(directory, file_base):
                 subprocess.run(['sudo', './', file_path])
             return
     # Se il file non ha una delle estensioni supportate
-    ui_print(f"Unsupported file: {file_base}")
+    (f"Unsupported file: {file_base}")
 
 def show_file_menu():
     directory = "app/"  # Modifica questo percorso con il percorso corretto
@@ -352,15 +352,15 @@ def draw_menu(selected_index):
 
 
 def ui_print(message, duration=2):
-    # Converti i codici emoji in caratteri Unicode
+
     message = emoji.emojize(message, language='alias')
     
-    print(message)  # Stampa il messaggio con emoji nella console
+    print(message)  
 
-    # Pulizia dell'immagine precedente
+
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 
-    # Disegna il testo (incluso con emoji)
+
     draw.text((10, 50), message, font=font, fill=(255, 255, 255))
     disp.LCD_ShowImage(image, 0, 0)
 
