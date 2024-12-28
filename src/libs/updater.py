@@ -3,7 +3,13 @@ import subprocess
 import requests
 import json
 import random
-from libs.mojstd import *
+try:
+    import mojstd
+except ImportError:
+    try:
+        import libs.mojstd
+     except ImportError:
+         ui_print("Mojstd not found", 1)
 
 # Configuration file name
 CONFIG_FILE = "updatlist.json"
