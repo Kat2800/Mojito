@@ -25,7 +25,7 @@ def git_pull(repo_path, remote_url):
     )
     print(f"Local repository updated successfully:\n{result.stdout}")
 
-def process_repositories(file_path):
+def update(file_path):
     with open(file_path, 'r') as f:
         for line in f:
             repo_url, local_repo_path = line.strip().split(', ')
@@ -48,4 +48,4 @@ def process_repositories(file_path):
 # Path to the file containing repository URLs and paths
 repos_file_path = '/home/kali/Mojito/src/repos.txt'
 
-process_repositories(repos_file_path)
+update(repos_file_path)
