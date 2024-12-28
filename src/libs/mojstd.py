@@ -7,7 +7,6 @@ import subprocess
 import psutil
 import json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/home/kali/Mojito/src/libs')))
-
 import LCD_1in44
 # Network settings
 BROADCAST_IP = '<broadcast>'
