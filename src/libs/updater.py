@@ -8,7 +8,7 @@ try:
 except ImportError:
     try:
         import libs.mojstd
-     except ImportError:
+    except ImportError:
          ui_print("Mojstd not found", 1)
 
 # Configuration file name
