@@ -69,26 +69,35 @@ def get_local_hash(local_dir):
 
 def update_repo(repo_url, repo_name, local_dir):
     """
-    Update the local repository to align with the remote repository.
+    Aggiorna la directory del repository locale per allinearla al repository remoto.
     """
     try:
-        # Get the default branch from the remote repository
+        # Ottieni informazioni sul ramo predefinito
         repo_api_url = repo_url.replace("https://github.com/", "https://api.github.com/repos/")
         repo_info = requests.get(repo_api_url)
         repo_info.raise_for_status()
         default_branch = repo_info.json().get("default_branch", "main")
 
+        # Controlla se la directory esiste
+        src_dir = os.path.join(local_dir, "src")
         if os.path.exists(local_dir):
-            # If the directory exists, perform a fetch and reset
+            # Aggiorna il repository
             subprocess.run(["git", "-C", local_dir, "fetch", "--all"], check=True)
             subprocess.run(["git", "-C", local_dir, "reset", "--hard", f"origin/{default_branch}"], check=True)
         else:
-            # Otherwise, clone the repository
+            # Clona il repository se non esiste
             subprocess.run(["git", "clone", repo_url, local_dir], check=True)
+
+        # Controlla che la directory src/ sia aggiornata
+        if not os.path.exists(src_dir):
+            ui_print(f"Directory 'src/' non trovata in {repo_name}.", 1)
+        else:
+            ui_print(f"Tutti i file e le directory in 'src/' sono aggiornati per {repo_name}.", 0)
 
         ui_print(f"{repo_name} Updated!", 1)
     except subprocess.CalledProcessError as e:
-        ui_print("Update Error.", 1)
+        ui_print(f"Update Error: {e}", 1)
+
 
 def randomCheck():
     """
