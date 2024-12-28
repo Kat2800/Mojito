@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 from PIL import Image, ImageDraw, ImageFont
-import drivers.LCD_1in44
+import LCD_1in44
 import time
 import os
 import subprocess
