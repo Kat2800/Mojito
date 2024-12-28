@@ -15,8 +15,6 @@ else:
 
 
 mon0()
-BootCheck() # Return True, so in case of plugin to start at boot it boot it
-# execPlugins()
 
 
 os.system("sudo python menu.py")
