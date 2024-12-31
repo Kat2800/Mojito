@@ -217,7 +217,7 @@ if the problem persist""")
                                                         elif process == 0:
                                                             break
                                                         else:
-                                                            break
+                                                            continue
 
                                                     
                                                     if bk_ == 1:
