@@ -61,18 +61,16 @@ class CapHandshakes():
             print(f"loop {i}")
             #key3
             if self.bk() == True:
-            	print("why")
                 killwhile = 1
                 return killwhile
                 break
-		
+
             time.sleep(2)
             ui_print(f"Loading ({commands.index(i)})...", 0.5)
             self.bettercap_process.stdin.write(i+'\n')
 
             #key3
             if self.bk() == True:
-                print("why")
                 killwhile = 1
                 return killwhile
                 break
