@@ -21,6 +21,8 @@ max_visible_options = 7
 INTERFACE = json.load(open("settings/settings.json", "r"))["interface"]
 interface = []
 
+
+
 #@functools.lru_cache(maxsize=1000)
 def bk():
     if GPIO.input(KEY3_PIN) == 0:
@@ -151,6 +153,7 @@ while True:
                                     for item in data:
                                         menu_options.append(item['ssid'])
                                         dictdionary[item['ssid']] = item['bssid']
+                                        dictdionary[item['bssid']] = item['chan']
 
                                     selected_index = 0
                                     while handshakes == 1:
@@ -169,8 +172,11 @@ while True:
                                                 break
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
+
                                                 selected_option = menu_options[selected_index]
                                                 selected_bssid = dictdionary[selected_option]
+                                                selected_chan = dictdionary[selected_bssid]
+                                                print(selected_chan)
                                                 print(selected_bssid)
                                                 #Bettercap
 
@@ -207,7 +213,7 @@ if the problem persist""")
 
                                                 else:
                                                     time.sleep(0.5)
-                                                    process = CapHandshakes(INTERFACE).initialization(selected_bssid, INTERFACE)
+                                                    process = CapHandshakes(INTERFACE).initialization(selected_chan, selected_bssid, INTERFACE)
                                                     print("process is running")
                                                     
                                                     while True:
@@ -217,7 +223,7 @@ if the problem persist""")
                                                         elif process == 0:
                                                             break
                                                         else:
-                                                            continue
+                                                            break
 
                                                     
                                                     if bk_ == 1:
@@ -229,7 +235,7 @@ if the problem persist""")
                                                     ui_print("""When the handshake
 is captured,
 you'll be notified""", 2.5)
-                                                    while process == True:
+                                                    while True:
                                                         if os.path.exists(f"'wpa({selected_bssid}).pcap'") == True:
                                                             ui_print("Handshake captured!",1)
                                                             os.system("sudo systemctl start NetworkManager")
