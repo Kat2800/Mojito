@@ -15,7 +15,7 @@ class CapHandshakes():
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            bufsize=1 
+            bufsize=1
         )
 
     def bk(self):
@@ -42,12 +42,12 @@ class CapHandshakes():
             bk_ = 1
             return bk_
 
-    def initialization(self, selected_bssid, INTERFACE):
+    def initialization(self, selected_chan, selected_bssid, INTERFACE):
         bk_ = 0
         commands = [
             'wifi.recon on',
             'wifi.show',
-            'set wifi.recon channel 8',
+            f'set wifi.recon channel {selected_chan}',
             'set net.sniff.verbose true',
             'set net.sniff.filter ether proto 0x888e',
             f'set net.sniff.output wpa({selected_bssid}).pcap',
@@ -81,4 +81,4 @@ class CapHandshakes():
             with open("output.txt", 'a') as file:
                 file.write(self.bettercap_process.stdout.readline())
 
-        return 2
+        return 0
