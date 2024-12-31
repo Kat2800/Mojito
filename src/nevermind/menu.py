@@ -9,10 +9,10 @@ from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 from lib import dos_bluetooth
 from lib.dos_bluetooth import dos
-import functools
 from lib import wifinetworks
 from lib.wifinetworks import wifi_info
 from lib.mojstd import *
+from lib.netstd import *
 
 scroll_offset = 0
 selected_index = 0
@@ -20,7 +20,6 @@ handshakes = 1 #on
 max_visible_options = 7
 INTERFACE = json.load(open("settings/settings.json", "r"))["interface"]
 interface = []
-Exit = "<---------Exit--------->"
 
 #@functools.lru_cache(maxsize=1000)
 def bk():
@@ -174,22 +173,25 @@ while True:
                                                 selected_bssid = dictdionary[selected_option]
                                                 print(selected_bssid)
                                                 #Bettercap
-                                                commands = [
-                                                    'wifi.recon on',
-                                                    'wifi.show',
-                                                    'set wifi.recon channel 8',
-                                                    'set net.sniff.verbose true',
-                                                    'set net.sniff.filter ether proto 0x888e',
-                                                    f'set net.sniff.output wpa({selected_bssid}).pcap',
-                                                    'net.sniff on',
-                                                    f'wifi.deauth {selected_bssid}'
-                                                ]
 
                                                 ui_print("Wait please...")
-                                                os.system(f"sudo iw {INTERFACE} interface add mon0 type monitor")
+                                                process = CapHandshakes(INTERFACE).interface_select(INTERFACE)
+                                                if process == 0:
+                                                    pass
+                                                else:
+                                                    print(process)
+                                                    ui_print("""Error: 
+Interface not Found
+Try to reboot Mojito
+if the problem persist""") 
+                                                    break
+
+                                                if CapHandshakes(INTERFACE).interface_start(INTERFACE) == 1:
+                                                    ui_print("Retring", 0.5)
+                                                    break
+
                                                 time.sleep(1)
-                                                os.system("sudo airmon-ng start mon0")
-                                                ui_print("mon0 ready!")
+                                                ui_print(f"{INTERFACE} ready!")
 
                                                 # KEY3
                                                 if bk() == True:
@@ -199,66 +201,35 @@ while True:
                                                 ui_print("Wait please...")
                                                 time.sleep(1)
 
-                                                #Handshake alredyc captured --> break
-                                                if os.path.exists(f"'wpa({selected_bssid}).pcap'") == True:
-                                                    ui_print("Handshake alredy captured", 1)
-                                                    os.system("sudo systemctl start NetworkManager")
-                                                    ui_print("Retring...")
-                                                    break
-
-                                                elif bk() == True:
+                                                if bk() == True:
                                                         ui_print("Retring...", 0.5)
                                                         break
 
                                                 else:
-                                                    bettercap_process = subprocess.Popen(
-                                                        ['sudo', 'bettercap', '-iface', 'mon0'],
-                                                        stdin=subprocess.PIPE,
-                                                        stdout=subprocess.PIPE,
-                                                        stderr=subprocess.PIPE,
-                                                        text=True,
-                                                        bufsize=1 #sono piccole memorie in cui vengono storati le cose temporaneamente, i byte vengono letti a blocchi è  più veloce
-                                                    )
-
                                                     time.sleep(0.5)
-                                                    for i in commands:
-
-                                                        #key3
-                                                        if bk() == True:
-                                                            ui_print("Retring...", 0.5)
-                                                            handshakes = 0
+                                                    process = CapHandshakes(INTERFACE).initialization(selected_bssid, INTERFACE)
+                                                    print("process is running")
+                                                    
+                                                    while True:
+                                                        if process == 1:
+                                                            bk_ = 1
+                                                            break
+                                                        elif process == 0:
+                                                            break
+                                                        else:
                                                             break
 
-                                                        time.sleep(2)
-                                                        ui_print(f"Loading ({commands.index(i)})...", 0.5)
-                                                        bettercap_process.stdin.write(i+'\n')
-
-                                                        #key3
-                                                        if bk() == True:
-                                                            ui_print("Retring...", 0.5)
-                                                            handshakes = 0
-                                                            break
-
-                                                        bettercap_process.stdin.flush()
-                                                        ui_print("Capturing handshakes...", 1)
-                                                        #Write output
-                                                        with open("output.txt", 'a') as file:
-                                                            file.write(bettercap_process.stdout.readline())
-
-                                                        break
-
-                                                    if handshakes == 0:
+                                                    
+                                                    if bk_ == 1:
                                                         selected_index = 0
                                                         break
+                                                            
 
                                                     ui_print("this might take some time...", 2)
                                                     ui_print("""When the handshake
 is captured,
-you'll be notified
-and you'll be
-brought back to the
-previous menu""", 2.5)
-                                                    while True:
+you'll be notified""", 2.5)
+                                                    while process == True:
                                                         if os.path.exists(f"'wpa({selected_bssid}).pcap'") == True:
                                                             ui_print("Handshake captured!",1)
                                                             os.system("sudo systemctl start NetworkManager")
@@ -287,7 +258,6 @@ previous menu""", 2.5)
                                             dictdionary[item['ssid']] = item['bssid']
                                             dictdionary[item['bssid']] = item['chan']
 
-                                    menu_options.append(Exit)
                                     ui_print("Loading...",1 )
 
                                     selected_index = 0
