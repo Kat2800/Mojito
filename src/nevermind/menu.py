@@ -249,7 +249,7 @@ you'll be notified""", 2.5)
                                                         else:
                                                             pass
 
-                                #DEAUTH ALL -----> THIS MIGHT NOT WORK 
+                                #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORKS)
                                 elif selected_option == "Deauth all":
                                     wifi_info().main()
                                     menu_options = []
@@ -332,13 +332,6 @@ you'll be notified""", 2.5)
 
 
 
-
-
-
-
-
-
-
                                 #Fake AP
                                 elif selected_option == 'Fake AP':
                                     selected_index = 0
@@ -369,11 +362,20 @@ you'll be notified""", 2.5)
                                                 os.system(f"sudo airmon-ng check {INTERFACE} && sudo airmon-ng check kill")
                                                 os.system(f"sudo airmon-ng start {INTERFACE}")
                                                 ui_print(f"{INTERFACE} is ready")
+                                                
+                                                if bk() == True:
+                                                    ui_print("Retring...", 0.5)
+                                                    break
+
                                                 ui_print("Starting ...")
                                                 time.sleep(1)
 
                                             def RickRoll(a, b):
                                                 os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
+                                                if bk() == True:
+                                                    os.system("sudo airmon-ng stop "+INTERFACE)
+                                                    ui_print("Retring...", 0.5)
+                                                    break
 
                                             for i in range(len(nevergonnagiveuup)):
                                                 ui_print(f"""Fake AP - 
@@ -491,7 +493,8 @@ RickRoll started . . .""", 1.5)
                     selected_option = menu_options[selected_index]
 
                     if selected_option == "Yes":
-                        ui_print("Rebooting...", 10)
+                        ui_print("Rebooting...", 1.5)
+                        draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
                         os.system("sudo reboot now")
 
                     else:
@@ -520,7 +523,8 @@ RickRoll started . . .""", 1.5)
                     selected_option = menu_options[selected_index]
 
                     if selected_option == "Yes":
-                        ui_print("Shutting down mojito...", 10)
+                        ui_print("Shutting down mojito...", 2)
+                        draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
                         os.system("sudo shutdown now")
 
                     else:
