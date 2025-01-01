@@ -35,12 +35,12 @@ class CapHandshakes():
             return 0
 
     def interface_start(self, INTERFACE):
-        bk_ = 0
         time.sleep(0.5)
         os.system(f"sudo airmon-ng start {INTERFACE}")
         if self.bk() == True:
-            bk_ = 1
-            return bk_
+            return 1
+        else:
+            return 0
 
     def initialization(self, selected_chan, selected_bssid, INTERFACE):
         bk_ = 0
