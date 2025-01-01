@@ -144,7 +144,7 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
    - Use for non-commercial purposes 💸❌<br>
    - You cannot Create Derivative Works, but the authors permict that if you respect that: the work will be ALWAYS open source and free, and the authors will be mentionated and if the authors dosn't like what you did, you must remove it from the internet (but you can have a copy that only you can use) 📄<br>
    - Impose additional restrictions 🟰<br>
-  What you can do: ✔️<br> 
+What you can do: ✔️<br> 
    - Share 🔗<br>
    - Use Mojito for educational purposes
    - Use Mojito for penetration testing (with permission)
