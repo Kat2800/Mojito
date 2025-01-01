@@ -176,8 +176,7 @@ while True:
                                                 selected_option = menu_options[selected_index]
                                                 selected_bssid = dictdionary[selected_option]
                                                 selected_chan = dictdionary[selected_bssid]
-                                                print(selected_chan)
-                                                print(selected_bssid)
+
                                                 #Bettercap
 
                                                 ui_print("Wait please...")
@@ -236,11 +235,12 @@ if the problem persist""")
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
-                                                        if os.path.exists(f"'wpa({selected_bssid}).pcap'") == True:
-                                                            ui_print("Handshake captured!",1)
-                                                            os.system("sudo systemctl start NetworkManager")
-                                                            ui_print("Retring...")
-                                                            break
+                                                        if os.path.exists(f"wpa({selected_bssid}).pcap") == True:
+                                                            if os.path.getsize(f"wpa({selected_bssid})") > 51200:
+                                                                ui_print("Handshake captured!",1)
+                                                                os.system("sudo systemctl start NetworkManager")
+                                                                ui_print("Retring...")
+                                                                break
 
                                                         elif bk() == True:
                                                             selected_index = 0
