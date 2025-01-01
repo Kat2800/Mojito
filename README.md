@@ -114,7 +114,7 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
 ```
 
 ## After a while it should display the Mojito menu! 🎉
-##Remember: This is not the first version of mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well
+## Remember: This is not the first version of mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well
 # SIMBOLS LIST: 
    - NB! = No Battery Found! <br> 
    - Plug = pluged to a power source 🔌<br>
