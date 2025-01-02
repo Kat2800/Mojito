@@ -553,7 +553,7 @@ RickRoll started . . .""", 1.5)
                     selected_option = menu_options[selected_index]
 
                     if selected_option == "Interface":
-                        sys_class_net_ = subprocess.run(["ls", "/sys/class/net/"], text=True, capture_output=True)
+                        sys_class_net_ = subprocess.run(["ls", "sys/class/net/"], text=True, capture_output=True)
                         if sys_class_net_.returncode != 0:
                             ui_print("""Error: Unable to find ANY 
     network interfaces""")
@@ -584,7 +584,7 @@ RickRoll started . . .""", 1.5)
                                     selected_option = menu_options[selected_index]
                                     INTERFACE = {"interface":selected_option}
                                     ui_print("Wait please...", 0.5)
-                                    with open("settings/settings.json", "w") as idk:
+                                    with open("kali/home/mojito/settings/settings.json", "w") as idk:
                                         json.dump(INTERFACE, idk, indent=2)
                                     ui_print(f"""Selected Interface:
 {selected_option}""")
