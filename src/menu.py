@@ -351,10 +351,6 @@ while True:
             os.system("sudo reboot")
         elif selected_option == "Restart MojUI":
             os.system("sudo python boot.py")
-        else:
-            ui_print("Unknown option", 2)
-
-
 
         elif selected_option == "Settings":
             selected_index = 0
@@ -416,10 +412,8 @@ while True:
 {selected_option}""")
 
                                 
-                                
 
 
+        else:
+            ui_print("Unknown option", 2)
 
-
-                    else:
-                        break
