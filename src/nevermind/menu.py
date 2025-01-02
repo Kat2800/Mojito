@@ -375,12 +375,13 @@ you'll be notified""", 2.5)
                                                 if bk() == True:
                                                     os.system("sudo airmon-ng stop "+INTERFACE)
                                                     ui_print("Retring...", 0.5)
-                                                    break
+                                                    return 1
 
                                             for i in range(len(nevergonnagiveuup)):
                                                 ui_print(f"""Fake AP - 
 RickRoll started . . .""", 1.5)
-                                                threading.Thread(target=RickRoll, args=(i, b)).start()
+                                                process = threading.Thread(target=RickRoll, args=(i, b)).start()
+                                                if process == 1
                                                 b += 1
                                             while True:
                                                 ui_print("Press Key 3 to stop...")
