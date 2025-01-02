@@ -235,8 +235,8 @@ if the problem persist""")
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
-                                                        if os.path.exists(f"home/kali/mojito/wpa({selected_bssid}).pcap") == True:
-                                                            if os.path.getsize(f"home/kali/mojito/wpa({selected_bssid})") > 51200:
+                                                        if os.path.exists(f"/home/kali/mojito/wpa({selected_bssid}).pcap") == True:
+                                                            if os.path.getsize(f"/home/kali/mojito/wpa({selected_bssid})") > 51200:
                                                                 ui_print("Handshake captured!",1)
                                                                 os.system("sudo systemctl start NetworkManager")
                                                                 ui_print("Retring...")
@@ -381,7 +381,8 @@ you'll be notified""", 2.5)
                                                 ui_print(f"""Fake AP - 
 RickRoll started . . .""", 1.5)
                                                 process = threading.Thread(target=RickRoll, args=(i, b)).start()
-                                                if process == 1
+                                                if process == 1:
+                                                    break
                                                 b += 1
                                             while True:
                                                 ui_print("Press Key 3 to stop...")
