@@ -18,7 +18,7 @@ scroll_offset = 0
 selected_index = 0
 handshakes = 1 #on
 max_visible_options = 7
-INTERFACE = json.load(open("settings/settings.json", "r"))["interface"]
+INTERFACE = json.load(open("home/kali/moijto/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
 
