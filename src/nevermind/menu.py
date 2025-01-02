@@ -235,8 +235,8 @@ if the problem persist""")
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
-                                                        if os.path.exists(f"wpa({selected_bssid}).pcap") == True:
-                                                            if os.path.getsize(f"wpa({selected_bssid})") > 51200:
+                                                        if os.path.exists(f"home/kali/mojito/wpa({selected_bssid}).pcap") == True:
+                                                            if os.path.getsize(f"home/kali/mojito/wpa({selected_bssid})") > 51200:
                                                                 ui_print("Handshake captured!",1)
                                                                 os.system("sudo systemctl start NetworkManager")
                                                                 ui_print("Retring...")
