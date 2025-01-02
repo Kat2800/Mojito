@@ -351,67 +351,7 @@ while True:
             os.system("sudo reboot")
         elif selected_option == "Restart MojUI":
             os.system("sudo python boot.py")
-
-        elif selected_option == "Settings":
-            selected_index = 0
-
-            time.sleep(0.20)
-            while True:
-                menu_options = ["Interface", "Ssh"]
-                draw_menu(selected_index)
-                if GPIO.input(KEY_UP_PIN) == 0:
-                    selected_index = (selected_index - 1) % len(menu_options)
-                    draw_menu(selected_index)
-
-                elif GPIO.input(KEY_DOWN_PIN) == 0:
-                    selected_index = (selected_index + 1) % len(menu_options)
-                    draw_menu(selected_index)
-
-                elif GPIO.input(KEY3_PIN) == 0:
-                    ui_print("Retring...", 0.5)
-                    break
-
-                elif GPIO.input(KEY_PRESS_PIN) == 0:
-                    selected_option = menu_options[selected_index]
-
-                    if selected_option == "Interface":
-                        sys_class_net_ = subprocess.run(["ls", "/sys/class/net/"], text=True, capture_output=True)
-                        if sys_class_net_.returncode != 0:
-                            ui_print("""Error: Unable to find ANY 
-    network interfaces""")
-
-                        else:
-                            interface = sys_class_net_.stdout.splitlines()
-
-                            #interface menu
-                            selected_index = 0
-                            time.sleep(0.20)
-
-                            while True:
-                                menu_options = interface
-                                draw_menu(selected_index)
-                                if GPIO.input(KEY_UP_PIN) == 0:
-                                    selected_index = (selected_index - 1) % len(menu_options)
-                                    draw_menu(selected_index)
-
-                                elif GPIO.input(KEY_DOWN_PIN) == 0:
-                                    selected_index = (selected_index + 1) % len(menu_options)
-                                    draw_menu(selected_index)
-
-                                elif GPIO.input(KEY3_PIN) == 0:
-                                    ui_print("Retring...", 0.5)
-                                    break
-
-                                elif GPIO.input(KEY_PRESS_PIN) == 0:
-                                    selected_option = menu_options[selected_index]
-                                    INTERFACE = {"interface":selected_option}
-                                    ui_print("Wait please...", 0.5)
-                                    with open("settings/settings.json", "w") as idk:
-                                        json.dump(INTERFACE, idk, indent=2)
-                                    ui_print(f"""Selected Interface:
-{selected_option}""")
-
-                                
+       
 
 
         else:
