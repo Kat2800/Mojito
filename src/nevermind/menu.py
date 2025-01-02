@@ -18,7 +18,7 @@ scroll_offset = 0
 selected_index = 0
 handshakes = 1 #on
 max_visible_options = 7
-INTERFACE = json.load(open("/home/kali/moijto/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
+INTERFACE = json.load(open("settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
 
@@ -230,17 +230,21 @@ if the problem persist""")
                                                         break
                                                             
 
-                                                    ui_print("this might take some time...", 2)
+                                                    ui_print("""This might take 
+some time...""", 2)
                                                     ui_print("""When the handshake
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
-                                                        if os.path.exists(f"/home/kali/mojito/wpa({selected_bssid}).pcap") == True:
-                                                            if os.path.getsize(f"/home/kali/mojito/wpa({selected_bssid})") > 51200:
+                                                        if os.path.exists(f"wpa_{selected_bssid}_.pcap") == True:
+                                                            if os.path.getsize(f"wpa_{selected_bssid}_.pcap") > 1000:
                                                                 ui_print("Handshake captured!",1)
-                                                                os.system("sudo systemctl start NetworkManager")
+                                                                os.system("sudo iwconfig "+INTERFACE+" mode managed")
                                                                 ui_print("Retring...")
                                                                 break
+                                                        else:
+                                                            ui_print("""Waiting the 4-way 
+handshake""", 1)
 
                                                         elif bk() == True:
                                                             selected_index = 0
@@ -586,7 +590,7 @@ RickRoll started . . .""", 1.5)
                                     selected_option = menu_options[selected_index]
                                     INTERFACE = {"interface":selected_option}
                                     ui_print("Wait please...", 0.5)
-                                    with open("kali/home/mojito/settings/settings.json", "w") as idk:
+                                    with open("settings/settings.json", "w") as idk:
                                         json.dump(INTERFACE, idk, indent=2)
                                     ui_print(f"""Selected Interface:
 {selected_option}""")
