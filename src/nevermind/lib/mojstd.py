@@ -325,8 +325,8 @@ def getYesNo():
             time.sleep(0.3)
 
 # Menu options
-menu_options = ["Networks","Bluetooth", "Payload", "Party", "App & Plugin", "Shutdown", "Reboot", "Restart MojUI"]
-selected_index = 0
+#menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
+#selected_index = 0
 
 def show_image(image_path, exit_event=None):
     image = Image.open(image_path)
@@ -351,7 +351,7 @@ def get_battery_level():
     is_plugged = battery.power_plugged
     return percent, is_plugged
 
-def draw_menu(selected_index):
+"""def draw_menu(selected_index):
     # Clear previous image
 
     # Clear screen
@@ -397,7 +397,7 @@ def draw_menu(selected_index):
             draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
 
     # Display the updated image
-    disp.LCD_ShowImage(image, 0, 0)
+    disp.LCD_ShowImage(image, 0, 0)"""
 
 
 
