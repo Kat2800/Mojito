@@ -6,7 +6,7 @@ import socket
 import sys
 from libs.mojstd import * # Mojito Standard Library 
 
-
+INTERFACE = json.load(open("settings/settings.json", "r"))["interface"]
 while True:
     draw_menu(selected_index)
 
