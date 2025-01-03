@@ -446,8 +446,7 @@ while True:
                                     selected_index = (selected_index + 1) % len(menu_options)
                                     draw_menu(selected_index)
 
-                                elif GPIO.input(KEY3_PIN) == 0:
-                                    ui_print("Retring...", 0.5)
+                                if bk():
                                     break
 
                                 elif GPIO.input(KEY_PRESS_PIN) == 0:
