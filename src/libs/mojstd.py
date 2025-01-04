@@ -296,20 +296,48 @@ def show_image(image_path, exit_event=None):
 def get_battery_level():
     battery = psutil.sensors_battery()
     if battery is None:
-        return None, None  # Nessuna batteria rilevata
+        return None, None  
     percent = battery.percent
     is_plugged = battery.power_plugged
     return percent, is_plugged
 
-def draw_menu(selected_index):
-    # Clear previous image
+def load_wallpaper(value):
+    if isinstance(value, str): 
+        return Image.open(value).convert("RGB")
+    elif isinstance(value, list) and len(value) == 3:  #
+        return tuple(value)
+    else:
+        raise ValueError("Error: 'Wallpaper' must be an RGB color or a image file.")
 
-    # Clear screen
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+# Funzione per caricare i colori dal file JSON
+def load_colors(json_file):
+    with open(json_file, 'r') as file:
+        return json.load(file)
+
+# File JSON con i colori
+color_file = "settings/colors.json"
+colors = load_colors(color_file)
+
+# Leggi il wallpaper (colore o immagine) e altri colori
+wallpaper = load_wallpaper(colors["wallpaper"])  # Può essere un colore o un'immagine
+evi_text_color = tuple(colors["evi_text"])       # Colore del testo evidenziato
+text_color = tuple(colors["text"])               # Colore del testo normale
+
+def draw_menu(selected_index):
+    global draw, width, height, image
+
+    # Se il wallpaper è un'immagine, ridimensiona e applica
+    if isinstance(wallpaper, Image.Image):
+        # Adatta l'immagine alla dimensione dello schermo
+        resized_wallpaper = wallpaper.resize((width, height))
+        image.paste(resized_wallpaper)
+    else:
+        # Se è un colore, riempi lo sfondo
+        draw.rectangle((0, 0, width, height), outline=0, fill=wallpaper)
 
     # Aggiungi l'orario in alto a destra
     current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Orario in alto a destra
+    draw.text((width - 40, 0), current_time, font=font, fill=text_color)  # Orario in alto a destra
 
     # Ottieni il livello della batteria
     battery_level, plugged_in = get_battery_level()
@@ -319,9 +347,9 @@ def draw_menu(selected_index):
         draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # Messaggio di errore a sinistra
     else:
         if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messaggio "PLUG" a sinistra
+            draw.text((5, 0), "PLUG", font=font, fill=text_color)  # Messaggio "PLUG" a sinistra
         else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # Livello della batteria a sinistra
+            draw.text((5, 0), f"{battery_level}%", font=font, fill=text_color)  # Livello della batteria a sinistra
 
     # Imposta il numero massimo di opzioni visibili
     max_visible_options = 6
@@ -341,14 +369,13 @@ def draw_menu(selected_index):
             text_size = draw.textbbox((0, 0), option, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
-            draw.rectangle((0, y, width, y + text_height), fill=(50, 205, 50))  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.rectangle((0, y, width, y + text_height), fill=evi_text_color)  # Evidenzia sfondo
+            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo evidenziato in nero
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((1, y), option, font=font, fill=text_color)  # Testo normale (bianco)
 
-    # Display the updated image
-    disp.LCD_ShowImage(image, 0, 0)
-
+# Chiamata al disegno del menu
+draw_menu(0)
 
 
 def ui_print(message, duration=2):
