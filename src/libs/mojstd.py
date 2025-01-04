@@ -315,25 +315,19 @@ def load_colors(json_file):
         return json.load(file)
 
 # File JSON con i colori
-color_file = "settings/style.json"
+color_file = "colors.json"
 colors = load_colors(color_file)
 
-# Leggi il wallpaper (colore o immagine) e altri colori
-wallpaper = load_wallpaper(colors["wallpaper"])  # Può essere un colore o un'immagine
-evi_text_color = tuple(colors["evi_text"])       # Colore del testo evidenziato
-text_color = tuple(colors["text"])               # Colore del testo normale
+# Colori letti dal JSON
+wallpaper_color = tuple(colors["wallpaper"])  # Colore dello sfondo generale
+evi_text_color = tuple(colors["evi_text"])    # Colore del testo evidenziato
+text_color = tuple(colors["text"])            # Colore del testo normale
 
 def draw_menu(selected_index):
-    global draw, width, height, image
+    # Clear previous image
 
-    # Se il wallpaper è un'immagine, ridimensiona e applica
-    if isinstance(wallpaper, Image.Image):
-        # Adatta l'immagine alla dimensione dello schermo
-        resized_wallpaper = wallpaper.resize((width, height))
-        image.paste(resized_wallpaper)
-    else:
-        # Se è un colore, riempi lo sfondo
-        draw.rectangle((0, 0, width, height), outline=0, fill=wallpaper)
+    # Clear screen
+    draw.rectangle((0, 0, width, height), outline=0, fill=wallpaper_color)  # Sfondo generale
 
     # Aggiungi l'orario in alto a destra
     current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
@@ -370,9 +364,9 @@ def draw_menu(selected_index):
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
             draw.rectangle((0, y, width, y + text_height), fill=evi_text_color)  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo evidenziato in nero
+            draw.text((1, y), option, font=font, fill=wallpaper_color)  # Testo evidenziato (es: nero o altro)
         else:
-            draw.text((1, y), option, font=font, fill=text_color)  # Testo normale (bianco)
+            draw.text((1, y), option, font=font, fill=text_color)  # Testo normale (es: bianco)
 
 # Chiamata al disegno del menu
 draw_menu(0)
