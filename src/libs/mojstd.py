@@ -40,7 +40,8 @@ disp = LCD_1in44.LCD()
 Lcd_ScanDir = LCD_1in44.SCAN_DIR_DFT
 disp.LCD_Init(Lcd_ScanDir)
 disp.LCD_Clear()
-
+def clear():
+    disp.LCD_Clear()
 def list_files_in_directory(directory):
     """List all files in the specified directory without extensions."""
     return [os.path.splitext(f)[0] for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
