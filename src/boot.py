@@ -12,6 +12,7 @@ from libs.updater import *
 import os
 import glob
 import time
+clear()
 show_image("../logo.png", exit_event=lambda: time.sleep(1) or True)
 plugins = glob.glob('plugins/boot/*.py')
 
