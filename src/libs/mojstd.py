@@ -315,7 +315,7 @@ def load_colors(json_file):
         return json.load(file)
 
 # File JSON con i colori
-color_file = "settings/colors.json"
+color_file = "settings/style.json"
 colors = load_colors(color_file)
 
 # Leggi il wallpaper (colore o immagine) e altri colori
