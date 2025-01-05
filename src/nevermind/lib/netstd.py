@@ -51,7 +51,7 @@ class CapHandshakes():
             f'set wifi.recon channel {selected_chan}',
             'set net.sniff.verbose true',
             'set net.sniff.filter ether proto 0x888e',
-            f'set net.sniff.output wpa_{selected_bssid}_.pcap',
+            f'set net.sniff.output /home/kali/mojito/wpa_{selected_bssid}_.pcap',
             'net.sniff on',
             f'wifi.deauth {selected_bssid}'
         ]
@@ -91,7 +91,7 @@ class CapHandshakes():
             ui_print(messages[commands.index(i)], 1)
 
             #Write output
-            with open("output.txt", 'a') as file:
+            with open("/kali/home/mojito/logs/output.txt", 'a') as file:
                 file.write(self.bettercap_process.stdout.readline())
 
         return 0
