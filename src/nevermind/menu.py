@@ -17,9 +17,8 @@ from lib.netstd import *
 scroll_offset = 0
 selected_index = 0
 handshakes = 1 #on
-stop_threading = threading.Event()
 max_visible_options = 7
-INTERFACE = json.load(open("settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
+INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
 
@@ -159,7 +158,7 @@ while True:
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Retring...", 0.5)
+                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -183,7 +182,7 @@ while True:
                                 draw_menu(selected_index)
 
                             elif bk() == True:
-                                ui_print("Retring...", 0.5)
+                                ui_print("Going back...", 0.5)
                                 break
 
                             elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -220,7 +219,7 @@ while True:
                                                 draw_menu(selected_index)
 
                                             elif bk() == True:
-                                                ui_print("Retring...", 0.5)
+                                                ui_print("Going back...", 0.5)
                                                 break
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -244,7 +243,7 @@ if the problem persist""")
                                                     break
 
                                                 if CapHandshakes(INTERFACE).interface_start(INTERFACE) == 1:
-                                                    ui_print("Retring", 0.5)
+                                                    ui_print("Going back", 0.5)
                                                     break
 
                                                 time.sleep(1)
@@ -252,14 +251,14 @@ if the problem persist""")
 
                                                 # KEY3
                                                 if bk() == True:
-                                                    ui_print("Retring...", 0.5)
+                                                    ui_print("Going back...", 0.5)
                                                     break
 
                                                 ui_print("Wait please...")
                                                 time.sleep(1)
 
                                                 if bk() == True:
-                                                        ui_print("Retring...", 0.5)
+                                                        ui_print("Going back...", 0.5)
                                                         break
 
                                                 else:
@@ -288,11 +287,11 @@ some time...""", 2)
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
-                                                        if os.path.exists(f"wpa_{selected_bssid}_.pcap") == True:
-                                                            if os.path.getsize(f"wpa_{selected_bssid}_.pcap") > 1000:
+                                                        if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
+                                                            if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
                                                                 ui_print("Handshake captured!",1)
                                                                 os.system("sudo iwconfig "+INTERFACE+" mode managed")
-                                                                ui_print("Retring...")
+                                                                ui_print("Going back...")
                                                                 break
                                                         else:
                                                             ui_print("""Waiting the 4-way 
@@ -334,7 +333,7 @@ handshake""", 1)
                                             draw_menu(selected_index)
 
                                         elif bk() == True:
-                                            ui_print("Retring...", 0.5)
+                                            ui_print("Going back...", 0.5)
                                             selected_index = 0
                                             break
 
@@ -364,7 +363,7 @@ handshake""", 1)
                                                 deauthall = subprocess.run(command, text=True, capture_output=True)
 
                                                 if  GPIO.input(KEY3_PIN) == 0:
-                                                    ui_print("Retring...", 0.5)
+                                                    ui_print("Going back...", 0.5)
                                                     break
 
                                                 elif deauthall.returncode != 0:
@@ -405,7 +404,7 @@ handshake""", 1)
                                             draw_menu(selected_index)
 
                                         elif bk() == True:
-                                            ui_print("Retring...", 0.5)
+                                            ui_print("Going back...", 0.5)
                                             break
 
                                         elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -420,7 +419,7 @@ handshake""", 1)
                                                 ui_print(f"{INTERFACE} is ready")
                                                 
                                                 if bk() == True:
-                                                    ui_print("Retring...", 0.5)
+                                                    ui_print("Going back...", 0.5)
                                                     break
 
                                                 ui_print("Starting ...")
@@ -430,7 +429,7 @@ handshake""", 1)
                                                 os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
                                                 if bk() == True:
                                                     os.system("sudo airmon-ng stop "+INTERFACE)
-                                                    ui_print("Retring...", 0.5)
+                                                    ui_print("Going back...", 0.5)
                                                     return 1
 
                                             for i in range(len(nevergonnagiveuup)):
@@ -443,8 +442,8 @@ RickRoll started . . .""", 1.5)
                                             while True:
                                                 ui_print("Press Key 3 to stop...")
                                                 if bk() == True:
-                                                    ui_print("Retring...", 0.5)
-                                                    stop_threading.set()
+                                                    ui_print("Going back...", 0.5)
+                                                    threading.Event()
                                                     break
 
         elif selected_option == "Bluetooth":
@@ -465,7 +464,7 @@ RickRoll started . . .""", 1.5)
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Retring...", 0.5)
+                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -502,7 +501,7 @@ RickRoll started . . .""", 1.5)
                                 draw_menu(selected_index)
 
                             elif bk() == True:
-                                ui_print("Retring...", 0.5)
+                                ui_print("Going back...", 0.5)
                                 break
 
                             elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -525,7 +524,7 @@ RickRoll started . . .""", 1.5)
                                      #   BLUEDOS = 0
                                       #  BleDos.threading.Event()
                                        # time.slee(1)
-                                        #ui_print("Retring...", 0.5)
+                                        #ui_print("Going back...", 0.5)
                                         #break
 
         elif selected_option == "Reboot":
@@ -544,7 +543,7 @@ RickRoll started . . .""", 1.5)
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Retring...", 0.5)
+                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -574,7 +573,7 @@ RickRoll started . . .""", 1.5)
                     draw_menu(selected_index)
 
                 elif  GPIO.input(KEY3_PIN) == 0:
-                    ui_print("Retring...", 0.5)
+                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -604,14 +603,14 @@ RickRoll started . . .""", 1.5)
                     draw_menu(selected_index)
 
                 elif GPIO.input(KEY3_PIN) == 0:
-                    ui_print("Retring...", 0.5)
+                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
                     selected_option = menu_options[selected_index]
 
                     if selected_option == "Interface":
-                        sys_class_net_ = subprocess.run(["ls", "sys/class/net/"], text=True, capture_output=True)
+                        sys_class_net_ = subprocess.run(["ls", "/sys/class/net/"], text=True, capture_output=True)
                         if sys_class_net_.returncode != 0:
                             ui_print("""Error: Unable to find ANY 
     network interfaces""")
@@ -635,7 +634,7 @@ RickRoll started . . .""", 1.5)
                                     draw_menu(selected_index)
 
                                 elif GPIO.input(KEY3_PIN) == 0:
-                                    ui_print("Retring...", 0.5)
+                                    ui_print("Going back...", 0.5)
                                     break
 
                                 elif GPIO.input(KEY_PRESS_PIN) == 0:
