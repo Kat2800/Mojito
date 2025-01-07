@@ -3,9 +3,6 @@ import RPi.GPIO as GPIO
 import os
 import subprocess
 import time
-import random
-import subprocess
-import time
 
 def generate():
     for var in range(0, 100000000):
