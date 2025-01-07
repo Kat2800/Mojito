@@ -157,6 +157,47 @@ image = Image.new('RGB', (width, height))
 draw = ImageDraw.Draw(image)
 font = ImageFont.load_default()
 
+def getYN(text):
+    
+    selected_option = "Yes"
+    
+  
+    def draw_interface():
+        draw.rectangle((0, 0, width, height), fill=(0, 0, 0))  
+
+        draw.text((10, 10), text, font=font, fill=(255, 255, 255))
+
+
+
+        draw.rectangle((10, 50, 60, 100), fill=(0, 255, 0) if selected_option == "Yes" else (128, 128, 128))
+        draw.text((30, 70), "Yes", font=font, fill=(255, 255, 255))
+
+        draw.rectangle((70, 50, 120, 100), fill=(0, 255, 0) if selected_option == "No" else (128, 128, 128))
+        draw.text((90, 70), "No", font=font, fill=(0, 0, 0))
+
+        disp.LCD_ShowImage(image, 0, 0)
+
+
+    draw_interface()
+
+    while True:
+     
+        if GPIO.input(KEY_LEFT_PIN) == 0:  
+            selected_option = "Yes"
+            draw_interface()
+            time.sleep(0.3)  
+        
+        if GPIO.input(KEY_RIGHT_PIN) == 0:  
+            selected_option = "No"
+            draw_interface()
+            time.sleep(0.3)  #
+        
+      
+        if GPIO.input(KEY_PRESS_PIN) == 0:  
+            return selected_option  
+
+        time.sleep(0.1) 
+
 def draw_keyboard(selected_key_index, input_text, mode="alpha", caps_lock=False):
     if mode == "alpha":
         keys = [
