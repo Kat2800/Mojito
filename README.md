@@ -147,7 +147,7 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
   #### What you can do: ✔️<br> 
    - Share 🔗<br>
    - Use Mojito for educational purposes
-   - Use Mojito for penetration testing (with permission)
+   - Use Mojito for penetration testing (with permission. READ TERMS AND USE OF THE SOFTWARE AND YOUR LOCAL LAW BEFORE USING IT.)
 
 
 Screen drivers based on https://github.com/Kudesnick/1.44inch-LCD-HAT-Code 💻<br>
