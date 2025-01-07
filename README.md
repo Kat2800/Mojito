@@ -80,7 +80,7 @@ sudo reboot
 ```
    ### <br>Set the time zone 
 ```
-    sudo timedatectl set-timezone {your local time zone} -- EXAMPLE FOR ITALY: "sudo timedatectl set-timezone Europe/Rome"
+    sudo timedatectl set-timezone {continent/capital} -- EXAMPLE FOR ITALY: "sudo timedatectl set-timezone Europe/Rome"
 ```
   ### Install l2flood ⛓️‍💥
 ```
