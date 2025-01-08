@@ -48,7 +48,7 @@ def list_files_in_directory(directory):
 
 def draw_file_menu(files, selected_index):
     """Draw the file menu on the display in a grid format."""
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
     # Definire dimensioni della griglia
     num_cols = 3  # Numero di colonne
@@ -66,10 +66,10 @@ def draw_file_menu(files, selected_index):
             text_size = draw.textbbox((0, 0), file, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
-            draw.rectangle((x, y, x + item_width, y + item_height), fill=(0, 255, 0))  # Evidenziare lo sfondo
-            draw.text((x + 1, y + 1), file, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.rectangle((x, y, x + item_width, y + item_height), fill=(high_text_color))  # Evidenziare lo sfondo
+            draw.text((x + 1, y + 1), file, font=font, fill=(text_color))  # Testo in nero
         else:
-            draw.text((x + 1, y + 1), file, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((x + 1, y + 1), file, font=font, fill=(wallpaper_color))  # Testo in bianco
 
     disp.LCD_ShowImage(image, 0, 0)
 
@@ -103,16 +103,16 @@ def show_file_menu():
         cell_width = width // num_cols
         cell_height = height // num_rows
 
-        draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+        draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
         for i, file in enumerate(files):
             y = (i // num_cols) * cell_height
             x = (i % num_cols) * cell_width
             if i == selected_index:
-                draw.rectangle((x, y, x + cell_width, y + cell_height), fill=(0, 255, 0))  # Evidenzia
-                draw.text((x + 2, y + 2), file, font=font, fill=(0, 0, 0))  # Testo in nero
+                draw.rectangle((x, y, x + cell_width, y + cell_height), fill=(high_text_color))  # Evidenzia
+                draw.text((x + 2, y + 2), file, font=font, fill=(text_color))  # Testo in nero
             else:
-                draw.text((x + 2, y + 2), file, font=font, fill=(255, 255, 255))  # Testo in bianco
+                draw.text((x + 2, y + 2), file, font=font, fill=(wallpaper_color))  # Testo in bianco
 
         disp.LCD_ShowImage(image, 0, 0)
 
@@ -163,17 +163,17 @@ def getYN(text):
     
   
     def draw_interface():
-        draw.rectangle((0, 0, width, height), fill=(0, 0, 0))  
+        draw.rectangle((0, 0, width, height), fill=(text_color))  
 
-        draw.text((10, 10), text, font=font, fill=(255, 255, 255))
+        draw.text((10, 10), text, font=font, fill=(wallpaper_color))
 
 
 
-        draw.rectangle((10, 50, 60, 100), fill=(0, 255, 0) if selected_option == "Yes" else (128, 128, 128))
-        draw.text((30, 70), "Yes", font=font, fill=(255, 255, 255))
+        draw.rectangle((10, 50, 60, 100), fill=(high_text_color) if selected_option == "Yes" else (128, 128, 128))
+        draw.text((30, 70), "Yes", font=font, fill=(wallpaper_color))
 
-        draw.rectangle((70, 50, 120, 100), fill=(0, 255, 0) if selected_option == "No" else (128, 128, 128))
-        draw.text((90, 70), "No", font=font, fill=(0, 0, 0))
+        draw.rectangle((70, 50, 120, 100), fill=(high_text_color) if selected_option == "No" else (128, 128, 128))
+        draw.text((90, 70), "No", font=font, fill=(text_color))
 
         disp.LCD_ShowImage(image, 0, 0)
 
@@ -223,10 +223,10 @@ def draw_keyboard(selected_key_index, input_text, mode="alpha", caps_lock=False)
     cols = 10
 
     # Clear previous image
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
     # Draw the current input text
-    draw.text((0, 0), input_text, font=font, fill=(255, 255, 255))
+    draw.text((0, 0), input_text, font=font, fill=(wallpaper_color))
 
     # Draw the keyboard
     for i, key in enumerate(keys):
@@ -235,11 +235,11 @@ def draw_keyboard(selected_key_index, input_text, mode="alpha", caps_lock=False)
         x = col * key_width
         y = (row + 1) * key_height  # Start drawing from second row
         if i == selected_key_index:
-            draw.rectangle((x, y, x + key_width, y + key_height), fill=(0, 255, 0))  # Highlight selected key
-            draw.text((x + 2, y + 2), key, font=font, fill=(0, 0, 0))
+            draw.rectangle((x, y, x + key_width, y + key_height), fill=(high_text_color))  # Highlight selected key
+            draw.text((x + 2, y + 2), key, font=font, fill=(text_color))
         else:
-            draw.rectangle((x, y, x + key_width, y + key_height), outline=(255, 255, 255))
-            draw.text((x + 2, y + 2), key, font=font, fill=(255, 255, 255))
+            draw.rectangle((x, y, x + key_width, y + key_height), outline=(wallpaper_color))
+            draw.text((x + 2, y + 2), key, font=font, fill=(wallpaper_color))
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
@@ -409,8 +409,8 @@ draw_menu(0)
 
 def ui_print(message, duration=2):
     print(message)
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))  # Clear previous image
-    draw.text((10, 50), message, font=font, fill=(255, 255, 255))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))  # Clear previous image
+    draw.text((10, 50), message, font=font, fill=(wallpaper_color))
     disp.LCD_ShowImage(image, 0, 0)
     if duration != "unclear":
         time.sleep(duration)
@@ -429,11 +429,11 @@ def draw_sub_menu(selected_index, menu_options):
     # Clear previous image
 
     # Clear screen
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
     # Aggiungi l'orario in alto a destra
     current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Orario in alto a destra
+    draw.text((width - 40, 0), current_time, font=font, fill=(wallpaper_color))  # Orario in alto a destra
 
     # Ottieni il livello della batteria
     battery_level, plugged_in = get_battery_level()
@@ -443,9 +443,9 @@ def draw_sub_menu(selected_index, menu_options):
         draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # Messaggio di errore a sinistra
     else:
         if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messaggio "PLUG" a sinistra
+            draw.text((5, 0), "PLUG", font=font, fill=(wallpaper_color))  # Messaggio "PLUG" a sinistra
         else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # Livello della batteria a sinistra
+            draw.text((5, 0), f"{battery_level}%", font=font, fill=(wallpaper_color))  # Livello della batteria a sinistra
 
     # Imposta il numero massimo di opzioni visibili
     max_visible_options = 6
@@ -465,10 +465,10 @@ def draw_sub_menu(selected_index, menu_options):
             text_size = draw.textbbox((0, 0), option, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
-            draw.rectangle((0, y, width, y + text_height), fill=(50, 205, 50))  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.rectangle((0, y, width, y + text_height), fill=(high_text_color))  # Evidenzia sfondo
+            draw.text((1, y), option, font=font, fill=(text_color))  # Testo in nero
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((1, y), option, font=font, fill=(wallpaper_color))  # Testo in bianco
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
@@ -478,11 +478,11 @@ def mc(menu_options): # Menu Configuration, don't confuse this with Mc Donald.
     # Clear previous image
 
     # Clear screen
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
     # Aggiungi l'orario in alto a destra
     current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Orario in alto a destra
+    draw.text((width - 40, 0), current_time, font=font, fill=(wallpaper_color))  # Orario in alto a destra
 
     # Ottieni il livello della batteria
     battery_level, plugged_in = get_battery_level()
@@ -492,9 +492,9 @@ def mc(menu_options): # Menu Configuration, don't confuse this with Mc Donald.
         draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # Messaggio di errore a sinistra
     else:
         if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messaggio "PLUG" a sinistra
+            draw.text((5, 0), "PLUG", font=font, fill=(wallpaper_color))  # Messaggio "PLUG" a sinistra
         else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # Livello della batteria a sinistra
+            draw.text((5, 0), f"{battery_level}%", font=font, fill=(wallpaper_color))  # Livello della batteria a sinistra
 
     # Imposta il numero massimo di opzioni visibili
     max_visible_options = 6
@@ -515,9 +515,9 @@ def mc(menu_options): # Menu Configuration, don't confuse this with Mc Donald.
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
             draw.rectangle((0, y, width, y + text_height), fill=(read_theme_color()))  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.text((1, y), option, font=font, fill=(text_color))  # Testo in nero
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((1, y), option, font=font, fill=(wallpaper_color))  # Testo in bianco
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
@@ -529,7 +529,7 @@ def list(menu_options):
     # Clear previous image
 
     # Clear screen
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+    draw.rectangle((0, 0, width, height), outline=0, fill=(text_color))
 
     max_visible_options = 7
     # Calcola l'offset di scorrimento in base all'opzione selezionata
@@ -549,9 +549,9 @@ def list(menu_options):
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
             draw.rectangle((0, y, width, y + text_height), fill=(read_theme_color()))  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.text((1, y), option, font=font, fill=(text_color))  # Testo in nero
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((1, y), option, font=font, fill=(wallpaper_color))  # Testo in bianco
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
