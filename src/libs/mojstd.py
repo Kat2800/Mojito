@@ -355,7 +355,7 @@ def load_wallpaper(value):
 
 # Colori letti dal JSON
 wallpaper_color = tuple([255, 255, 255]) # Colore dello sfondo generale
-evi_text_color = tuple([0, 255, 0])  # Colore del testo evidenziato
+high_text_color = tuple([50, 205, 50])  # Colore del testo evidenziato
 text_color = tuple([0, 0, 0])  # Colore del testo normale
 
 def draw_menu(selected_index):
