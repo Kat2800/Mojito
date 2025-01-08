@@ -398,7 +398,7 @@ def draw_menu(selected_index):
             text_size = draw.textbbox((0, 0), option, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
-            draw.rectangle((0, y, width, y + text_height), fill=evi_text_color)  # Evidenzia sfondo
+            draw.rectangle((0, y, width, y + text_height), fill=high_text_color)  # Evidenzia sfondo
             draw.text((1, y), option, font=font, fill=wallpaper_color)  # Testo evidenziato (es: nero o altro)
         else:
             draw.text((1, y), option, font=font, fill=text_color)  # Testo normale (es: bianco)
