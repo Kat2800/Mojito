@@ -351,19 +351,12 @@ def load_wallpaper(value):
     else:
         raise ValueError("Error: 'Wallpaper' must be an RGB color or a image file.")
 
-# Funzione per caricare i colori dal file JSON
-def load_colors(json_file):
-    with open(json_file, 'r') as file:
-        return json.load(file)
 
-# File JSON con i colori
-color_file = "colors.json"
-colors = load_colors(color_file)
 
 # Colori letti dal JSON
-wallpaper_color = tuple(colors["wallpaper"])  # Colore dello sfondo generale
-evi_text_color = tuple(colors["evi_text"])    # Colore del testo evidenziato
-text_color = tuple(colors["text"])            # Colore del testo normale
+wallpaper_color = [0, 0, 0]  # Colore dello sfondo generale
+evi_text_color = [0, 255, 0]  # Colore del testo evidenziato
+text_color = [255, 255, 255]  # Colore del testo normale
 
 def draw_menu(selected_index):
     # Clear previous image
