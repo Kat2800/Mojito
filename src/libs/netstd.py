@@ -113,7 +113,10 @@ def brute_force_wps(self, ssid):
             break
         time.sleep(0.1) 
 
-
+def macchanger():
+	os.system("sudo macchanger -r eth0")
+	os.system("sudo macchanger -r wlan0")
+	os.system("sudo macchanger -r wlan1")
 
 
 # network_ssid = getinput() 
