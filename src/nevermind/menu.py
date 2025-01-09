@@ -4,13 +4,8 @@ import os
 import subprocess
 import json
 import threading
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.backends import default_backend
-from lib import dos_bluetooth
-from lib.dos_bluetooth import dos
-from lib import wifinetworks
-from lib.wifinetworks import wifi_info
+from lib.dos_bluetooth import *
+from lib.wifinetworks import *
 from lib.mojstd import *
 from lib.netstd import *
 
@@ -26,12 +21,13 @@ interface = []
 #@functools.lru_cache(maxsize=1000)
 def bk():
     if GPIO.input(KEY3_PIN) == 0:
-            return True
+        ui_print("Going back...", 0.5)
+        selected_index = 0
+        return True
 
 
 def draw_menu(selected_index):
     # Clear previous image
-
     # Clear screen
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 
@@ -76,40 +72,6 @@ def draw_menu(selected_index):
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
-
-
-
-
-"""def draw_menu(selected_index):
-    global scroll_offset
-    draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
-
-    # Determina quante opzioni sono fuori dallo schermo e gestisce lo scorrimento
-    total_options = len(menu_options)
-
-    # Controlla se bisogna scorrere in basso o in alto
-    if selected_index < scroll_offset:
-        scroll_offset = selected_index
-    elif selected_index >= scroll_offset + max_visible_options:
-        scroll_offset = selected_index - max_visible_options + 1
-
-    # Calcola l'offset per le opzioni del menu
-
-    for i in range(scroll_offset, min(scroll_offset + max_visible_options, total_options)):
-        y = ((i - scroll_offset) * 20) # Spacing between menu items with offset
-        option = menu_options[i]
-        if i == selected_index:
-            text_size = draw.textbbox((0, 0), option, font=font)
-            text_width = text_size[2] - text_size[0]
-            text_height = text_size[3] - text_size[1]
-            draw.rectangle((0, y, width, y + text_height), fill=(0, 255, 0)) #Highlight background
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Text in black
-        else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Text in white
-
-    # Display the updated image
-    disp.LCD_ShowImage(image, 0, 0)
-"""
 
 selected_index = 0
 b = 1
@@ -158,7 +120,6 @@ while True:
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -170,7 +131,7 @@ while True:
                         time.sleep(0.30)
                         selected_index = 0
                         while True:
-                            menu_options = ["Fake AP", "Handshakes", "Deauth all"]
+                            menu_options = ["Fake AP", "Handshakes", "Deauth all", "Wps"]
 
                             draw_menu(selected_index)
                             if GPIO.input(KEY_UP_PIN) == 0:
@@ -182,14 +143,13 @@ while True:
                                 draw_menu(selected_index)
 
                             elif bk() == True:
-                                ui_print("Going back...", 0.5)
                                 break
 
                             elif GPIO.input(KEY_PRESS_PIN) == 0:
                                 selected_option = menu_options[selected_index]
 
 
-                                #Handshakes -----------------> WORKS !!!
+                                #Handshakes -----> works
                                 if selected_option == "Handshakes":
                                     ui_print("Loading...", 0.3)
                                     wifi_info().main()
@@ -219,11 +179,9 @@ while True:
                                                 draw_menu(selected_index)
 
                                             elif bk() == True:
-                                                ui_print("Going back...", 0.5)
                                                 break
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
-
                                                 selected_option = menu_options[selected_index]
                                                 selected_bssid = dictdionary[selected_option]
                                                 selected_chan = dictdionary[selected_bssid]
@@ -231,7 +189,7 @@ while True:
                                                 #Bettercap
 
                                                 ui_print("Wait please...")
-                                                process = CapHandshakes(INTERFACE).interface_select(INTERFACE)
+                                                process = netstd(INTERFACE).interface_select(INTERFACE)
                                                 if process == 0:
                                                     pass
                                                 else:
@@ -241,29 +199,23 @@ Interface not Found
 Try to reboot Mojito
 if the problem persist""") 
                                                     break
-
-                                                if CapHandshakes(INTERFACE).interface_start(INTERFACE) == 1:
+                                                if netstd(INTERFACE).interface_start(INTERFACE) == 1:
                                                     ui_print("Going back", 0.5)
                                                     break
-
                                                 time.sleep(1)
                                                 ui_print(f"{INTERFACE} ready!")
-
+                                                
                                                 # KEY3
                                                 if bk() == True:
-                                                    ui_print("Going back...", 0.5)
                                                     break
-
                                                 ui_print("Wait please...")
                                                 time.sleep(1)
 
                                                 if bk() == True:
-                                                        ui_print("Going back...", 0.5)
-                                                        break
-
+                                                    break
                                                 else:
                                                     time.sleep(0.5)
-                                                    process = CapHandshakes(INTERFACE).initialization(selected_chan, selected_bssid, INTERFACE)
+                                                    process = netstd(INTERFACE).initialization(selected_chan, selected_bssid, INTERFACE)
                                                     print("process is running")
                                                     
                                                     while True:
@@ -274,19 +226,19 @@ if the problem persist""")
                                                             break
                                                         else:
                                                             break
-
                                                     
                                                     if bk_ == 1:
                                                         selected_index = 0
                                                         break
-                                                            
-
+                                                    
                                                     ui_print("""This might take 
 some time...""", 2)
                                                     ui_print("""When the handshake
 is captured,
 you'll be notified""", 2.5)
                                                     while True:
+                                                        start_time = time.time()
+                                                        timeout = 10 * 60
                                                         if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
                                                             if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
                                                                 ui_print("Handshake captured!",1)
@@ -295,16 +247,16 @@ you'll be notified""", 2.5)
                                                                 break
                                                         else:
                                                             ui_print("""Waiting the 4-way 
-handshake""", 1)
-
-                                                        if bk() == True:
-                                                            selected_index = 0
-                                                            break
-
-                                                        else:
+handshake""", 1)                                            
                                                             pass
 
-                                #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORKS)
+                                                        if bk() == True:
+                                                            break
+
+                                                        if time.time() - start_time > timeout:
+                                                            break
+
+                                #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORK)
                                 elif selected_option == "Deauth all":
                                     wifi_info().main()
                                     menu_options = []
@@ -333,8 +285,6 @@ handshake""", 1)
                                             draw_menu(selected_index)
 
                                         elif bk() == True:
-                                            ui_print("Going back...", 0.5)
-                                            selected_index = 0
                                             break
 
 
@@ -404,7 +354,6 @@ handshake""", 1)
                                             draw_menu(selected_index)
 
                                         elif bk() == True:
-                                            ui_print("Going back...", 0.5)
                                             break
 
                                         elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -419,7 +368,6 @@ handshake""", 1)
                                                 ui_print(f"{INTERFACE} is ready")
                                                 
                                                 if bk() == True:
-                                                    ui_print("Going back...", 0.5)
                                                     break
 
                                                 ui_print("Starting ...")
@@ -429,7 +377,6 @@ handshake""", 1)
                                                 os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
                                                 if bk() == True:
                                                     os.system("sudo airmon-ng stop "+INTERFACE)
-                                                    ui_print("Going back...", 0.5)
                                                     return 1
 
                                             for i in range(len(nevergonnagiveuup)):
@@ -442,10 +389,70 @@ RickRoll started . . .""", 1.5)
                                             while True:
                                                 ui_print("Press Key 3 to stop...")
                                                 if bk() == True:
-                                                    ui_print("Going back...", 0.5)
                                                     threading.Event()
                                                     break
+                                elif selected_option == "Wps":
+                                    selected_index = 0
+                                    time.sleep(0.20)
 
+                                    while True:
+                                        menu_options = ["Wps Pin Bruteforce", "Pixie Dust Attack"]
+                                        draw_menu(selected_index)
+
+                                        if GPIO.input(KEY_UP_PIN) == 0:
+                                            selected_index = (selected_index - 1) % len(menu_options)
+                                            draw_menu(selected_index)
+
+                                        elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                            selected_index = (selected_index + 1) % len(menu_options)
+                                            draw_menu(selected_index)
+
+                                        elif bk() == True:
+                                            break
+
+                                        elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                            selected_option = menu_options[selected_index]
+                                            ui_print("Wait please...", 0.5)
+
+                                            if selected_option == "Wps Pin Bruteforce":
+                                                wifi_info().main()
+
+                                                menu_options = []
+
+                                                with open("wifiinfo.json", mode="r") as a:
+                                                    data = json.load(a)
+
+                                                dictdionary = {}
+
+                                                for item in data:
+                                                    menu_options.append(item['ssid'])
+                                                ui_print("Loading...", 1)
+
+                                                selected_index = 0
+                                                while True:
+                                                    draw_menu(selected_index)
+                                                    if GPIO.input(KEY_UP_PIN) == 0:
+                                                        selected_index = (selected_index - 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                                        selected_index = (selected_index + 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif bk() == True:
+                                                        break
+
+
+                                                    elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                                        selected_option = menu_options[selected_index]
+
+                                                        ui_print("Wait please...", 0.75)
+                                                        while True:
+                                                            if netstd(INTERFACE, selected_option, 0).brute_force_wps(selected_option, INTERFACE) == 0:
+                                                                pass
+                                                            
+
+        #Bluetooth
         elif selected_option == "Bluetooth":
             selected_index = 0
             time.sleep(0.20)
@@ -456,22 +463,20 @@ RickRoll started . . .""", 1.5)
 
 
                 if GPIO.input(KEY_UP_PIN) == 0:
-                        selected_index = (selected_index - 1) % len(menu_options)
-                        draw_menu(selected_index)
+                    selected_index = (selected_index - 1) % len(menu_options)
+                    draw_menu(selected_index)
 
                 elif GPIO.input(KEY_DOWN_PIN) == 0:
                     selected_index = (selected_index + 1) % len(menu_options)
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
                     selected_option = menu_options[selected_index]
 
                     #Bluetooth Dos
-
                     if selected_option == "Dos":
 
                         ui_print("Wait please . . .")
@@ -479,7 +484,7 @@ RickRoll started . . .""", 1.5)
                         selected_index = 0
 
                         dos().main()       #Scan for mac address
-                        for i in dos_bluetooth.mac_addrs:
+                        for i in mac_addrs:
                             menu_options.append(i)
 
                         time.sleep(0.25)
@@ -501,7 +506,6 @@ RickRoll started . . .""", 1.5)
                                 draw_menu(selected_index)
 
                             elif bk() == True:
-                                ui_print("Going back...", 0.5)
                                 break
 
                             elif GPIO.input(KEY_PRESS_PIN) == 0:
@@ -543,7 +547,6 @@ RickRoll started . . .""", 1.5)
                     draw_menu(selected_index)
 
                 elif bk() == True:
-                    ui_print("Going back...", 0.5)
                     break
 
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
