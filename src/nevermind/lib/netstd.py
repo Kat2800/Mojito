@@ -50,6 +50,8 @@ class netstd():
         os.system(f"sudo ifconfig {INTERFACE} down")
         os.system(f"sudo airmon-ng start {INTERFACE}")
         os.system(f"sudo ifconfig {INTERFACE} up")
+        os.system(f"sudo airmon-ng check {INTERFACE} && sudo airmon-ng check kill")
+
         if self.bk() == True:
             return 1
         else:
@@ -87,7 +89,7 @@ class netstd():
             if self.bk() == True:
                 return 1
 
-            time.sleep(2)
+            time.sleep(4)
             ui_print(f"Loading ({commands.index(i)})", 0.5)
             self.bettercap_process.stdin.write(i+'\n')
 
