@@ -238,11 +238,12 @@ is captured,
 you'll be notified""", 2.5)
                                                     while True:
                                                         start_time = time.time()
-                                                        timeout = 10 * 60
+                                                        timeout = 25 * 60
                                                         if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
                                                             if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
                                                                 ui_print("Handshake captured!",1)
                                                                 os.system("sudo iwconfig "+INTERFACE+" mode managed")
+                                                                os.system("sudo systemctl restart NetworkManager")
                                                                 ui_print("Going back...")
                                                                 break
                                                         else:
@@ -251,9 +252,12 @@ handshake""", 1)
                                                             pass
 
                                                         if bk() == True:
+                                                            handshakes = 0
                                                             break
 
                                                         if time.time() - start_time > timeout:
+                                                            ui_print("Timeout After 25 min", 1.5)
+                                                            handshakes = 0
                                                             break
 
                                 #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORK)
