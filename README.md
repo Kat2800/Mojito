@@ -1,5 +1,4 @@
 # STILL UNDER DEVELOPMENT 
-### Ehy! We are working hard on this project! So please if you can help us! 🫰
 ## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "How to setup and install" section.
 
 # The Mojito Project by BlacKat
