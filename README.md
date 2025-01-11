@@ -141,12 +141,12 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
 ### Under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) Licence 📄
   #### What you cannot do: ❌<br>
    - Use for non-commercial purposes 💸❌<br>
-   - You cannot Create Derivative Works, but the authors permict that if you respect that: the work will be ALWAYS open source and free, and the authors will be mentionated and if the authors dosn't like what you did, you must remove it from the internet (but you can have a copy that only you can use) 📄<br>
+   - You cannot Create Derivative Works, and share them online 📄<br>
    - Impose additional restrictions 🟰<br>
   #### What you can do: ✔️<br> 
    - Share 🔗<br>
-   - Use Mojito for educational purposes
-   - Use Mojito for penetration testing (with permission. READ TERMS AND USE OF THE SOFTWARE AND YOUR LOCAL LAWS BEFORE USING IT.)
+   - Use Mojito for educational purposes, 'obviously' :)
+   - Use Mojito for penetration testing or ethical hacking ("with permission" READ TERMS AND USE OF THE SOFTWARE AND CHECK YOUR LOCAL LAWS BEFORE USING IT.)
 
 
 Screen drivers based on https://github.com/Kudesnick/1.44inch-LCD-HAT-Code 💻<br>
