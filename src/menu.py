@@ -4,6 +4,10 @@ import os
 import subprocess
 import socket
 import sys
+from lib.dos_bluetooth import *
+from lib.wifinetworks import *
+from lib.mojstd import *
+from lib.netstd import *
 from libs.mojstd import * # Mojito Standard Library 
 
 def draw_menu(selected_index):
@@ -53,8 +57,9 @@ def draw_menu(selected_index):
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
-
+interface = []
 INTERFACE = json.load(open("settings/settings.json", "r"))["interface"]
+
 while True:
     draw_menu(selected_index)
 
@@ -113,28 +118,121 @@ while True:
                                 sub_selected_option = sub_menu_options[sub_selected_index]
                                 ui_print(f"Selected: {sub_selected_option}", 1)
 
-                            if sub_selected_option == "Fake AP":
-                                ui_print("Create a name for\n the fake AP", 3)
-                                fakeAp = getinput()  # Prende il nome inserito dall'utente
-                                # Esegui wifiphisher con il nome del fake AP
-                                command = subprocess.run(
-                                    ["sudo", "wifiphisher", "-i", "wlan0", "-e", f"{fakeAp}", "-p", "firmware-upgrade"],
-                                    capture_output=True, text=True
-                                )
+                            elif selected_option == 'Fake AP':
+                                selected_index = 0
 
-                                # Mostra il risultato del comando
-                                if command.returncode == 0:
-                                    ui_print(f"Fake AP '{fakeAp}' created successfully", 3)
-                                else:
-                                    ui_print(f"Error: {command.stderr}", 3)
-
-                                ui_print("Press joystick to stop", 3)
-
-                                # Loop per aspettare che l'utente interrompa il processo
                                 while True:
-                                    ui_print(command.stdout, 1)  # Mostra output in tempo reale (facoltativo)
-                                    if GPIO.input(KEY_UP_PIN) == 0 or GPIO.input(KEY_DOWN_PIN) == 0 or GPIO.input(KEY_PRESS_PIN) == 0:
+                                    menu_options = ["RickRoll", "Evil Twin"]
+                                    draw_menu(selected_index)
+                                        
+                                    if GPIO.input(KEY_UP_PIN) == 0:
+                                        selected_index = (selected_index - 1) % len(menu_options)
+                                        draw_menu(selected_index)
+
+                                    elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                        selected_index = (selected_index + 1) % len(menu_options)
+                                        draw_menu(selected_index)
+
+                                    elif bk() == True:
                                         break
+
+                                    elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                        selected_option = menu_options[selected_index]
+                                        ui_print("Wait please...")
+
+#RICKROLL
+                                    if selected_option == "RickRoll":
+                                        time.sleep(1)
+                                        os.system(f"sudo airmon-ng start {INTERFACE}")
+                                        os.system(f"sudo airmon-ng check {INTERFACE} && sudo airmon-ng check kill")
+                                        os.system(f"sudo airmon-ng start {INTERFACE}")
+                                        ui_print(f"{INTERFACE} is ready")
+                                                
+                                        if bk() == True:
+                                            break
+
+                                            ui_print("Starting ...")
+                                            time.sleep(1)
+
+                                            def RickRoll(a, b):
+                                                os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
+                                                if bk() == True:
+                                                    os.system("sudo airmon-ng stop "+INTERFACE)
+                                                    return 1
+
+                                                for i in range(len(nevergonnagiveuup)):
+                                                    ui_print(f"""Fake AP - 
+RickRoll started . . .""", 1.5)
+                                                    process = threading.Thread(target=RickRoll, args=(i, b)).start()
+                                                    if process == 1:
+                                                        break
+                                                    b += 1
+                                                while True:
+                                                    ui_print("Press Key 3 to stop...")
+                                                    if bk() == True:
+                                                        threading.Event()
+                                                        break
+                                    elif selected_option == "Evil Twin":
+                                                wifi_info().main()
+                                                menu_options = []
+
+                                                with open("wifiinfo.json", mode="r") as a:
+                                                    data = json.load(a)
+
+                                                dictdionary = {}
+
+                                                for item in data:
+                                                    menu_options.append(item['ssid'])
+                                                    dictdionary[item['ssid']] = item['bssid']
+                                                    dictdionary[item['bssid']] = item['chan']
+                                                
+                                                ui_print("Loading...", 0.5)
+
+                                                selected_index = 0
+                                                while True:
+                                                    draw_menu(selected_index)
+                                                    if GPIO.input(KEY_UP_PIN) == 0:
+                                                        selected_index = (selected_index - 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                                        selected_index = (selected_index + 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif bk() == True:
+                                                        break
+
+                                                    elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                                        selected_option = menu_options[selected_index]
+                                                        selected_bssid = dictdionary[selected_option]
+                                                        selected_chan = dictdionary[selected_bssid]
+
+                                                        ui_print("Wait please...", 0.5)
+                                                            
+                                                        if netstd(INTERFACE).interface_select(INTERFACE) == 0:
+                                                            pass
+                                                        
+                                                        else:
+                                                            ui_print(f"Error: Interface {INTERFACE} not found", 2)
+                                                            
+                                                        if netstd(INTERFACE).interface_start1(INTERFACE) == 1:
+                                                            ui_print("Going back...", 0.5)
+                                                            break
+                                                        ui_print(f"{INTERFACE} ready!", 0.5)
+                                                        ui_print(f"""{selected_option}
+    -
+Evil Twin loading...""", 1)
+                                                        ui_print(f"""Sniffing the real
+{selected_option}""", 1)
+                                                        while True:
+                                                            ui_print("Press Key 3 to stop...")
+                                                            if netstd(INTERFACE).evil_twin(INTERFACE, selected_option, selected_bssid, selected_chan) == 0:
+                                                                ui_print("""Evil Twin
+            _
+    Spoofing and Sniffing
+        Stopped...""", 1)
+                                                                break
+                                                                
                             if sub_menu_options == "Sniff":
                                     os.system("sudo ifconfig wlan0 down")
                                     os.system("sudo iwconfig wlan0 mode monitor")
