@@ -131,7 +131,7 @@ while True:
                         time.sleep(0.30)
                         selected_index = 0
                         while True:
-                            menu_options = ["Fake AP", "Handshakes", "Deauth all", "Wps"]
+                            menu_options = ["Fake AP", "Handshakes", "Deauth", "Wps"]
 
                             draw_menu(selected_index)
                             if GPIO.input(KEY_UP_PIN) == 0:
@@ -215,7 +215,7 @@ if the problem persist""")
                                                     break
                                                 else:
                                                     time.sleep(0.5)
-                                                    process = netstd(INTERFACE).initialization(selected_chan, selected_bssid, INTERFACE)
+                                                    process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_bssid, INTERFACE)
                                                     print("process is running")
                                                     
                                                     while True:
@@ -346,7 +346,7 @@ handshake""", 1)
                                     selected_index = 0
 
                                     while True:
-                                        menu_options = ["RickRoll", "Random"]
+                                        menu_options = ["RickRoll", "Evil Twin"]
                                         draw_menu(selected_index)
                                         
                                         if GPIO.input(KEY_UP_PIN) == 0:
@@ -364,6 +364,7 @@ handshake""", 1)
                                             selected_option = menu_options[selected_index]
                                             ui_print("Wait please...")
 
+#RICKROLL
                                             if selected_option == "RickRoll":
                                                 time.sleep(1)
                                                 os.system(f"sudo airmon-ng start {INTERFACE}")
@@ -377,24 +378,91 @@ handshake""", 1)
                                                 ui_print("Starting ...")
                                                 time.sleep(1)
 
-                                            def RickRoll(a, b):
-                                                os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
-                                                if bk() == True:
-                                                    os.system("sudo airmon-ng stop "+INTERFACE)
-                                                    return 1
+                                                def RickRoll(a, b):
+                                                    os.system(f'sudo airbase-ng -e "{nevergonnagiveuup[a]}" -c {b} {INTERFACE}')
+                                                    if bk() == True:
+                                                        os.system("sudo airmon-ng stop "+INTERFACE)
+                                                        return 1
 
-                                            for i in range(len(nevergonnagiveuup)):
-                                                ui_print(f"""Fake AP - 
+                                                for i in range(len(nevergonnagiveuup)):
+                                                    ui_print(f"""Fake AP - 
 RickRoll started . . .""", 1.5)
-                                                process = threading.Thread(target=RickRoll, args=(i, b)).start()
-                                                if process == 1:
-                                                    break
-                                                b += 1
-                                            while True:
-                                                ui_print("Press Key 3 to stop...")
-                                                if bk() == True:
-                                                    threading.Event()
-                                                    break
+                                                    process = threading.Thread(target=RickRoll, args=(i, b)).start()
+                                                    if process == 1:
+                                                        break
+                                                    b += 1
+                                                while True:
+                                                    ui_print("Press Key 3 to stop...")
+                                                    if bk() == True:
+                                                        threading.Event()
+                                                        break
+                                            
+#EVIL TWIN
+                                            elif selected_option == "Evil Twin":
+                                                wifi_info().main()
+                                                menu_options = []
+
+                                                with open("wifiinfo.json", mode="r") as a:
+                                                    data = json.load(a)
+
+                                                dictdionary = {}
+
+                                                for item in data:
+                                                    menu_options.append(item['ssid'])
+                                                    dictdionary[item['ssid']] = item['bssid']
+                                                    dictdionary[item['bssid']] = item['chan']
+                                                
+                                                ui_print("Loading...", 0.5)
+
+                                                selected_index = 0
+                                                while True:
+                                                    draw_menu(selected_index)
+                                                    if GPIO.input(KEY_UP_PIN) == 0:
+                                                        selected_index = (selected_index - 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                                        selected_index = (selected_index + 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif bk() == True:
+                                                        break
+
+                                                    elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                                        selected_option = menu_options[selected_index]
+                                                        selected_bssid = dictdionary[selected_option]
+                                                        selected_chan = dictdionary[selected_bssid]
+
+                                                        ui_print("Wait please...", 0.5)
+                                                            
+                                                        if netstd(INTERFACE).interface_select(INTERFACE) == 0:
+                                                            pass
+                                                        
+                                                        else:
+                                                            ui_print(f"Error: Interface {INTERFACE} not found", 2)
+                                                            
+                                                        if netstd(INTERFACE).interface_start1(INTERFACE) == 1:
+                                                            ui_print("Going back...", 0.5)
+                                                            break
+                                                        ui_print(f"{INTERFACE} ready!", 0.5)
+                                                        ui_print(f"""{selected_option}
+    -
+Evil Twin loading...""", 1)
+                                                        ui_print(f"""Sniffing the real
+{selected_option}""", 1)
+                                                        while True:
+                                                            ui_print("Press Key 3 to stop...")
+                                                            if netstd(INTERFACE).evil_twin(INTERFACE, selected_option, selected_bssid, selected_chan) == 0:
+                                                                ui_print("""Evil Twin
+            _
+    Spoofing and Sniffing
+        Stopped...""", 1)
+                                                                break                   
+                                                    
+
+
+
+#WPS ATTACKS 
                                 elif selected_option == "Wps":
                                     selected_index = 0
                                     time.sleep(0.20)
