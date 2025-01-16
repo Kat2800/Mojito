@@ -172,7 +172,7 @@ class netstd():
     #EVIL TWIN
     def evil_twin(self, INTERFACE, selected_option, selected_bssid, selected_chan):
         #os.system(f"sudo airmon-ng check kill")
-        os.system(f"sudo airbase-ng -a {selected_bssid} -e {selected_option} -c {selected_chan} {INTERFACE}")
+        os.system(f"sudo airbase-ng -e {selected_option} -c {selected_chan} {INTERFACE}")
         commands = [
             "sudo ip link add name mojito_wlan type bridge",
             "sudo ip link set mojito_wlan up",
