@@ -9,10 +9,9 @@ from lib.wifinetworks import *
 from lib.mojstd import *
 from lib.netstd import *
 
-scroll_offset = 0
-selected_index = 0
+
 handshakes = 1 #on
-max_visible_options = 7
+#max_visible_options = 7
 INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
@@ -84,9 +83,6 @@ a = nevergonnagiveuup[0]
                                         # THE WHILE#
 
 #############################################################################################
-
-
-
 
 while True:
     menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
@@ -183,6 +179,7 @@ while True:
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
                                                 selected_option = menu_options[selected_index]
+                                                
                                                 selected_bssid = dictdionary[selected_option]
                                                 selected_chan = dictdionary[selected_bssid]
 
@@ -205,60 +202,95 @@ if the problem persist""")
                                                 time.sleep(1)
                                                 ui_print(f"{INTERFACE} ready!")
                                                 
-                                                # KEY3
-                                                if bk() == True:
-                                                    break
-                                                ui_print("Wait please...")
-                                                time.sleep(1)
+                                                menu_options = ["Pcap", "Pcapng"]
+                                                while handshakes == 1:
+                                                    draw_menu(selected_index)
+                                                    if GPIO.input(KEY_UP_PIN) == 0:
+                                                        selected_index = (selected_index - 1) % len(menu_options)
+                                                        draw_menu(selected_index)
 
-                                                if bk() == True:
-                                                    break
-                                                else:
-                                                    time.sleep(0.5)
-                                                    process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_bssid, INTERFACE)
-                                                    print("process is running")
-                                                    
-                                                    while True:
-                                                        if process == 1:
-                                                            bk_ = 1
-                                                            break
-                                                        elif process == 0:
-                                                            break
-                                                        else:
-                                                            break
-                                                    
-                                                    if bk_ == 1:
-                                                        selected_index = 0
+                                                    elif GPIO.input(KEY_DOWN_PIN) == 0:
+                                                        selected_index = (selected_index + 1) % len(menu_options)
+                                                        draw_menu(selected_index)
+
+                                                    elif bk() == True:
                                                         break
+
+                                                    elif GPIO.input(KEY_PRESS_PIN) == 0:
+                                                        selected_option = menu_options[selected_index]
+
                                                     
-                                                    ui_print("""This might take 
-some time...""", 2)
-                                                    ui_print("""When the handshake
-is captured,
-you'll be notified""", 2.5)
-                                                    while True:
-                                                        start_time = time.time()
-                                                        timeout = 25 * 60
-                                                        if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
-                                                            if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
-                                                                ui_print("Handshake captured!",1)
-                                                                os.system("sudo iwconfig "+INTERFACE+" mode managed")
-                                                                os.system("sudo systemctl restart NetworkManager")
-                                                                ui_print("Going back...")
-                                                                break
-                                                        else:
-                                                            ui_print("""Waiting the 4-way 
-handshake""", 1)                                            
-                                                            pass
+                                                        #Handshakes -----> works
+                                                        
+                                                                
+                                                        ui_print("Loading...", 0.3)
+                                                        menu_options = []
+                                                        selected_index = 0
+                                                        
+                                                        # KEY3
+                                                        if bk() == True:
+                                                            break
+
+                                                        ui_print("Wait please...")
+                                                        time.sleep(1)
 
                                                         if bk() == True:
-                                                            handshakes = 0
                                                             break
 
-                                                        if time.time() - start_time > timeout:
-                                                            ui_print("Timeout After 25 min", 1.5)
-                                                            handshakes = 0
-                                                            break
+                                                        else:
+                                                            time.sleep(0.5)
+                                                            if selected_option == "Pcap":
+                                                                a = 0
+                                                                process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_option, selected_bssid, INTERFACE, a)
+                                                            else: 
+                                                                a = 1
+                                                                process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_option, selected_bssid, INTERFACE, a)
+
+                                                            print("process is running")
+                                                            
+                                                            while True:
+                                                                if process == 1:
+                                                                    bk_ = 1
+                                                                    break
+                                                                elif process == 0:
+                                                                    break
+                                                                else:
+                                                                    break
+                                                            
+                                                            if bk_ == 1:
+                                                                selected_index = 0
+                                                                break
+                                                            
+                                                            ui_print("""This might take 
+        some time...""", 2)
+                                                            ui_print("""When the handshake
+        is captured,
+        you'll be notified""", 2.5)
+                                                            while True:
+                                                                start_time = time.time()
+                                                                timeout = 25 * 60
+                                                                if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
+                                                                    if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
+                                                                        ui_print("Handshake captured!",1)
+                                                                        os.system("sudo iwconfig "+INTERFACE+" mode managed")
+                                                                        os.system("sudo systemctl restart NetworkManager")
+                                                                        ui_print("Going back...")
+                                                                        break
+                                                                else:
+                                                                    ui_print("""Waiting the 4-way 
+        handshake""", 1)                                            
+                                                                    pass
+
+                                                                if bk() == True:
+                                                                    handshakes = 0
+                                                                    break
+
+                                                                if time.time() - start_time > timeout:
+                                                                    ui_print("Timeout After 25 min", 1.5)
+                                                                    handshakes = 0
+                                                                    break
+
+
 
                                 #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORK)
                                 elif selected_option == "Deauth all":
@@ -720,12 +752,6 @@ Evil Twin loading...""", 1)
                                         json.dump(INTERFACE, idk, indent=2)
                                     ui_print(f"""Selected Interface:
 {selected_option}""")
-
-                                
-                                
-
-
-
 
                     else:
                         break
