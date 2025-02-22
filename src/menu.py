@@ -4,10 +4,10 @@ import os
 import subprocess
 import json
 import threading
-from lib.dos_bluetooth import *
-from lib.wifinetworks import *
-from lib.mojstd import *
-from lib.netstd import *
+from libs.dos_bluetooth import *
+from libs.wifinetworks import *
+from libs.mojstd import *
+from libs.netstd import *
 
 handshakes = 1 #on
 #max_visible_options = 7
