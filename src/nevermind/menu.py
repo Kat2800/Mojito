@@ -9,13 +9,10 @@ from lib.wifinetworks import *
 from lib.mojstd import *
 from lib.netstd import *
 
-
 handshakes = 1 #on
 #max_visible_options = 7
 INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
-
-
 
 #@functools.lru_cache(maxsize=1000)
 def bk():
@@ -179,7 +176,7 @@ while True:
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
                                                 selected_option = menu_options[selected_index]
-                                                
+
                                                 selected_bssid = dictdionary[selected_option]
                                                 selected_chan = dictdionary[selected_bssid]
 
@@ -191,17 +188,17 @@ while True:
                                                     pass
                                                 else:
                                                     print(process)
-                                                    ui_print("""Error: 
+                                                    ui_print("""Error:
 Interface not Found
 Try to reboot Mojito
-if the problem persist""") 
+if the problem persist""")
                                                     break
                                                 if netstd(INTERFACE).interface_start(INTERFACE) == 1:
                                                     ui_print("Going back", 0.5)
                                                     break
                                                 time.sleep(1)
                                                 ui_print(f"{INTERFACE} ready!")
-                                                
+
                                                 menu_options = ["Pcap", "Pcapng"]
                                                 while handshakes == 1:
                                                     draw_menu(selected_index)
@@ -219,14 +216,14 @@ if the problem persist""")
                                                     elif GPIO.input(KEY_PRESS_PIN) == 0:
                                                         selected_option = menu_options[selected_index]
 
-                                                    
+
                                                         #Handshakes -----> works
-                                                        
-                                                                
+
+
                                                         ui_print("Loading...", 0.3)
                                                         menu_options = []
                                                         selected_index = 0
-                                                        
+
                                                         # KEY3
                                                         if bk() == True:
                                                             break
@@ -241,13 +238,13 @@ if the problem persist""")
                                                             time.sleep(0.5)
                                                             if selected_option == "Pcap":
                                                                 a = 0
-                                                                process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_option, selected_bssid, INTERFACE, a)
-                                                            else: 
+                                                                process = netstd(INTERFACE).initialization(selected_chan, selected_option, selected_bssid, INTERFACE, a)
+                                                            else:
                                                                 a = 1
-                                                                process = netstd(INTERFACE).initialization(selected_option, selected_chan, selected_option, selected_bssid, INTERFACE, a)
+                                                                process = netstd(INTERFACE).initialization(selected_chan, selected_option, selected_bssid, INTERFACE, a)
 
                                                             print("process is running")
-                                                            
+
                                                             while True:
                                                                 if process == 1:
                                                                     bk_ = 1
@@ -256,12 +253,12 @@ if the problem persist""")
                                                                     break
                                                                 else:
                                                                     break
-                                                            
+
                                                             if bk_ == 1:
                                                                 selected_index = 0
                                                                 break
-                                                            
-                                                            ui_print("""This might take 
+
+                                                            ui_print("""This might take
         some time...""", 2)
                                                             ui_print("""When the handshake
         is captured,
@@ -277,8 +274,8 @@ if the problem persist""")
                                                                         ui_print("Going back...")
                                                                         break
                                                                 else:
-                                                                    ui_print("""Waiting the 4-way 
-        handshake""", 1)                                            
+                                                                    ui_print("""Waiting the 4-way
+        handshake""", 1)
                                                                     pass
 
                                                                 if bk() == True:
@@ -380,7 +377,7 @@ if the problem persist""")
                                     while True:
                                         menu_options = ["RickRoll", "Evil Twin"]
                                         draw_menu(selected_index)
-                                        
+
                                         if GPIO.input(KEY_UP_PIN) == 0:
                                             selected_index = (selected_index - 1) % len(menu_options)
                                             draw_menu(selected_index)
@@ -403,7 +400,7 @@ if the problem persist""")
                                                 os.system(f"sudo airmon-ng check {INTERFACE} && sudo airmon-ng check kill")
                                                 os.system(f"sudo airmon-ng start {INTERFACE}")
                                                 ui_print(f"{INTERFACE} is ready")
-                                                
+
                                                 if bk() == True:
                                                     break
 
@@ -417,7 +414,7 @@ if the problem persist""")
                                                         return 1
 
                                                 for i in range(len(nevergonnagiveuup)):
-                                                    ui_print(f"""Fake AP - 
+                                                    ui_print(f"""Fake AP -
 RickRoll started . . .""", 1.5)
                                                     process = threading.Thread(target=RickRoll, args=(i, b)).start()
                                                     if process == 1:
@@ -428,7 +425,7 @@ RickRoll started . . .""", 1.5)
                                                     if bk() == True:
                                                         threading.Event()
                                                         break
-                                            
+
 #EVIL TWIN
                                             elif selected_option == "Evil Twin":
                                                 wifi_info().main()
@@ -443,7 +440,7 @@ RickRoll started . . .""", 1.5)
                                                     menu_options.append(item['ssid'])
                                                     dictdionary[item['ssid']] = item['bssid']
                                                     dictdionary[item['bssid']] = item['chan']
-                                                
+
                                                 ui_print("Loading...", 0.5)
 
                                                 selected_index = 0
@@ -466,13 +463,13 @@ RickRoll started . . .""", 1.5)
                                                         selected_chan = dictdionary[selected_bssid]
 
                                                         ui_print("Wait please...", 0.5)
-                                                            
+
                                                         if netstd(INTERFACE).interface_select(INTERFACE) == 0:
                                                             pass
-                                                        
+
                                                         else:
                                                             ui_print(f"Error: Interface {INTERFACE} not found", 2)
-                                                            
+
                                                         if netstd(INTERFACE).interface_start1(INTERFACE) == 1:
                                                             ui_print("Going back...", 0.5)
                                                             break
@@ -489,12 +486,12 @@ Evil Twin loading...""", 1)
             _
     Spoofing and Sniffing
         Stopped...""", 1)
-                                                                break                   
-                                                    
+                                                                break
 
 
 
-#WPS ATTACKS 
+
+#WPS ATTACKS
                                 elif selected_option == "Wps":
                                     selected_index = 0
                                     time.sleep(0.20)
@@ -554,7 +551,7 @@ Evil Twin loading...""", 1)
                                                         while True:
                                                             if netstd(INTERFACE, selected_option, 0).brute_force_wps(selected_option, INTERFACE) == 0:
                                                                 pass
-                                                            
+
 
         #Bluetooth
         elif selected_option == "Bluetooth":
@@ -719,7 +716,7 @@ Evil Twin loading...""", 1)
                     if selected_option == "Interface":
                         sys_class_net_ = subprocess.run(["ls", "/sys/class/net/"], text=True, capture_output=True)
                         if sys_class_net_.returncode != 0:
-                            ui_print("""Error: Unable to find ANY 
+                            ui_print("""Error: Unable to find ANY
     network interfaces""")
 
                         else:
