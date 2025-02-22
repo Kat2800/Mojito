@@ -45,7 +45,6 @@ class netstd():
         test = os.popen(f"iwconfig {self.INTERFACE} ")
         out = test.read()
 
-
         if "No such device" in out:
             return 1
 
@@ -103,7 +102,7 @@ class netstd():
         if a == 1:
             commands.remove(commands[4])
             commands[5] = f'set net.sniff.output /home/kali/mojito/wpa_handshakes/wpa_{selected_ssid}_.pcapng'
-
+            commands[3] = 'set net.sniff.verbose false'
         messages = [
             "Starting Recon...",
             "Examining Networks...",
