@@ -136,7 +136,7 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
    - ❌ Fix Settings app
    - ❌ bluetooth spam
    - ❌ Fix all the exit buttons
-   - ✔️ Plugin and app support
+   - ✔️ Plugins and apps support
 
 ### Under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) Licence 📄
   #### What you cannot do: ❌<br>
