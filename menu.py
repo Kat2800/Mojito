@@ -11,7 +11,7 @@ from libs.netstd import *
 
 handshakes = 1 #on
 #max_visible_options = 7
-INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
+INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"]
 interface = []
 
 #@functools.lru_cache(maxsize=1000)
