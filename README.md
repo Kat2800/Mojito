@@ -1,21 +1,14 @@
 # STILL UNDER DEVELOPMENT 
 ## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "How to setup and install" section.
 
-# The Mojito Project by BlacKat
+# Mojito Project
 
-## Why is called "Mojito" like the cocktail? 🍸
-This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos
 ![logo](https://github.com/user-attachments/assets/70a9894e-ec0f-4338-940d-0b09a3c6ecaa)
 
-# What's that? 🤔
+# About
 Mojito is swiss army knife for ethical hacking (educational purposes only) and penetration testing, it runs on a raspberry pi 0 w/wh that use a wavseshare 1.44 inch lcd HAT display. It has a collection of hacking tools and it is based on Kali Linux. 
-
-# DISCLAIMER ⚠️
-### Mojito is for educational purposes only. 
-The authors take NO responsibility and liability for how you use any of the tools/source code/any files provided. The authors and anyone affiliated with will not be liable for any losses and/or damages in connection or other type of damages with use of ANY Tools provided with Mojito. DO NOT use Mojito if you don't have the permission to do that. <br>
-We, the authors and developers of Mojito, do not guarantee that the tools inside it will work completely bug-free and we do not guarantee the safety of being anonymous/undetected when performing an attack on a device or service.
-
-## USE IT AT YOUR OWN RISK. 
+This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos (maked by @rickyfili10)
+<br>
 
 # REQUIREMENTS 📃
   - Wavseshare 1.44 inch lcd HAT display 
@@ -23,21 +16,21 @@ We, the authors and developers of Mojito, do not guarantee that the tools inside
   - 16 GB sd card (You need much less, but you might need 16 GB for additional packages)
   - An external usb antenna that support packet injection and monitor mode. We recommend RTL8812BU or RTL8822BU Chipsets
   - An USB to Micro USB adapter
-# HOW TO SETUP AND INSTALL MOJITO? 
-## First version is not been released yet!
-1. Flash and setup kali linux for raspberry pi 0 wh  <br>{<br>
-    You can get kali linux official image from: [Download Kali Linux](https://kali.download/arm-images/kali-2024.4/kali-linux-2024.4-raspberry-pi-zero-w-armel.img.xz)  <br>
-    You can flash the image on the sd card using Balena Etcher. You can get it from: [Download Balena Etcher](https://etcher.balena.io) <br>
-}<br>
-3. Put a wpa_supplicant.conf with your wifi information inside the sd card and create a file called "ssh" with nothing inside. <br>{<br>
+<br>
+
+# SETUP AND INSTALLATION
+
+## First version is not been released yet! 
+1. <a href="https://etcher.balena.io">Flash</a> and setup <a href="https://kali.download/arm-images/kali-2024.4/kali-linux-2024.4-raspberry-pi-zero-w-armel.img.xz">Kali Linux</a> for raspberry pi 0 wh  <br>
+    <br>
+2. Create a "wpa_supplicant.conf" file with your wifi informations in the boot partition and create a file called "ssh" with nothing inside. (always in the boot partition of the sd card) <br>
     Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
-}<br>
-### ⚠️ REMEMBER: THE PASSWORD WILL BE ALWAYS "kali" ⚠️
-4. Connect to USB port, and if you have it connect the antenna on the second port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
+    <br>
+3. Connect to USB port, and if you have it connect the antenna on the second port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
 ssh kali@192.168.1.xxx
 ```
-You can see Mojito ip form your WiFi-Router.
+You can see Mojito ip from your WiFi Router.
 If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try connecting to the wifi manually.<br>
 
 ```
@@ -46,10 +39,9 @@ sudo nmcli device wifi connect "{your wifi SSID}" password "{your wifi password}
 sudo enable ssh
 sudo start ssh
 ```
-5. Install and setup requisites with the commands below
-## ⚠️ IF YOU HAVE ALREADY AN EXTERNAL ANTENNA THAT SUPPORT PACKET INJECTION WITH A RECOMMEND CHIPSETS BY US, INSTALL THIS ⚠️
-### Else skip to Clone the Mojito repostory and enter in it 
-## Method 1 (Credit to morrownr on github)
+4. Install and setup requisites with the commands below
+
+#### Method 1 (Credit to morrownr on github)
  ```
 git clone https://github.com/morrownr/88x2bu-20210702.git && cd 88x2bu-20210702
  ```
@@ -58,7 +50,7 @@ sudo bash install-driver.sh
 sudo reboot
  ```
 ### ⚠️ BE CAREFUL NOT TO BLACKLIST INSTALLED DRIVERS ⚠️
-## Method 2
+#### Method 2
  ```
 sudo apt update
 sudo apt install realtek-rtl88xxau-dkms -y
@@ -68,7 +60,7 @@ sudo reboot
 ```
 ## Clone the Mojito repostory and enter in it 
  ```
-  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/
+  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
  ```
 ## Install the requisites 📃
  ```
@@ -113,30 +105,25 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
 ```
 
 ## After a while it should display the Mojito menu! 🎉
-## Remember: This is not the first version of mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well 🚀
+## Remember: This is not the first version of mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well
 # SIMBOLS LIST: 
    - NB! = No Battery Found! <br> 
    - Plug = pluged to a power source 🔌<br>
    - N% = battery level ( not tested ) 🔋<br>
 # TO DO ✔️
-  [<br>
+  <br>
   ❌ Not implemented yet <br>
-  ✔️ Implemented <br>
-  ]
-   - ✔️ Add wifi deauth
-   - ❌ Add wifi sniff
-   - ❌ Add wifi fakeAP
-   - ✔️ 4 Way Handshake capture
-   - ✔️ Add wifi fakeAP (Rick Roll)
-   - ✔️ Fix I/O errors
-   - ❌ Add Apple sideload
-   - ❌ Add Apple Jailbreaker 
-   - ❌ Add android rooter -> Bootloader unlocker, vbmeta flasher and sudo binary flasher (like Magisk)
+  ✔️ Implemented <br><br>
+
+   - ✔️ Wifi deauth
+   - ✔️ FakeAP
+   - ✔️ Handshake capture
+   - ✔️ Wps PIN bruteforce
+   - ❌ Bluetooth Dos
+   - ❌ Bluetooth Spam
    - ❌ Mojito official wiki
-   - ❌ Fix Settings app
-   - ❌ bluetooth spam
-   - ❌ Fix all the exit buttons
-   - ✔️ Plugins and apps support
+   - ❌ Plugin and app support
+   - ❌ Other...
 
 ### Under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) Licence 📄
   #### What you cannot do: ❌<br>
@@ -148,6 +135,12 @@ sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
    - Use Mojito for educational purposes, 'obviously' :)
    - Use Mojito for penetration testing or ethical hacking ("with permission" READ TERMS AND USE OF THE SOFTWARE AND CHECK YOUR LOCAL LAWS BEFORE USING IT.)
 
+# DISCLAIMER ⚠️
+### Mojito is for educational purposes only. 
+The authors take NO responsibility and liability for how you use any of the tools/source code/any files provided. The authors and anyone affiliated with will not be liable for any losses and/or damages in connection or other type of damages with use of ANY Tools provided with Mojito. DO NOT use Mojito if you don't have the permission to do that. <br>
+We, the authors and developers of Mojito, do not guarantee that the tools inside it will work completely bug-free and we do not guarantee the safety of being anonymous/undetected when performing an attack on a device or service.
+
+## USE IT AT YOUR OWN RISK. 
 
 Screen drivers based on https://github.com/Kudesnick/1.44inch-LCD-HAT-Code 💻<br>
 Antenna drivers created by https://github.com/morrownr/88x2bu-20210702.git 📡<br>
