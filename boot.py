@@ -13,7 +13,7 @@ import os
 import glob
 import time
 clear()
-show_image("../boot.png", exit_event=lambda: time.sleep(1) or True)
+show_image("logo.png", exit_event=lambda: time.sleep(1) or True)
 plugins = glob.glob('plugins/boot/*.py')
 
 for file in plugins:
