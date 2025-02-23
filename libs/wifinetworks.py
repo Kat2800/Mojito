@@ -8,7 +8,7 @@ from functools import lru_cache
 class wifi_info():
     
     def __init__(self):
-        self.adapter = Cell.all("wlo1")
+        self.adapter = Cell.all("wlan1")
 
     #clear chache
     #@lru_cache(maxsize=128)
