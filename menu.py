@@ -23,11 +23,11 @@ def bk():
 
 
 icons = {
-    "Networks": Image.open("wifi.png").resize((16, 16)),
-    "Bluetooth": Image.open("bluetooth.png").resize((16, 16)),
-    "Settings": Image.open("wrench.png").resize((16, 16)),
-    "Reboot": Image.open("reboot.png").resize((16, 16)),
-    "Shutdown": Image.open("shutdown.png").resize((16, 16)),
+    "Networks": Image.open("icons/wifi.png").resize((16, 16)),
+    "Bluetooth": Image.open("icons/bluetooth.png").resize((16, 16)),
+    "Settings": Image.open("icons/wrench.png").resize((16, 16)),
+    "Reboot": Image.open("icons/reboot.png").resize((16, 16)),
+    "Shutdown": Image.open("icons/shutdown.png").resize((16, 16)),
 }
 
 def draw_menu(selected_index):
