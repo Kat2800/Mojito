@@ -1,4 +1,4 @@
-from lib.mojstd import *
+from libs.mojstd import *
 import RPi.GPIO as GPIO
 import os
 import subprocess
