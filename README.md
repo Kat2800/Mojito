@@ -68,7 +68,7 @@ sudo reboot
 ```
 ## Clone the Mojito repostory and enter in it 
  ```
-  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
+  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/
  ```
 ## Install the requisites 📃
  ```
