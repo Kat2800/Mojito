@@ -4,7 +4,7 @@
 # The Mojito Project by BlacKat
 
 ## Why is called "Mojito" like the cocktail? 🍸
-This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos (maked by @rickyfili10)
+This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos
 ![logo](https://github.com/user-attachments/assets/70a9894e-ec0f-4338-940d-0b09a3c6ecaa)
 
 # What's that? 🤔
