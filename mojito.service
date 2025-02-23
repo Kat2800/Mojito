@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/python3 /home/kali/Mojito/boot.py
-WorkingDirectory=/home/kali/Mojito/src
+WorkingDirectory=/home/kali/Mojito/
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
