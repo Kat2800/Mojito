@@ -410,7 +410,7 @@ def bk():
         return True
     if GPIO.input(KEY3_PIN) == 0:
         return True
-
+"""
 def draw_sub_menu(selected_index, menu_options):
 
 
@@ -449,7 +449,7 @@ def draw_sub_menu(selected_index, menu_options):
 
 
     disp.LCD_ShowImage(image, 0, 0)
-
+"""
 
 def mc(menu_options):
 
