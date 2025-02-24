@@ -8,7 +8,6 @@
 # checks for updates randomly and runs all the plugins that need to be run at boot and then runs the menu.
 
 from libs.mojstd import *
-from libs.updater import *
 import os
 import glob
 import time
