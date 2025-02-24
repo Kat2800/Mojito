@@ -77,6 +77,7 @@ def draw_menu(selected_index):
 
 while True:
     menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
+    selected_index = 0
     draw_menu(selected_index)
 
     if GPIO.input(KEY_UP_PIN) == 0:
