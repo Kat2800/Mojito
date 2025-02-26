@@ -4,14 +4,14 @@ import os
 import subprocess
 import json
 import threading
-from lib.dos_bluetooth import *
-from lib.wifinetworks import *
-from lib.mojstd import *
-from lib.netstd import *
+from libs.dos_bluetooth import *
+from libs.wifinetworks import *
+from libs.mojstd import *
+from libs.netstd import *
 
 handshakes = 1 #on
 #max_visible_options = 7
-INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
+INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
 #@functools.lru_cache(maxsize=1000)
@@ -266,8 +266,8 @@ if the problem persist""")
                                                             while True:
                                                                 start_time = time.time()
                                                                 timeout = 25 * 60
-                                                                if os.path.exists(f"/home/kali/moijto/wpa_{selected_bssid}_.pcap") == True:
-                                                                    if os.path.getsize(f"/home/kali/mojito/wpa_{selected_bssid}_.pcap") > 1000:
+                                                                if os.path.exists(f"home/kali/Moijto/wpa_{selected_bssid}_.pcap") == True:
+                                                                    if os.path.getsize(f"/home/kali/Mojito/wpa_{selected_bssid}_.pcap") > 1000:
                                                                         ui_print("Handshake captured!",1)
                                                                         os.system("sudo iwconfig "+INTERFACE+" mode managed")
                                                                         os.system("sudo systemctl restart NetworkManager")
