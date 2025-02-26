@@ -4,14 +4,14 @@ import os
 import subprocess
 import json
 import threading
-from libs.dos_bluetooth import *
-from libs.wifinetworks import *
-from libs.mojstd import *
-from libs.netstd import *
+from lib.dos_bluetooth import *
+from lib.wifinetworks import *
+from lib.mojstd import *
+from lib.netstd import *
 
 handshakes = 1 #on
 #max_visible_options = 7
-INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"]
+INTERFACE = json.load(open("/home/kali/mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
 
 #@functools.lru_cache(maxsize=1000)
@@ -27,54 +27,60 @@ def draw_menu(selected_index):
     # Clear screen
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 
-    current_time = time.strftime("%H:%M")  # 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Clock right up
+    # Aggiungi l'orario in alto a destra
+    current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
+    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Orario in alto a destra
 
-    # battery level
+    # Ottieni il livello della batteria
     battery_level, plugged_in = get_battery_level()
 
-    # NB if battery not found
+    # Visualizza messaggio sul livello della batteria o "NB!" a sinistra
     if battery_level is None:
-        draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # error mesasge on the left
+        draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # Messaggio di errore a sinistra
     else:
         if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messagge "PLUG" on the left
+            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messaggio "PLUG" a sinistra
         else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # battery level left up
+            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # Livello della batteria a sinistra
 
-    # MAX VISIBLE OPTIONS
+    # Imposta il numero massimo di opzioni visibili
     max_visible_options = 6
-    # OFFSET
+    # Calcola l'offset di scorrimento in base all'opzione selezionata
     scroll_offset = max(0, min(selected_index - max_visible_options + 1, len(menu_options) - max_visible_options))
 
-    # VISIBLE OPTIONS
+    # Ottieni le opzioni visibili nella finestra di visualizzazione
     visible_options = menu_options[scroll_offset:scroll_offset + max_visible_options]
 
-    # DRAW OPTIONS
-    menu_offset = 16  
+    # Disegna le opzioni del menu con scorrimento
+    menu_offset = 16  # Offset per iniziare a disegnare il menu più in basso
     for i, option in enumerate(visible_options):
-        y = (i * 20) + menu_offset  # SPACE BETWEEN OFFSET
+        y = (i * 20) + menu_offset  # Spaziatura tra le opzioni con l'offset
 
-        # HIGHLIGHT SELECTED OPTION
+        # Evidenzia l'opzione selezionata
         if scroll_offset + i == selected_index:
             text_size = draw.textbbox((0, 0), option, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
-            draw.rectangle((0, y, width, y + text_height), fill=(50, 205, 50))  # HIGHLIGHT OPTION
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # TEXT BLACK
+            draw.rectangle((0, y, width, y + text_height), fill=(50, 205, 50))  # Evidenzia sfondo
+            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # TEXT WHITE
+            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
 
-
-#############################################################################################
-
-                                        # THE WHILE #
-
-#############################################################################################
 selected_index = 0
+b = 1
+nevergonnagiveuup = ["Never Gonna Give You Up", "Never Gonna Let You Down", "Never Gonna Run Around", "And DesertYou", "Never Gonna Make You Cry", "Never Gonna Say Good Bye"]
+a = nevergonnagiveuup[0]
+
+
+#############################################################################################
+
+                                        # THE WHILE#
+
+#############################################################################################
+
 while True:
     menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
     draw_menu(selected_index)
