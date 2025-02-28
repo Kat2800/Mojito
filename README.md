@@ -32,13 +32,13 @@ ssh kali@192.168.1.xxx
 ```
 You can see Mojito ip from your WiFi Router.
 If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try connecting to the wifi manually.<br>
-# Now you can setup with Mojito Setup Helper!
-## Moggy will be happy to help you during the setup! 
+# Now you can setup with Mojito Setup Helper! 
+## Moggy will be happy to help you during the setup! 😸
 ### Clone the Mojito Repostory and enter in it
 ```
  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
 ```
-### Run Mojito Setup Helper!
+### Run Mojito Setup Helper! 🔧
 ```
 sudo python msh.py
 ```
