@@ -5,10 +5,11 @@ from functools import lru_cache
 
 # Initialize WiFi adapter
 
+INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"]
+
 class wifi_info():
-    
-    def __init__(self):
-        self.adapter = Cell.all("wlan1")
+    def __init__(self, INTERFACE):
+        self.adapter = Cell.all(INTERFACE)
 
     #clear chache
     #@lru_cache(maxsize=128)
@@ -32,16 +33,16 @@ class wifi_info():
                 thefinaldict = {
                 "bssid" : bssid,
                 "ssid"  : ssid,
-                "mode"  : mode,
+                #"mode"  : mode,
                 "chan"  : chan,
-                "rate"  : rate,
-                "signal" : signal,
-                "security" : security
+                #"rate"  : rate,
+                #"signal" : signal,
+                #"security" : security
             }    
             
             #store all the info collected in thefinaldict              
             wifi_data.append(thefinaldict)
-            print(thefinaldict)
+            #print(thefinaldict) enable this by removing # for debugging
             
         with open("wifiinfo.json", mode="w") as a:
             json.dump(wifi_data, a, indent=2)
@@ -49,4 +50,4 @@ class wifi_info():
     def main(self):
         self.info()
     
-wifi_info().main()
+wifi_info(INTERFACE).main()
