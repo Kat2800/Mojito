@@ -148,6 +148,10 @@ selected_option = curses.wrapper(menu)
 interface = selected_option if selected_option != "other" else input("Write the name of your interface (E.g. wlan2): ")
 
 os.system(f"sudo ifconfig {interface} up")
+with open("settings/settings.json", "w") as settings:
+with open("settings/settings.json", "w") as settings:
+    settings_data = {"interface": interface}
+    json.dump(settings_data, settings, indent=2)
 moggy("Write your WiFi name (E.g. HomeWiFi): ")
 ssid = input("> ")
 moggy("Write your WiFi password (E.g. H3ll0!): ")
