@@ -28,7 +28,7 @@ This project is called "Mojito" beacuse while the developers were coding this pr
     <br>
 3. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
-ssh kali@192.168.1.xxx
+ssh kali@192.168.1.214
 ```
 You can see Mojito ip from your WiFi Router.
 If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try connecting to the wifi manually.<br>
