@@ -49,5 +49,4 @@ class wifi_info():
    
     def main(self):
         self.info()
-    
-wifi_info(INTERFACE).main()
+
