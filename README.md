@@ -32,7 +32,8 @@ ssh kali@192.168.1.xxx
 ```
 You can see Mojito ip from your WiFi Router.
 If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try connecting to the wifi manually.<br>
-# New or inexperienced? Use Mojito Setup Helper!
+# Now you can setup with Mojito Setup Helper!
+## Moggy will be happy to help you during the setup! 
 ### Clone the Mojito Repostory and enter in it
 ```
  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
@@ -42,79 +43,6 @@ If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboa
 sudo python msh.py
 ```
 ### Follow and fill out his requests!
-```
-sudo iwconfig wlan0 up
-sudo nmcli device wifi connect "{your wifi SSID}" password "{your wifi password}"
-sudo enable ssh
-sudo start ssh
-```
-## Or else, continue with the guide:
-4. Install and setup requisites with the commands below
-
-#### Method 1 (Credit to morrownr on github)
- ```
-git clone https://github.com/morrownr/88x2bu-20210702.git && cd 88x2bu-20210702
- ```
- ```
-sudo bash install-driver.sh
-sudo reboot
- ```
-### ⚠️ BE CAREFUL NOT TO BLACKLIST INSTALLED DRIVERS ⚠️
-#### Method 2
- ```
-sudo apt update
-sudo apt install realtek-rtl88xxau-dkms -y
-sudo apt install dkms
-sudo apt upgrade
-sudo reboot
-```
-## Clone the Mojito repostory and enter in it 
- ```
-  git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
- ```
-## Install the requisites 📃
- ```
-    sudo apt update
-    sudo apt-get install libbluetooth-dev
-    sudo apt install python3-spidev python3-RPi.gpio
-    sudo pip install git+https://github.com/pybluez/pybluez 
-```
-   ### <br>Set the time zone 
-```
-    sudo timedatectl set-timezone {Continent/Capital} # EXAMPLE: "sudo timedatectl set-timezone Europe/Amsterdam"
-```
-  ### Install l2flood ⛓️‍💥
-```
-  git clone https://github.com/kovmir/l2flood
-  cd l2flood
-  make # Use `make serial` to build upstream l2ping.
-  sudo make install
-```
-   ### Enabling SPi
-```
-sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"
-```   
-  ### Execute Mojito at boot and set his hostname
-```
-  sudo cp mojito.service /etc/systemd/system/
-```
-```
- sudo systemctl daemon-reload
-```
-```
-  sudo systemctl enable mojito.service
-```
-```
-  sudo systemctl start mojito.service
-```
-```
-  sudo hostnamectl set-hostname Mojito
-```
-```
-  sudo reboot
-```
-
-## After a while it should display the Mojito menu! 🎉
 ## Remember: This is not the first version of mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well
 # SIMBOLS LIST: 
    - NB! = No Battery Found! <br> 
