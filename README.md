@@ -48,6 +48,7 @@ sudo nmcli device wifi connect "{your wifi SSID}" password "{your wifi password}
 sudo enable ssh
 sudo start ssh
 ```
+## Or else, continue with the guide:
 4. Install and setup requisites with the commands below
 
 #### Method 1 (Credit to morrownr on github)
