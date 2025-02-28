@@ -149,7 +149,6 @@ interface = selected_option if selected_option != "other" else input("Write the 
 
 os.system(f"sudo ifconfig {interface} up")
 with open("settings/settings.json", "w") as settings:
-with open("settings/settings.json", "w") as settings:
     settings_data = {"interface": interface}
     json.dump(settings_data, settings, indent=2)
 moggy("Write your WiFi name (E.g. HomeWiFi): ")
