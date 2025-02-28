@@ -3,7 +3,7 @@ Description=Mojito Boot Executer
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/kali/Mojito/boot.py
+ExecStart=/usr/bin/python /home/kali/Mojito/boot.py
 WorkingDirectory=/home/kali/Mojito/
 StandardOutput=inherit
 StandardError=inherit
