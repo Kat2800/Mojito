@@ -145,7 +145,7 @@ while True:
                                 #Handshakes -----> works
                                 if selected_option == "Handshakes":
                                     ui_print("Loading...", 0.3)
-                                    wifi_info().main()
+                                    wifi_info(INTERFACE).main()
                                     menu_options = []
                                     selected_index = 0
 
@@ -291,7 +291,7 @@ if the problem persist""")
 
                                 #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORK)
                                 elif selected_option == "Deauth all":
-                                    wifi_info().main()
+                                    wifi_info(INTERFACE).main()
                                     menu_options = []
 
                                     with open("wifiinfo.json", mode="r") as a:
@@ -428,7 +428,7 @@ RickRoll started . . .""", 1.5)
 
 #EVIL TWIN
                                             elif selected_option == "Evil Twin":
-                                                wifi_info().main()
+                                                wifi_info(INTERFACE).main()
                                                 menu_options = []
 
                                                 with open("wifiinfo.json", mode="r") as a:
@@ -516,7 +516,7 @@ Evil Twin loading...""", 1)
                                             ui_print("Wait please...", 0.5)
 
                                             if selected_option == "Wps Pin Bruteforce":
-                                                wifi_info().main()
+                                                wifi_info(INTERFACE).main()
 
                                                 menu_options = []
 
