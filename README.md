@@ -26,7 +26,7 @@ This project is called "Mojito" beacuse while the developers were coding this pr
 2. Create a "wpa_supplicant.conf" file with your wifi informations in the boot partition and create a file called "ssh" with nothing inside. (always in the boot partition of the sd card) <br>
     Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
     <br>
-3. Connect to USB port, and if you have it connect the antenna on the second port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
+3. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
 ssh kali@192.168.1.xxx
 ```
