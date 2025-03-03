@@ -4,6 +4,7 @@ import subprocess
 import time
 import textwrap
 import json
+from libs.achievements import *
 
 moggy_faces = {
     "happy": [
@@ -113,7 +114,7 @@ def get_bluetooth_mac():
             if "BD Address" in line:
                 return line.split()[2].strip()
     except Exception as e:
-        print(f"Errore nel recuperare il MAC Bluetooth: {e}")
+        print(f"Error: {e}")
     return "Unknown"
 def load_or_create_profile():
     if os.path.exists(PROFILE_FILE):
@@ -138,6 +139,20 @@ def load_or_create_profile():
     
     moggy(f"Nice to meet you, {nickname}", "happy")
     time.sleep(3)
+    unlock_achievement("hello_world") 
+    moggy("You unlocked the 'Hello, World!' achievement!", "happy")
+    time.sleep(3)
+    moggy("Did you know what an achievement is? Write yes or no", "irritated")
+    ask = input("[yes/no]>")
+    if ask == "no":
+        moggy("An achievement is a milestone that you unlock when you accomplish something, this will help you better understand how networks and cybersecurity work, encouraging you to unlock them all! P.S: you can flex them to your friends", "cool")
+        time.sleep(7)
+    if ask == "yes":
+        moggy("Good...", "irritated")
+        time.sleep(3)
+    else:
+        moggy("An achievement is a milestone that you unlock when you accomplish something, this will help you better understand how networks and cybersecurity work, encouraging you to unlock them all! P.S: you can flex them to your friends", "cool")
+        time.sleep(7)
     return profile_data
     
 moggy("Hi! My name is Moggy, I will help you to set up Mojito! I am here to guide you step by step.", "happy")
@@ -148,9 +163,6 @@ selected_option = curses.wrapper(menu)
 interface = selected_option if selected_option != "other" else input("Write the name of your interface (E.g. wlan2): ")
 
 os.system(f"sudo ifconfig {interface} up")
-with open("settings/settings.json", "w") as settings:
-    settings_data = {"interface": interface}
-    json.dump(settings_data, settings, indent=2)
 moggy("Write your WiFi name (E.g. HomeWiFi): ")
 ssid = input("> ")
 moggy("Write your WiFi password (E.g. H3ll0!): ")
