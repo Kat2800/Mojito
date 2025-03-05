@@ -27,44 +27,44 @@ def draw_menu(selected_index):
     # Clear screen
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 
-    # Aggiungi l'orario in alto a destra
-    current_time = time.strftime("%H:%M")  # Formato 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # Orario in alto a destra
+    # clock on the up right
+    current_time = time.strftime("%H:%M")  # 24h HH:MM
+    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # clock
 
-    # Ottieni il livello della batteria
+    # battery level
     battery_level, plugged_in = get_battery_level()
 
-    # Visualizza messaggio sul livello della batteria o "NB!" a sinistra
+    # battery level or "NB!
     if battery_level is None:
-        draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # Messaggio di errore a sinistra
+        draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # error Messagge
     else:
         if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # Messaggio "PLUG" a sinistra
+            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # "PLUG" message 
         else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # Livello della batteria a sinistra
+            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # bettery level
 
-    # Imposta il numero massimo di opzioni visibili
+    #IMPORTANT
     max_visible_options = 6
-    # Calcola l'offset di scorrimento in base all'opzione selezionata
+    # Offset
     scroll_offset = max(0, min(selected_index - max_visible_options + 1, len(menu_options) - max_visible_options))
 
-    # Ottieni le opzioni visibili nella finestra di visualizzazione
+    #IMPORTANT
     visible_options = menu_options[scroll_offset:scroll_offset + max_visible_options]
 
-    # Disegna le opzioni del menu con scorrimento
-    menu_offset = 16  # Offset per iniziare a disegnare il menu più in basso
+    # DRAW OPTIONS
+    menu_offset = 16  # Offset
     for i, option in enumerate(visible_options):
-        y = (i * 20) + menu_offset  # Spaziatura tra le opzioni con l'offset
+        y = (i * 20) + menu_offset  # Space 
 
-        # Evidenzia l'opzione selezionata
+        # highlight
         if scroll_offset + i == selected_index:
             text_size = draw.textbbox((0, 0), option, font=font)
             text_width = text_size[2] - text_size[0]
             text_height = text_size[3] - text_size[1]
             draw.rectangle((0, y, width, y + text_height), fill=(50, 205, 50))  # Evidenzia sfondo
-            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # Testo in nero
+            draw.text((1, y), option, font=font, fill=(0, 0, 0))  # black text
         else:
-            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # Testo in bianco
+            draw.text((1, y), option, font=font, fill=(255, 255, 255))  # white text
 
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
