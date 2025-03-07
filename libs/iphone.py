@@ -7,8 +7,8 @@ import array
 import fcntl
 from errno import EALREADY
 import RPi.GPIO as GPIO
-from PIL import Image
-import LCD_1in44
+from PIL import Image, ImageDraw, ImageFont
+from libs import LCD_1in44
 import time
 import threading  
 
