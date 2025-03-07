@@ -2,13 +2,17 @@
 
 ![logo](https://github.com/user-attachments/assets/70a9894e-ec0f-4338-940d-0b09a3c6ecaa)
 <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" /> <img alt="Cybersecurity" src="https://img.shields.io/badge/-Cybersecurity-00599C?style=flat-square&logo=hackthebox&logoColor=white" /> <img alt="Networking" src="https://img.shields.io/badge/-Networking-0A66C2?style=flat-square&logo=cisco&logoColor=white" /> <img alt="Kali Linux" src="https://img.shields.io/badge/-Kali_Linux-557C94?style=flat-square&logo=kalilinux&logoColor=white" /> <img alt="Raspberry Pi" src="https://img.shields.io/badge/-Raspberry_Pi-A22846?style=flat-square&logo=raspberrypi&logoColor=white" /></p>
+
+
+<br><br>
+# STILL UNDER DEVELOPMENT 
+## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "How to setup and install" section.
+<br><br>
+
 # About
 Mojito is swiss army knife for ethical hacking (educational purposes only) and penetration testing, it runs on a raspberry pi 0 w/wh that use a wavseshare 1.44 inch lcd HAT display. It has a collection of hacking tools and it is based on Kali Linux. 
 This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos (maked by @rickyfili10)
 <br>
-
-# STILL UNDER DEVELOPMENT 
-## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "How to setup and install" section.
 
 # REQUIREMENTS 📃
   - Wavseshare 1.44 inch lcd HAT display 
