@@ -25,31 +25,9 @@ Lcd_ScanDir = LCD_1in44.SCAN_DIR_DFT
 disp.LCD_Init(Lcd_ScanDir)
 disp.LCD_Clear()
 
-def show_image_and_wait():
-    try:
-
-        image_path = "bkat.png"
-        if not os.path.exists(image_path):
-            print(f"Image file {image_path} not found")
-            return
-
-        image = Image.open(image_path)
-        image = image.resize((128, 128)) 
-
-        # Show the image on LCD
-        disp.LCD_ShowImage(image, 0, 0)
-
-
-        while GPIO.input(KEY_PRESS_PIN) == 1:
-            time.sleep(0.1)  
-
-  
-        disp.LCD_Clear()
-  
-        os.system("sudo python3 menu.py")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
+def wait_break():
+    while GPIO.input(KEY_PRESS_PIN) == 1:
+        time.sleep(0.1)  
 def send_bt_packets(sock):
     try:
         while True:
@@ -104,10 +82,8 @@ def iOspam():
 
     try:
       
-        show_image_and_wait()
+        wait_break()
     except KeyboardInterrupt:
         print("\nProgram terminated by user")
     finally:
         GPIO.cleanup()  
-
-
