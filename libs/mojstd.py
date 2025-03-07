@@ -492,46 +492,7 @@ def mc(menu_options):
     disp.LCD_ShowImage(image, 0, 0)
 
 
-def getYN(text):
 
-    selected_option = "Yes"
-
-
-    def draw_interface():
-        draw.rectangle((0, 0, width, height), fill=(text_color))
-
-        draw.text((10, 10), text, font=font, fill=(wallpaper_color))
-
-
-
-        draw.rectangle((10, 50, 60, 100), fill=(high_text_color) if selected_option == "Yes" else (128, 128, 128))
-        draw.text((30, 70), "Yes", font=font, fill=(wallpaper_color))
-
-        draw.rectangle((70, 50, 120, 100), fill=(high_text_color) if selected_option == "No" else (128, 128, 128))
-        draw.text((90, 70), "No", font=font, fill=(text_color))
-
-        disp.LCD_ShowImage(image, 0, 0)
-
-
-    draw_interface()
-
-    while True:
-
-        if GPIO.input(KEY_LEFT_PIN) == 0:
-            selected_option = "Yes"
-            draw_interface()
-            time.sleep(0.3)
-
-        if GPIO.input(KEY_RIGHT_PIN) == 0:
-            selected_option = "No"
-            draw_interface()
-            time.sleep(0.3)  #
-
-
-        if GPIO.input(KEY_PRESS_PIN) == 0:
-            return selected_option
-
-        time.sleep(0.1)
 
 def list(menu_options):
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
