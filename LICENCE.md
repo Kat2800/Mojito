@@ -90,14 +90,10 @@ In the event that any provision or clause of this License is found to be invalid
 
 The Authors shall not be held liable for any criminal or civil consequences resulting from the use or distribution of the Software. The License is not intended to impose any penalty or legal consequences on the Authors in any jurisdiction where it may conflict with local laws or regulations.
 
-## License Revocation
-The authors of the license reserve the right to revoke the validity of the BlacKat Custom License (BKL) at any time. If the authors decide that the license is no longer valid or that they no longer wish for it to be used, this decision will apply to all versions of the license and any software released under it. In such a case, the license and all associated rights will be annulled, and it will no longer be possible to use, distribute, or modify the Software under the terms of the license.
+## Revocation of the License and Authors' Liability
+The authors of the BlacKat Custom License (BKL) reserve the right to revoke the validity of the license at any time, without any obligation to provide compensation or explanation. If the license is revoked or becomes invalid, the authors will not be responsible for any damage, loss, legal consequence, or any other arising from the use of the Software, either before or after the revocation of the license.
 
-All users who have used or distributed the Software under this license must immediately cease all activities related to it. They must also remove any copies of the Software from all platforms where it has been shared or distributed.
-
-This revocation will be final, and no further rights will be granted or valid after the license is annulled, unless a new license is provided to replace the previous one.
-
-
+All users who have used the Software under this license are required to immediately cease all use, distribution, or modification, and to remove any copies of the Software from any platforms where it was distributed. The authors will not be required to compensate for any financial loss or damage caused by the revocation of the license, nor will they be subject to any legal proceedings related to such revocation.
 ---
 
 **By using this Software, You agree to these terms.**
