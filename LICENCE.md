@@ -1,4 +1,4 @@
-# BlacKat License v1.0
+# BlacKat License v1.1
 
 **Last Updated: 03/07/2025**
 
@@ -89,6 +89,14 @@ This License is applicable worldwide, and its terms shall apply in all jurisdict
 In the event that any provision or clause of this License is found to be invalid or unenforceable under the laws of the jurisdiction in which it is being applied, such provision shall be deemed modified to the minimum extent necessary to bring it into compliance with the applicable laws. If such modification is not possible, the provision shall be deemed severed from the License without affecting the validity of the remaining provisions. 
 
 The Authors shall not be held liable for any criminal or civil consequences resulting from the use or distribution of the Software. The License is not intended to impose any penalty or legal consequences on the Authors in any jurisdiction where it may conflict with local laws or regulations.
+
+## License Revocation
+The authors of the license reserve the right to revoke the validity of the BlacKat Custom License (BKL) at any time. If the authors decide that the license is no longer valid or that they no longer wish for it to be used, this decision will apply to all versions of the license and any software released under it. In such a case, the license and all associated rights will be annulled, and it will no longer be possible to use, distribute, or modify the Software under the terms of the license.
+
+All users who have used or distributed the Software under this license must immediately cease all activities related to it. They must also remove any copies of the Software from all platforms where it has been shared or distributed.
+
+This revocation will be final, and no further rights will be granted or valid after the license is annulled, unless a new license is provided to replace the previous one.
+
 
 ---
 
