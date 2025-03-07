@@ -8,6 +8,7 @@ from libs.dos_bluetooth import *
 from libs.wifinetworks import *
 from libs.mojstd import *
 from libs.netstd import *
+from libs.iphone import *
 
 handshakes = 1 #on
 #max_visible_options = 7
@@ -550,7 +551,7 @@ Evil Twin loading...""", 1)
             time.sleep(0.20)
 
             while True:
-                menu_options = ["Dos", "Multiple attacks"]
+                menu_options = ["Dos", "iOs Spam", "Multiple attacks"]
                 draw_menu(selected_index)
 
 
@@ -569,6 +570,10 @@ Evil Twin loading...""", 1)
                     selected_option = menu_options[selected_index]
 
                     #Bluetooth Dos
+                    if selected_option == "iOs Spam":
+                        iOspam()
+                        if bk() == True:
+                            break
                     if selected_option == "Dos":
 
                         ui_print("Wait please . . .")
