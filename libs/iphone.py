@@ -8,9 +8,8 @@ import fcntl
 from errno import EALREADY
 import RPi.GPIO as GPIO
 from PIL import Image, ImageDraw, ImageFont
-from libs import LCD_1in44
 import time
-import threading  
+import threading
 
 
 KEY_PRESS_PIN = 13
@@ -20,14 +19,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(KEY_PRESS_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-disp = LCD_1in44.LCD()
-Lcd_ScanDir = LCD_1in44.SCAN_DIR_DFT
-disp.LCD_Init(Lcd_ScanDir)
-disp.LCD_Clear()
-
 def wait_break():
     while GPIO.input(KEY_PRESS_PIN) == 1:
-        time.sleep(0.1)  
+        time.sleep(0.1)
 def send_bt_packets(sock):
     try:
         while True:
@@ -43,7 +37,7 @@ def send_bt_packets(sock):
             cmd_pkt = struct.pack("<B%dB" % len(bt_packet), len(bt_packet), *bt_packet)
             bluez.hci_send_cmd(sock, 0x08, 0x0008, cmd_pkt)
 
-            time.sleep(1)  
+            time.sleep(1)
 
             cmd_pkt = struct.pack("<B", 0x00)
             bluez.hci_send_cmd(sock, 0x08, 0x000A, cmd_pkt)
@@ -57,6 +51,7 @@ def send_bt_packets(sock):
         bluez.hci_send_cmd(sock, 0x08, 0x000A, cmd_pkt)
 
 def iOspam():
+    print("iOspam started")
     hci_sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_RAW, socket.BTPROTO_HCI)
     req_str = struct.pack("H", 0)
     request = array.array("b", req_str)
@@ -81,9 +76,9 @@ def iOspam():
     send_thread.start()
 
     try:
-      
+
         wait_break()
     except KeyboardInterrupt:
         print("\nProgram terminated by user")
     finally:
-        GPIO.cleanup()  
+        GPIO.cleanup()
