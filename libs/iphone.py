@@ -78,7 +78,7 @@ def send_bt_packets(sock):
         cmd_pkt = struct.pack("<B", 0x00)
         bluez.hci_send_cmd(sock, 0x08, 0x000A, cmd_pkt)
 
-def main():
+def iOspam():
     hci_sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_RAW, socket.BTPROTO_HCI)
     req_str = struct.pack("H", 0)
     request = array.array("b", req_str)
@@ -111,5 +111,4 @@ def main():
     finally:
         GPIO.cleanup()  # Clean up GPIO pins on program exit
 
-if __name__ == "__main__":
-    main()
+
