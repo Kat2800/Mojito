@@ -67,7 +67,7 @@ sudo python msh.py
    - ❌ Plugin and app support
    - ❌ Other...
 
-### Under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) Licence 📄
+### Under BlacKat Custom Licence (BKL) 📄
   #### What you cannot do: ❌<br>
    - Use for non-commercial purposes 💸❌<br>
    - You cannot Create Derivative Works, and share them online 📄<br>
