@@ -31,7 +31,7 @@ def draw_menu(selected_index):
     current_time = time.strftime("%H:%M")  # 24h HH:MM
     draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # clock
 
-    NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname"]
+    NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname", "NOT FOUND!"]
     draw.text((5, 0), NICKNAME, font=font, fill=(255, 255, 255))  
 
     #IMPORTANT
