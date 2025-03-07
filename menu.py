@@ -31,17 +31,8 @@ def draw_menu(selected_index):
     current_time = time.strftime("%H:%M")  # 24h HH:MM
     draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # clock
 
-    # battery level
-    battery_level, plugged_in = get_battery_level()
-
-    # battery level or "NB!
-    if battery_level is None:
-        draw.text((5, 0), "NB!", font=font, fill=(255, 0, 0))  # error Messagge
-    else:
-        if plugged_in:
-            draw.text((5, 0), "PLUG", font=font, fill=(255, 255, 255))  # "PLUG" message 
-        else:
-            draw.text((5, 0), f"{battery_level}%", font=font, fill=(255, 255, 255))  # bettery level
+    NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname"]
+    draw.text((5, 0), NICKNAME, font=font, fill=(255, 255, 255))  
 
     #IMPORTANT
     max_visible_options = 6
