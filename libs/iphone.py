@@ -10,16 +10,16 @@ import RPi.GPIO as GPIO
 from PIL import Image
 import LCD_1in44
 import time
-import threading  # Aggiungi questa linea per importare il modulo threading
+import threading  
 
-# Pin setup (assumi che KEY_PRESS_PIN sia già definito nel tuo menu.py)
+
 KEY_PRESS_PIN = 13
 
-# Initialize GPIO (assumi che GPIO sia già inizializzato nel tuo menu.py)
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(KEY_PRESS_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-# Initialize LCD (assumi che disp sia già inizializzato nel tuo menu.py)
+
 disp = LCD_1in44.LCD()
 Lcd_ScanDir = LCD_1in44.SCAN_DIR_DFT
 disp.LCD_Init(Lcd_ScanDir)
@@ -27,25 +27,25 @@ disp.LCD_Clear()
 
 def show_image_and_wait():
     try:
-        # Load and resize the image
+
         image_path = "bkat.png"
         if not os.path.exists(image_path):
             print(f"Image file {image_path} not found")
             return
 
         image = Image.open(image_path)
-        image = image.resize((128, 128))  # Resize image to fit the display
+        image = image.resize((128, 128)) 
 
         # Show the image on LCD
         disp.LCD_ShowImage(image, 0, 0)
 
-        # Wait for button press to exit
-        while GPIO.input(KEY_PRESS_PIN) == 1:
-            time.sleep(0.1)  # Polling delay
 
-        # Clear the LCD display
+        while GPIO.input(KEY_PRESS_PIN) == 1:
+            time.sleep(0.1)  
+
+  
         disp.LCD_Clear()
-        # Reopen menu
+  
         os.system("sudo python3 menu.py")
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -65,7 +65,7 @@ def send_bt_packets(sock):
             cmd_pkt = struct.pack("<B%dB" % len(bt_packet), len(bt_packet), *bt_packet)
             bluez.hci_send_cmd(sock, 0x08, 0x0008, cmd_pkt)
 
-            time.sleep(1)  # Adjust this delay to increase or decrease packet sending speed
+            time.sleep(1)  
 
             cmd_pkt = struct.pack("<B", 0x00)
             bluez.hci_send_cmd(sock, 0x08, 0x000A, cmd_pkt)
@@ -99,16 +99,15 @@ def iOspam():
         print(f"Unable to connect to Bluetooth hardware 0: {e}")
         return
 
-    # Spawn a thread to send Bluetooth packets at high speed
     send_thread = threading.Thread(target=send_bt_packets, args=(sock,))
     send_thread.start()
 
     try:
-        # After starting the send thread, show the image and wait for exit
+      
         show_image_and_wait()
     except KeyboardInterrupt:
         print("\nProgram terminated by user")
     finally:
-        GPIO.cleanup()  # Clean up GPIO pins on program exit
+        GPIO.cleanup()  
 
 
