@@ -6,7 +6,7 @@
 
 <br><br>
 # STILL UNDER DEVELOPMENT 
-## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "How to setup and install" section.
+## No release and ISO or IMG file will be made before version 1.0. Using the code now may have bugs or incomplete pieces. 💿❌ If you want to install it without a iso file, go to "Setup and installation" section.
 <br><br>
 
 # About
