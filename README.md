@@ -76,7 +76,7 @@ sudo python msh.py
    - Share 🔗<br>
    - Use Mojito for educational purposes, 'obviously' :)
    - Use Mojito for penetration testing or ethical hacking ("with permission" READ TERMS AND USE OF THE SOFTWARE AND CHECK YOUR LOCAL LAWS BEFORE USING IT.)
-### Read the license before using the code.
+### Read the license before using Mojito.
 # DISCLAIMER ⚠️
 ### Mojito is for educational purposes only. 
 The authors take NO responsibility and liability for how you use any of the tools/source code/any files provided. The authors and anyone affiliated with will not be liable for any losses and/or damages in connection or other type of damages with use of ANY Tools provided with Mojito. DO NOT use Mojito if you don't have the permission to do that. <br>
