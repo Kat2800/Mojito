@@ -238,7 +238,8 @@ os.system("""
 sudo apt update
 sudo apt-get install libbluetooth-dev -y
 sudo apt install python3-spidev python3-RPi.gpio -y
-sudo pip install git+https://github.com/pybluez/pybluez
+sudo pip install git+https://github.com/pybluez/pybluez --break-system-packages
+sudo pip install wifi --break-system-packages
 """)
 os.system("""
 git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make install
