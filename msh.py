@@ -249,10 +249,7 @@ os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"')
 moggy("-- Almost finished! --", "happy")
 
 os.system("""
-sudo cp mojito.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable mojito.service
-sudo systemctl start mojito.service
+sudo nano "sudo python /home/kali/Mojito/boot.py" >> ~/.bashrc
 sudo hostnamectl set-hostname Mojito
 sudo reboot
 """)
