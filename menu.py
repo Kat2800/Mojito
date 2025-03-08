@@ -14,6 +14,10 @@ handshakes = 1 #on
 #max_visible_options = 7
 INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
 interface = []
+selected_index = 0
+b = 1
+nevergonnagiveuup = ["Never Gonna Give You Up", "Never Gonna Let You Down", "Never Gonna Run Around", "And DesertYou", "Never Gonna Make You Cry", "Never Gonna Say Good Bye"]
+a = nevergonnagiveuup[0]
 
 #@functools.lru_cache(maxsize=1000)
 def bk():
@@ -22,15 +26,13 @@ def bk():
         selected_index = 0
         return True
 
-
 def draw_menu(selected_index):
-    # Clear previous image
     # Clear screen
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 
-    # clock on the up right
+    #clock on the up right
     current_time = time.strftime("%H:%M")  # 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  # clock
+    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  #Clock
 
     NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname"]
     draw.text((5, 0), NICKNAME, font=font, fill=(255, 255, 255))  
@@ -61,10 +63,6 @@ def draw_menu(selected_index):
     # Display the updated image
     disp.LCD_ShowImage(image, 0, 0)
 
-selected_index = 0
-b = 1
-nevergonnagiveuup = ["Never Gonna Give You Up", "Never Gonna Let You Down", "Never Gonna Run Around", "And DesertYou", "Never Gonna Make You Cry", "Never Gonna Say Good Bye"]
-a = nevergonnagiveuup[0]
 
 
 #############################################################################################
@@ -72,6 +70,8 @@ a = nevergonnagiveuup[0]
                                         # THE WHILE#
 
 #############################################################################################
+
+
 
 while True:
     menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
@@ -90,7 +90,8 @@ while True:
         selected_option = menu_options[selected_index]
 
         if selected_option == "Networks":
-            # NETWORKS
+
+# NETWORKS
             time.sleep(0.2)
             while True:
                 menu_options = ["Wifi"]
@@ -111,7 +112,8 @@ while True:
                     selected_option = menu_options[selected_index]
 
                     if selected_option == "Wifi":
-                        #WIFI
+
+#WIFI
 
                         time.sleep(0.30)
                         selected_index = 0
@@ -134,7 +136,7 @@ while True:
                                 selected_option = menu_options[selected_index]
 
 
-                                #Handshakes -----> works
+    #HANDSHAKES -----> works
                                 if selected_option == "Handshakes":
                                     ui_print("Loading...", 0.3)
                                     wifi_info(INTERFACE).main()
@@ -168,11 +170,10 @@ while True:
 
                                             elif GPIO.input(KEY_PRESS_PIN) == 0:
                                                 selected_option = menu_options[selected_index]
-
                                                 selected_bssid = dictdionary[selected_option]
                                                 selected_chan = dictdionary[selected_bssid]
 
-                                                #Bettercap
+        #HANDSHAKE CAPTURE
 
                                                 ui_print("Wait please...")
                                                 process = netstd(INTERFACE).interface_select(INTERFACE)
@@ -209,14 +210,12 @@ if the problem persist""")
                                                         selected_option = menu_options[selected_index]
 
 
-                                                        #Handshakes -----> works
+            #PCAP - PCAPNG
 
 
                                                         ui_print("Loading...", 0.3)
                                                         menu_options = []
                                                         selected_index = 0
-
-                                                        # KEY3
                                                         if bk() == True:
                                                             break
 
@@ -281,7 +280,7 @@ if the problem persist""")
 
 
 
-                                #DEAUTH ALL -----> WORKS BETTER ON SIGLE TARGETS (NOT ON ALL THE NETWORK)
+    #DEAUTH ALL --> works
                                 elif selected_option == "Deauth all":
                                     wifi_info(INTERFACE).main()
                                     menu_options = []
@@ -362,7 +361,7 @@ if the problem persist""")
 
 
 
-                                #Fake AP
+    #FAKE AP --> To improve
                                 elif selected_option == 'Fake AP':
                                     selected_index = 0
 
@@ -385,7 +384,7 @@ if the problem persist""")
                                             selected_option = menu_options[selected_index]
                                             ui_print("Wait please...")
 
-#RICKROLL
+        #RICKROLL
                                             if selected_option == "RickRoll":
                                                 time.sleep(1)
                                                 os.system(f"sudo airmon-ng start {INTERFACE}")
@@ -483,7 +482,7 @@ Evil Twin loading...""", 1)
 
 
 
-#WPS ATTACKS
+    #WPS ATTACKS --> To improve
                                 elif selected_option == "Wps":
                                     selected_index = 0
                                     time.sleep(0.20)
@@ -545,7 +544,12 @@ Evil Twin loading...""", 1)
                                                                 pass
 
 
-        #Bluetooth
+#################################################################################################################
+#################################################################################################################
+#################################################################################################################
+
+
+#BLUETOOTH
         elif selected_option == "Bluetooth":
             selected_index = 0
             time.sleep(0.20)
@@ -569,7 +573,7 @@ Evil Twin loading...""", 1)
                 elif GPIO.input(KEY_PRESS_PIN) == 0:
                     selected_option = menu_options[selected_index]
 
-                    #Bluetooth Dos
+    #BLUETOOTH DOS --> To do
                     if selected_option == "iOs Spam":
                         iOspam()
                         if bk() == True:
@@ -628,6 +632,7 @@ Evil Twin loading...""", 1)
                                         #ui_print("Going back...", 0.5)
                                         #break
 
+#REBOOT --> To improve
         elif selected_option == "Reboot":
             menu_options = ["Yes", "No"]
             selected_index = 0
@@ -657,6 +662,7 @@ Evil Twin loading...""", 1)
                     else:
                         break
 
+#SHUTDOWN --> To improve
         elif selected_option == "Shutdown":
             menu_options = ["Yes", "No"]
             selected_index = 0
@@ -687,6 +693,7 @@ Evil Twin loading...""", 1)
                     else:
                         break
 
+#SETTINGS --> To improve
         elif selected_option == "Settings":
             selected_index = 0
 
