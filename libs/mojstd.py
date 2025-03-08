@@ -321,7 +321,7 @@ def getYesNo():
 #menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
 #selected_index = 0
 
-def show_image(image_path):
+def show_image(image_path, duration=1.5):
     image = Image.open(image_path)
     image = image.resize((128, 128))
 
@@ -329,7 +329,7 @@ def show_image(image_path):
     disp.LCD_ShowImage(image, 0, 0)
 
     
-    time.sleep(1.5)
+    time.sleep(duration)
 
     disp.LCD_Clear()
 
