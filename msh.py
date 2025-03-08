@@ -4,7 +4,6 @@ import subprocess
 import time
 import textwrap
 import json
-from libs.achievements import *
 
 moggy_faces = {
     "happy": [
@@ -136,27 +135,12 @@ def load_or_create_profile():
     profile_data = {
         "nickname": nickname,
         "mac_address": mac_address,
-        "achievements": []
     }
     with open(PROFILE_FILE, "w") as file:
         json.dump(profile_data, file, indent=4)
     
     moggy(f"Nice to meet you, {nickname}", "happy")
     time.sleep(3)
-    unlock_achievement("hello_world") 
-    moggy("You unlocked the 'Hello, World!' achievement!", "happy")
-    time.sleep(3)
-    moggy("Did you know what an achievement is? Write yes or no", "irritated")
-    ask = input("[yes/no]>")
-    if ask == "no":
-        moggy("An achievement is a milestone that you unlock when you accomplish something, this will help you better understand how networks and cybersecurity work, encouraging you to unlock them all! P.S: you can flex them to your friends", "cool")
-        time.sleep(7)
-    if ask == "yes":
-        moggy("Good...", "irritated")
-        time.sleep(3)
-    else:
-        moggy("An achievement is a milestone that you unlock when you accomplish something, this will help you better understand how networks and cybersecurity work, encouraging you to unlock them all! P.S: you can flex them to your friends", "cool")
-        time.sleep(7)
     return profile_data
     
 moggy("Hi! My name is Moggy, I will help you to set up Mojito! I am here to guide you step by step.", "happy")
