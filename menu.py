@@ -29,13 +29,13 @@ def bk():
 def draw_menu(selected_index):
     # Clear screen
     draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
-
+    
     #clock on the up right
     current_time = time.strftime("%H:%M")  # 24h HH:MM
-    draw.text((width - 40, 0), current_time, font=font, fill=(255, 255, 255))  #Clock
+    draw.text((width - 40, 0), current_time, font=font, fill=(255, 0, 0))  #Clock
 
-    NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname"]
-    draw.text((5, 0), NICKNAME, font=font, fill=(255, 255, 255))  
+    #NICKNAME = json.load(open("/home/kali/Mojito/myprofile.json", "r"))["nickname"]
+    #draw.text((5, 0), NICKNAME, font=font, fill=(255, 255, 255))  
 
     #IMPORTANT
     max_visible_options = 6
@@ -657,7 +657,7 @@ Evil Twin loading...""", 1)
 
                     if selected_option == "Yes":
                         ui_print("Rebooting...", 1.5)
-                        draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+                        show_image(r"images/logo.png", 10)
                         os.system("sudo reboot now")
 
                     else:
@@ -688,7 +688,7 @@ Evil Twin loading...""", 1)
 
                     if selected_option == "Yes":
                         ui_print("Shutting down mojito...", 2)
-                        draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+                        show_image(r"images/logo.png", 10)
                         os.system("sudo shutdown now")
 
                     else:
