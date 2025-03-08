@@ -70,7 +70,11 @@ def moggy(message, mood="chill", stdscr=None):
             cat_part = cat[i] if i < len(cat) else " " * max_cat_width
             msg_part = msg_lines[i] if i < len(msg_lines) else ""
             print(f"{cat_part}  {msg_part}")
-
+if os.geteuid() != 0:
+    moggy("Looks like I'm running without root permissions... use 'sudo python msh.py' to run me.", "irritated")    
+    exit(1)
+else:
+    print()
 def menu(stdscr):
     curses.curs_set(0)
     options = ["wlan0", "wlan1", "other"]
