@@ -71,7 +71,8 @@ def draw_menu(selected_index):
 
 #############################################################################################
 
-
+# Display the image
+show_image(r"images/logo.png")
 
 while True:
     menu_options = ["Networks","Bluetooth", "Settings", "Reboot", "Shutdown"]
