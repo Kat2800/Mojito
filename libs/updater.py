@@ -47,7 +47,4 @@ def update(file_path):
             except ValueError as ve:
                 print(f"Error with repository path for {repo_url}: {ve}")
 
-# Path to the file containing repository URLs and paths
-repos_file_path = '/home/kali/Mojito/repos.txt'
 
-update(repos_file_path)
