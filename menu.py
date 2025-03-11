@@ -9,7 +9,7 @@ from libs.wifinetworks import *
 from libs.mojstd import *
 from libs.netstd import *
 from libs.iphone import *
-
+from libs.updater import *
 handshakes = 1 #on
 #max_visible_options = 7
 INTERFACE = json.load(open("/home/kali/Mojito/settings/settings.json", "r"))["interface"] #Different for the menu on the src folder
@@ -691,7 +691,7 @@ try:
 
                 time.sleep(0.20)
                 while True:
-                    menu_options = ["Interface", "Ssh", "Developer Options"]
+                    menu_options = ["Interface", "Ssh", "Update", "Developer Options"]
                     draw_menu(selected_index)
                     if GPIO.input(KEY_UP_PIN) == 0:
                         selected_index = (selected_index - 1) % len(menu_options)
@@ -708,6 +708,9 @@ try:
                     elif GPIO.input(KEY_PRESS_PIN) == 0:
                         selected_option = menu_options[selected_index]
 
+                        if selected_option == "Update":
+                            repos_file_path = '/home/kali/Mojito/repos.txt'
+                            update(repos_file_path)
                         if selected_option == "Interface":
                             sys_class_net_ = subprocess.run(["ls", "/sys/class/net/"], text=True, capture_output=True)
                             if sys_class_net_.returncode != 0:
@@ -748,7 +751,7 @@ try:
 
                             time.sleep(0.20)
                             while True:
-                                menu_options = ["Simulate error"]
+                                menu_options = ["Simulate error", "Call Func"]
                                 draw_menu(selected_index)
                                 if GPIO.input(KEY_UP_PIN) == 0:
                                     selected_index = (selected_index - 1) % len(menu_options)
@@ -767,6 +770,12 @@ try:
                                 if selected_option == "Simulate error":
                                     error = 2/0
                                     print(error)
+                                if selected_option == "Call Func":
+                                    ui_print("Write the function name\nE.g. iOspam", 1)
+                                    shell = getinput()
+                                    exec(shell + "()")
+
+
 
                         else:
                             break
