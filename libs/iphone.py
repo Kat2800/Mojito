@@ -1,7 +1,6 @@
 import random
 import bluetooth._bluetooth as bluez
 import struct
-import os
 import socket
 import array
 import fcntl
