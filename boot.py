@@ -11,7 +11,7 @@ import os
 import glob
 import time
 
-show_image("images/logo.png", exit_event=lambda: time.sleep(1) or True)
+show_image("images/logo.png", lambda: time.sleep(1) or True)
 plugins = glob.glob('plugins/boot/*.py')
 print("before plugin")
 for file in plugins:
