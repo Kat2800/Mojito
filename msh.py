@@ -4,6 +4,19 @@ import subprocess
 import time
 import textwrap
 import json
+import random
+
+fun_facts = [
+    "The first battery for Mojito was designed to enable its use even without being plugged into a power socket. It was created by repurposing an electronic cigarette, removing the inhalation sensor to make it suitable for Mojito.",
+    "The project is called 'Mojito' because the creators came up with the idea while drinking a mojito",
+    "The authors began studying computer science because one of them, in the frist year of middle school, saw a TikTok video where someone created a 'virus' in a BAT file that opened multiple terminal windows (fond memories from the past).",
+    "The authors of the project have been best friends since elementary school.",
+    "No one ever taught the authors how to program or about cybersecurity. They learned everything on their own by reading forums and searching online.",
+    "Mojito was created solely for fun."
+]
+
+def get_random_fact():
+    return random.choice(fun_facts)
 
 moggy_faces = {
     "happy": [
@@ -74,6 +87,28 @@ if os.geteuid() != 0:
     exit(1)
 else:
     print()
+moggy("Before proceeding, you need to accept the terms and conditions of the BlacKat License v1.1", "thinking")
+time.sleep(2)
+moggy("Please read the license carefully. Type 'read' to view the license, 'accept' to continue, or any other key to exit.", "chill")
+user_input = input("> ").lower()
+if user_input == "read":
+    try:
+        with open("LICENCE.md", "r") as file:
+            license_text = file.read()
+            os.system("clear")
+            print(license_text)
+            input("\nPress Enter to continue...")
+            moggy("Please type 'accept' to continue or any other key to exit.", "chill")
+            user_input = input("> ").lower()
+    except Exception as e:
+        moggy(f"Error reading license file: {e}", "sad")
+        exit(1)
+
+if user_input != "accept":
+    moggy("License terms not accepted. Exiting...", "sad")
+    exit(1)
+moggy("License terms accepted! Let's continue...", "happy")
+time.sleep(2)
 def menu(stdscr):
     curses.curs_set(0)
     options = ["wlan0", "wlan1", "other"]
@@ -98,6 +133,7 @@ def menu(stdscr):
             break
 
     return options[selected]
+
 PROFILE_FILE = "myprofile.json"
 def set_bluetooth_name(name="Mojito"):
     try:
@@ -199,28 +235,24 @@ def drivers(stdscr):
 selected_option1 = curses.wrapper(drivers)
 driver = selected_option1 if selected_option1 != "Skip for now" else None
 
-if driver == "Realtek":
-    os.system("""
-    sudo apt update
-    sudo apt install realtek-rtl88xxau-dkms -y
-    sudo apt install dkms -y
-    sudo apt upgrade -y
-    sudo reboot
-    """)
-elif driver == "Morrownr":
-    os.system("""
-    git clone https://github.com/morrownr/88x2bu-20210702.git && cd 88x2bu-20210702
-    sudo bash install-driver.sh
-    sudo reboot
-    """)
+if driver in ["Realtek", "Morrownr"]:
+    from libs.driver_installer_enhanced import install_drivers
+    if install_drivers(driver):
+        moggy("Driver installation completed successfully!", "happy")
+        time.sleep(2)
+    else:
+        moggy("Driver installation failed. Please check the logs for details.", "sad")
+        time.sleep(2)
 else:
-    moggy("Skipping driver installation...")
+    moggy("Skipping driver installation...", "chill")
 
 
 moggy("Write your time zone (E.g Europe/Amsterdam)", "chill")
 timezone = input("> ")
 os.system(f"sudo timedatectl set-timezone {timezone}")
 moggy("I will install everything for you, in the meantime you can go and have a coffee or your favorite energy drink", "cool")
+time.sleep(2)
+moggy(f"Did you know? {get_random_fact()}", "thinking")
 time.sleep(3)
 os.system("""
 sudo apt update
@@ -234,6 +266,17 @@ git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make i
 """)
 
 os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"')
+moggy("Before proceeding, you need to accept the terms and conditions of the BlacKat License v1.1", "thinking")
+time.sleep(2)
+moggy("Please read the license carefully. Type 'accept' to continue or any other key to exit.", "chill")
+user_input = input("> ").lower()
+if user_input != "accept":
+    moggy("License terms not accepted. Exiting...", "sad")
+    exit(1)
+moggy("License terms accepted! Let's continue...", "happy")
+time.sleep(2)
+moggy(f"Did you know? {get_random_fact()}", "thinking")
+time.sleep(3)
 moggy("-- Almost finished! --", "happy")
 
 os.system("""
