@@ -1,6 +1,6 @@
 # Mojito Project
 
-![logo](https://github.com/user-attachments/assets/70a9894e-ec0f-4338-940d-0b09a3c6ecaa)
+<img src="images/logo.png"/>
 <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" /> <img alt="Cybersecurity" src="https://img.shields.io/badge/-Cybersecurity-00599C?style=flat-square&logo=hackthebox&logoColor=white" /> <img alt="Networking" src="https://img.shields.io/badge/-Networking-0A66C2?style=flat-square&logo=cisco&logoColor=white" /> <img alt="Kali Linux" src="https://img.shields.io/badge/-Kali_Linux-557C94?style=flat-square&logo=kalilinux&logoColor=white" /> <img alt="Raspberry Pi" src="https://img.shields.io/badge/-Raspberry_Pi-A22846?style=flat-square&logo=raspberrypi&logoColor=white" /></p>
 
 
