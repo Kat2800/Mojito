@@ -266,14 +266,6 @@ git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make i
 """)
 
 os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"')
-time.sleep(2)
-moggy("Please read the license carefully. Type 'accept' to continue or any other key to exit.", "chill")
-user_input = input("> ").lower()
-if user_input != "accept":
-    moggy("License terms not accepted. Exiting...", "sad")
-    exit(1)
-moggy("License terms accepted! Let's continue...", "happy")
-time.sleep(2)
 moggy(f"Did you know? {get_random_fact()}", "thinking")
 time.sleep(3)
 moggy("-- Almost finished! --", "happy")
