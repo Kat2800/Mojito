@@ -266,7 +266,6 @@ git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make i
 """)
 
 os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"')
-moggy("Before proceeding, you need to accept the terms and conditions of the BlacKat License v1.1", "thinking")
 time.sleep(2)
 moggy("Please read the license carefully. Type 'accept' to continue or any other key to exit.", "chill")
 user_input = input("> ").lower()
