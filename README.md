@@ -39,7 +39,7 @@ If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboa
 ## Moggy will be happy to help you during the setup! 😸
 ### Clone the Mojito Repostory and enter in it
 ```
- git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/src
+ git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/
 ```
 ### Run Mojito Setup Helper! 🔧
 ```
