@@ -265,7 +265,6 @@ os.system("""
 git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make install
 """)
 
-os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/firmware/config.txt"')
 moggy(f"Did you know? {get_random_fact()}", "thinking")
 time.sleep(3)
 moggy("-- Almost finished! --", "happy")
@@ -273,5 +272,6 @@ moggy("-- Almost finished! --", "happy")
 os.system("""
 sudo nano "sudo python /home/kali/Mojito/boot.py" >> ~/.bashrc
 sudo hostnamectl set-hostname Mojito
+sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/firmware/config.txt"
 sudo reboot
 """)
