@@ -37,13 +37,9 @@ You can see Mojito ip from your WiFi Router.
 If it doesn't seem to appear, try connecting it to an HDMI and plugging a keyboard into it to try connecting to the wifi manually.<br>
 # Now you can setup with Mojito Setup Helper! 
 ## Moggy will be happy to help you during the setup! 😸
-### Clone the Mojito Repostory and enter in it
+### Clone and install Mojito!
 ```
- git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/
-```
-### Run Mojito Setup Helper! 🔧
-```
-sudo python msh.py
+ git clone https://github.com/rickyfili10/Mojito.git && cd Mojito/ && sudo python msh.py
 ```
 ### Follow and fill out his requests!
 ## Remember: This is not the first version of Mojito! You're using the "uncomplete" code of Mojito, it might not work and many function could not work as well
