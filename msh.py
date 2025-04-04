@@ -265,7 +265,7 @@ os.system("""
 git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make install
 """)
 
-os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/config.txt"')
+os.system('sudo sed -i "s/#dtparam=spi=on/dtparam=spi=on/" "/boot/firmware/config.txt"')
 moggy(f"Did you know? {get_random_fact()}", "thinking")
 time.sleep(3)
 moggy("-- Almost finished! --", "happy")
