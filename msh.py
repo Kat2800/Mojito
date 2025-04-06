@@ -11,6 +11,7 @@ fun_facts = [
     "The project is called 'Mojito' because the creators came up with the idea while drinking a mojito",
     "The authors began studying computer science because one of them, in the frist year of middle school, saw a TikTok video where someone created a 'virus' in a BAT file that opened multiple terminal windows (fond memories from the past).",
     "No one ever taught the authors how to program or about cybersecurity. They learned everything on their own by reading forums and searching online. So you can do it too!",
+    "The project is named 'Mojito' because the idea for it came to the authors while they were enjoying a mojito.",
     "Mojito was created solely for fun."
 ]
 
