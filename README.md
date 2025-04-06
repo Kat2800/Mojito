@@ -23,7 +23,8 @@ Mojito is swiss army knife for ethical hacking (educational purposes only) and p
 # SETUP AND INSTALLATION
 
 ## First version is not been released yet! 
-1. Flash and setup Kali Linux for raspberry pi 0 wh with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br>
+### Before we continue: Mojito has only been tested on the Raspberry Pi Zero WH, but should work on all other Raspberry Pis.
+1. Flash and setup Kali Linux for raspberry pi with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br>
     <br>
 2. Change OS settings from Raspberry Pi Imager, it will ask you if you want to do it a few steps before flashing.
 3. Enable SSH, as username put "kali" and as password "kali" and put your SSID and WiFi password. Remember: if you do not connect to wifi and do not enable ssh you will not be able to proceed with the installation.
