@@ -23,7 +23,7 @@ Mojito is swiss army knife for ethical hacking (educational purposes only) and p
 # SETUP AND INSTALLATION
 
 ## First version is not been released yet! 
-1. <a href="https://www.raspberrypi.com/software/">Flash</a> and setup Kali Linux for raspberry pi 0 wh with Raspberry Pi Imager<br>
+1. Flash and setup Kali Linux for raspberry pi 0 wh with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br>
     <br>
 2. Create a "wpa_supplicant.conf" file with your wifi informations in the boot partition and create a file called "ssh" with nothing inside. (always in the boot partition of the sd card) <br>
     Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
