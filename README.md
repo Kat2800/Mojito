@@ -10,7 +10,6 @@
 
 # About
 Mojito is swiss army knife for ethical hacking (educational purposes only) and penetration testing, it runs on a raspberry pi 0 w/wh that use a wavseshare 1.44 inch lcd HAT display. It has a collection of hacking tools and it is based on Kali Linux. 
-This project is called "Mojito" beacuse while the developers were coding this project, they were drinking Mojitos (maked by @rickyfili10)
 <br>
 
 # REQUIREMENTS 📃
