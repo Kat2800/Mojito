@@ -24,11 +24,10 @@ Mojito is swiss army knife for ethical hacking (educational purposes only) and p
 
 ## First version is not been released yet! 
 ### Before we continue: Mojito has only been tested on the Raspberry Pi Zero WH, but should work on all other Raspberry Pi.
-1. Flash and setup Kali Linux for raspberry pi with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br>
-    <br>
-2. Change OS settings from Raspberry Pi Imager, it will ask you if you want to do it a few steps before flashing.
-3. Enable SSH, as username put "kali" and as password "kali" and put your SSID and WiFi password. Remember: if you do not connect to wifi and do not enable ssh you will not be able to proceed with the installation.
-4. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
+1. Flash and setup Kali Linux for raspberry pi with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br><br>
+2. Change OS settings from Raspberry Pi Imager, it will ask you if you want to do it a few steps before flashing.<br><br>
+4. Enable SSH, as username put "kali" and as password "kali" and put your SSID and WiFi password. Remember: if you do not connect to wifi and do not enable ssh you will not be able to proceed with the installation.<br><br>
+5. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
 ssh kali@192.168.1.214
 ```
