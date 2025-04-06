@@ -178,6 +178,18 @@ def load_or_create_profile():
     moggy(f"Nice to meet you, {nickname}", "happy")
     time.sleep(3)
     return profile_data
+
+def add_cron_job():
+    cron_job = "@reboot /usr/bin/python3 /home/kali/Mojito/menu.py"
+
+    try:
+        subprocess.run(f'echo "{cron_job}" | sudo crontab -u root -', shell=True, check=True)
+        moggy('Cron added.', "cool")
+    except subprocess.CalledProcessError as e:
+        moggy(f"Error adding Cron: {e}", "sad")
+
+if __name__ == "__main__":
+    add_cron_job()
     
 moggy("Hi! My name is Moggy, I will help you to set up Mojito! I am here to guide you step by step.", "happy")
 time.sleep(3)
@@ -268,7 +280,7 @@ git clone https://github.com/kovmir/l2flood && cd l2flood && make && sudo make i
 moggy(f"Did you know? {get_random_fact()}", "thinking")
 time.sleep(3)
 moggy("-- Almost finished! --", "happy")
-
+add_cron_job()
 os.system("""
 sudo nano "sudo python /home/kali/Mojito/boot.py" >> ~/.bashrc
 sudo hostnamectl set-hostname Mojito
