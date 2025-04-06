@@ -25,10 +25,9 @@ Mojito is swiss army knife for ethical hacking (educational purposes only) and p
 ## First version is not been released yet! 
 1. Flash and setup Kali Linux for raspberry pi 0 wh with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br>
     <br>
-2. Create a "wpa_supplicant.conf" file with your wifi informations in the boot partition and create a file called "ssh" with nothing inside. (always in the boot partition of the sd card) <br>
-    Don't know how to write a wpa_supplican file? No problem! [Wpa supplicant file example](https://github.com/asparatu/raspberrypi-wpa-supplicant.conf/blob/master/wpa_supplicant.conf)<br>
-    <br>
-3. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
+2. Change OS settings from Raspberry Pi Imager, it will ask you if you want to do it a few steps before flashing.
+3. Enable SSH, as username put "kali" and as password "kali" and put your SSID and WiFi password. Remember: if you do not connect to wifi and do not enable ssh you will not be able to proceed with the installation.
+4. Connect to USB port, and if you have it connect the antenna on the OTG port, Then wait... (The first boot is slow, don't worry it's normal!). Then, connect to it using ssh, for example:
 ```
 ssh kali@192.168.1.214
 ```
