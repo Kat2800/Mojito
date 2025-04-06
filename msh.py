@@ -7,11 +7,10 @@ import json
 import random
 
 fun_facts = [
-    "The first battery for Mojito was designed to enable its use even without being plugged into a power socket. It was created by repurposing an electronic cigarette, removing the inhalation sensor to make it suitable for Mojito.",
+    "The first battery for Mojito was created by repurposing an electronic cigarette, removing the inhalation sensor to make it suitable for Mojito.",
     "The project is called 'Mojito' because the creators came up with the idea while drinking a mojito",
     "The authors began studying computer science because one of them, in the frist year of middle school, saw a TikTok video where someone created a 'virus' in a BAT file that opened multiple terminal windows (fond memories from the past).",
-    "The authors of the project have been best friends since elementary school.",
-    "No one ever taught the authors how to program or about cybersecurity. They learned everything on their own by reading forums and searching online.",
+    "No one ever taught the authors how to program or about cybersecurity. They learned everything on their own by reading forums and searching online. So you can do it too!",
     "Mojito was created solely for fun."
 ]
 
