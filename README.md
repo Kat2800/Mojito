@@ -21,7 +21,8 @@ Mojito is swiss army knife for ethical hacking (educational purposes only) and p
 <br>
 
 # SETUP AND INSTALLATION
-
+# _MSH NOTE_:
+MSH (Mojito Setup Helper) It's still under development, so it's normal to find some bugs, *especially in the installation of the antenna drivers*.
 ## First version is not been released yet! 
 ### Before we continue: Mojito has only been tested on the Raspberry Pi Zero WH, but should work on all other Raspberry Pi.
 1. Flash and setup Kali Linux for raspberry pi with <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a><br><br>
