@@ -223,7 +223,7 @@ os.system("sudo systemctl start ssh")
 
 def drivers(stdscr):
     curses.curs_set(0)
-    options = ["Morrownr's drivers", "Realtek drivers", "Skip for now"]
+    options = ["Morrownr's drivers", "Realtek drivers", "rtl88x2bu pre-compiled" "Skip for now"]
     selected = 0
 
     while True:
@@ -246,20 +246,17 @@ def drivers(stdscr):
     return options[selected]
 
 selected_option1 = curses.wrapper(drivers)
-driver = selected_option1 if selected_option1 != "Skip for now" else None
-
-if driver in ["Realtek", "Morrownr"]:
-    from libs.driver_installer_enhanced import install_drivers
-    if install_drivers(driver):
-        moggy("Driver installation completed successfully!", "happy")
-        time.sleep(2)
-    else:
-        moggy("Driver installation failed. Please check the logs for details.", "sad")
-        time.sleep(2)
+driver = selected_option1
+if selected_option1 != "Skip for now":
+    if driver == "rtl88x2bu pre-compiled":
+        moggy(f"Did you know? {get_random_fact()}", "thinking")
+        os.system("""
+        sudo cp msh/drivers/antenna/rtl88x2bu/88x2bu.ko.xz /lib/modules/$(uname -r)/updates/dkms/
+        sudo depmod
+        sudo modprobe 88x2bu
+        """)
 else:
-    moggy("Skipping driver installation...", "chill")
-
-
+    print(" ")
 moggy("Write your time zone (E.g Europe/Amsterdam)", "chill")
 timezone = input("> ")
 os.system(f"sudo timedatectl set-timezone {timezone}")
