@@ -19,6 +19,7 @@ def get_random_fact():
     return random.choice(fun_facts)
 
 moggy_faces = {
+    
     "happy": [
         r" /\_/\  ",
         r"( ^.^ ) ",
